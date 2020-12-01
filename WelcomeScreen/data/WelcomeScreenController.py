@@ -127,6 +127,12 @@ def show_welcome_message():
     mylcd.lcd_write_char_with_position(7, 4, 17)
     mylcd.lcd_write_char_with_position(7, 4, 18)
     mylcd.lcd_write_char_with_position(3, 4, 19)
+    # Left frame
+    mylcd.lcd_write_char_with_position(4, 2, 0)
+    mylcd.lcd_write_char_with_position(4, 3, 0)
+    # Right frame
+    mylcd.lcd_write_char_with_position(5, 2, 19)
+    mylcd.lcd_write_char_with_position(5, 3, 19)
     mylcd.lcd_display_string("Hello Pablo!", 2, 4)
     mylcd.lcd_display_string("Initialising...!", 3, 2)
 

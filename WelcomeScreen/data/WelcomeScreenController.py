@@ -1,5 +1,6 @@
 from WelcomeScreen.data import I2C_LCD_driver
 
+
 welcome_font = [
     # Up Left cornet
     [0b11111,
@@ -83,8 +84,7 @@ welcome_font = [
 
 
 def show_welcome_message():
-    mylcd = I2C_LCD_driver.lcd()
-    mylcd.lcd_load_custom_chars(welcome_font)
+    mylcd = I2C_LCD_driver.lcd(welcome_font)
     # Up frame
     mylcd.lcd_write_char_with_position(0, 1, 0)
     mylcd.lcd_write_char_with_position(6, 1, 1)

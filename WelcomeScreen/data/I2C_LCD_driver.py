@@ -107,7 +107,7 @@ Rs = 0b00000001  # Register select bit
 
 class lcd:
     # initializes objects and lcd
-    def __init__(self, custom_font):
+    def __init__(self):
         self.lcd_device = i2c_device(ADDRESS)
 
         self.lcd_write(0x03)
@@ -120,7 +120,6 @@ class lcd:
         self.lcd_write(LCD_CLEARDISPLAY)
         self.lcd_write(LCD_ENTRYMODESET | LCD_ENTRYLEFT)
         sleep(0.2)
-        self.lcd_load_custom_chars(custom_font)
 
     # clocks EN to latch command
     def lcd_strobe(self, data):

@@ -1,5 +1,6 @@
-from WelcomeScreen.data import WelcomeScreenController
+from WelcomeScreen.data.WelcomeScreenController import WelcomeScreenController
 
 
 def show_screen():
-    WelcomeScreenController.show_welcome_message()
+    controller = WelcomeScreenController()
+    controller.show_welcome_message()

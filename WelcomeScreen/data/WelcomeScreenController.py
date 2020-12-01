@@ -85,6 +85,6 @@ welcome_font = [
 def show_welcome_message():
     mylcd = I2C_LCD_driver.lcd()
     mylcd.lcd_load_custom_chars(welcome_font)
-    mylcd.lcd_write_char(0, 1, 0)
+    mylcd.lcd_write_char_with_position(0, 1, 0)
     mylcd.lcd_display_string("Hello Pablo!", 2, 4)
     mylcd.lcd_display_string("Initialising...!", 3, 2)

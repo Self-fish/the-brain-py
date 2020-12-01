@@ -143,7 +143,7 @@ class lcd:
         self.lcd_write_four_bits(mode | (charvalue & 0xF0))
         self.lcd_write_four_bits(mode | ((charvalue << 4) & 0xF0))
 
-    def lcd_write_char(self, charvalue, line, column):
+    def lcd_write_char_with_position(self, charvalue, line, column):
         switcher = {
             1: 0,
             2: 0x40,
@@ -151,7 +151,6 @@ class lcd:
             4: 0x54
         }
         position = 0x80 + switcher.get(line) + column
-
         self.lcd_write(position)
         self.lcd_write_char(charvalue)
 
@@ -185,7 +184,7 @@ class lcd:
 
     # add custom characters (0 - 7)
     def lcd_load_custom_chars(self, fontdata):
-        self.lcd_write(0x40);
+        self.lcd_write(0x40)
         for char in fontdata:
             for line in char:
                 self.lcd_write_char(line)

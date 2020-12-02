@@ -7,7 +7,7 @@ class WelcomeScreenUseCase:
 
     @inject
     def __init__(self, controller: WelcomeScreenController = Provide[Container.welcomeController]):
-        self.controller = controller
+        self.__controller = controller
 
     def show_screen(self):
-        self.controller.show_welcome_message()
+        self.__controller.show_welcome_message()

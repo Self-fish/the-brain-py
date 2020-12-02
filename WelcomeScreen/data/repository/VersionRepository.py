@@ -1,11 +1,9 @@
 import subprocess
+from WelcomeScreen.domain.exception.NoVersionException import NoVersionException
 
 
 def get_version_code():
-    version = 0
     try:
-        version = subprocess.check_output(["git", "describe"]).strip()
+        return subprocess.check_output(["git", "describe"]).strip()
     except subprocess.CalledProcessError:
-        pass
-
-    return version
+        raise NoVersionException

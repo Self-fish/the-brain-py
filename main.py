@@ -1,6 +1,6 @@
 import sys
 from WelcomeScreen.WelcomeScreenContainer import Container
-from WelcomeScreen.domain.UseCase import WelcomeScreenUseCase
+from WelcomeScreen.domain.usecase.UseCase import WelcomeScreenUseCase
 
 if __name__ == '__main__':
     container = Container()

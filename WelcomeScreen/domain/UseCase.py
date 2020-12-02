@@ -10,4 +10,7 @@ class WelcomeScreenUseCase:
         self.__controller = controller
 
     def show_screen(self):
-        self.__controller.show_welcome_message()
+        self.__controller.build_frame()
+        self.__controller.write_user_message("Pablo")
+        self.__controller.write_version_message("0.1")
+        self.__controller.write_initialising_message()

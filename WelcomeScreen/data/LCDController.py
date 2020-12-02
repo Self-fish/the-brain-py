@@ -86,7 +86,7 @@ class WelcomeScreenController:
         self.__lcd = lcd
         self.__lcd.lcd_load_custom_chars(self.welcome_font)
 
-    def __build_frame(self):
+    def build_frame(self):
         # Up frame
         self.__lcd.lcd_write_char_with_position(0, 1, 0)
         self.__lcd.lcd_write_char_with_position(6, 1, 1)
@@ -136,10 +136,12 @@ class WelcomeScreenController:
         self.__lcd.lcd_write_char_with_position(4, 3, 0)
         self.__lcd.lcd_write_char_with_position(4, 2, 0)
 
-    def __write_message(self):
-        self.__lcd.lcd_display_string("Hello Pablo!", 2, 4)
-        self.__lcd.lcd_display_string("Initialising...!", 3, 2)
+    def write_user_message(self, user_name):
+        self.__lcd.lcd_display_string("Hello " + user_name + "!", 2, 4)
 
-    def show_welcome_message(self):
-        self.__build_frame()
-        self.__write_message()
+    def write_version_message(self, version_code):
+        self.__lcd.lcd_display_string("Version " + version_code , 3, 2)
+
+    def write_initialising_message(self):
+        self.__lcd.lcd_display_string("                  ", 3, 1)
+        self.__lcd.lcd_display_string("Initialising...!", 3, 2)

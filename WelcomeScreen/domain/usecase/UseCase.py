@@ -1,5 +1,4 @@
 import time
-from subprocess import CalledProcessError
 
 from dependency_injector.wiring import Provide, inject
 from WelcomeScreen.WelcomeScreenContainer import Container

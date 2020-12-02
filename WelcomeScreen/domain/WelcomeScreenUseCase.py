@@ -1,14 +1,13 @@
-import sys
-
 from dependency_injector.wiring import Provide, inject
 from WelcomeScreen.Containers import Container
-from WelcomeScreen.data import I2C_LCD_driver
 from WelcomeScreen.data.WelcomeScreenController import WelcomeScreenController
 
 
 class WelcomeScreenUseCase:
 
     @inject
-    def show_screen(self, lcd: I2C_LCD_driver.lcd = Provide[Container.lcd]):
-        controller = WelcomeScreenController(lcd)
-        controller.show_welcome_message()
+    def __init__(self, controller: WelcomeScreenController = Provide[Container.welcomeController]):
+        self.controller = controller
+
+    def show_screen(self):
+        self.controller.show_welcome_message()

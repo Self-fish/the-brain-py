@@ -6,9 +6,10 @@ from WelcomeScreen.data import I2C_LCD_driver
 from WelcomeScreen.data.WelcomeScreenController import WelcomeScreenController
 
 
+class WelcomeScreenUseCase:
 
-@inject
-def show_screen(lcd: I2C_LCD_driver.lcd = Provide[Container.lcd]):
-    controller = WelcomeScreenController(lcd)
-    #controller.show_welcome_message()
-    controller.test()
+    @inject
+    def show_screen(lcd: I2C_LCD_driver.lcd = Provide[Container.lcd]):
+        controller = WelcomeScreenController(lcd)
+        #controller.show_welcome_message()
+        controller.test()

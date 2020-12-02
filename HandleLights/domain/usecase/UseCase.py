@@ -1,6 +1,6 @@
 import time
 
-from HandleLights.data.repository.Controller import LightController
+from HandleLights.data.repository.Controller import turn_on_lights, turn_off_lights
 
 
 class HandleLightsUseCase:
@@ -10,7 +10,6 @@ class HandleLightsUseCase:
         print("Hola")
 
     def handle_lights(self):
-        controller = LightController()
-        controller.turn_on_lights()
+        turn_on_lights()
         time.sleep(5)
-        controller.turn_off_lights()
+        turn_off_lights()

@@ -17,7 +17,7 @@ class WelcomeScreenUseCase:
         self.__controller.build_frame()
         self.__controller.write_user_message("Pablo")
         try:
-            self.__controller.write_version_message(str(VersionRepository.get_version_code()).decode("utf-8"))
+            self.__controller.write_version_message(str(VersionRepository.get_version_code(), "utf-8"))
             time.sleep(5)
         except NoVersionException:
             pass

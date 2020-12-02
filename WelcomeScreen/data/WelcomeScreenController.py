@@ -87,7 +87,7 @@ class WelcomeScreenController:
     @inject
     def __init__(self, lcd):
         self.lcd = lcd
-        #self.lcd.lcd_load_custom_chars(self.welcome_font)
+        self.lcd.lcd_load_custom_chars(self.welcome_font)
 
     def __build_frame(self):
         # Up frame

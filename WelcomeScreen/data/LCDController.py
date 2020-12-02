@@ -140,7 +140,7 @@ class WelcomeScreenController:
         self.__lcd.lcd_display_string("Hello " + user_name + "!", 2, 4)
 
     def write_version_message(self, version_code):
-        self.__lcd.lcd_display_string("Version " + version_code , 3, 2)
+        self.__lcd.lcd_display_string("Version " + version_code , 3, 4)
 
     def write_initialising_message(self):
         self.__lcd.lcd_display_string("                  ", 3, 1)

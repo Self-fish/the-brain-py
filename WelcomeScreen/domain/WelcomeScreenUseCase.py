@@ -11,5 +11,4 @@ class WelcomeScreenUseCase:
     @inject
     def show_screen(self, lcd: I2C_LCD_driver.lcd = Provide[Container.lcd]):
         controller = WelcomeScreenController(lcd)
-        #controller.show_welcome_message()
-        controller.test()
+        controller.show_welcome_message()

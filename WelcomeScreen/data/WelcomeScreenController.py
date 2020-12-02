@@ -1,3 +1,4 @@
+from dependency_injector.wiring import inject
 from WelcomeScreen.data import I2C_LCD_driver
 
 
@@ -84,10 +85,10 @@ class WelcomeScreenController(I2C_LCD_driver.lcd):
          0b11111]
     ]
 
-    lcd = I2C_LCD_driver.lcd()
-
-    def __init__(self):
+    @inject
+    def __init__(self, lcd):
         super().__init__()
+        self.lcd = lcd
         self.lcd.lcd_load_custom_chars(self.welcome_font)
 
     def __build_frame(self):

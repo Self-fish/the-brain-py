@@ -9,7 +9,7 @@ class HandleLightsUseCase:
 
     def handle_lights(self):
         io = wiringpi.GPIO(wiringpi.GPIO.WPI_MODE_PINS)
-        io.pinMode(11, io.OUTPUT)
-        io.digitalWrite(11, io.HIGH)
+        io.pinMode(0, io.OUTPUT)
+        io.digitalWrite(0, io.HIGH)
         time.sleep(5)
-        io.digitalWrite(11, io.LOW)
+        io.digitalWrite(0, io.LOW)

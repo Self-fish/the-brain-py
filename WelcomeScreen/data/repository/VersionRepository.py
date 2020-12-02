@@ -2,4 +2,10 @@ import subprocess
 
 
 def get_version_code():
-    return subprocess.check_output(["git", "describe"]).strip()
+    version = 0
+    try:
+        version = subprocess.check_output(["git", "describe"]).strip()
+    except subprocess.CalledProcessError:
+        pass
+
+    return version

@@ -84,7 +84,6 @@ class WelcomeScreenController:
          0b11111]
     ]
 
-    @inject
     def __init__(self, lcd):
         self.lcd = lcd
         self.lcd.lcd_load_custom_chars(self.welcome_font)

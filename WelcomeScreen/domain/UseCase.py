@@ -16,6 +16,6 @@ class WelcomeScreenUseCase:
     def show_screen(self):
         self.__controller.build_frame()
         self.__controller.write_user_message("Pablo")
-        self.__controller.write_version_message(VersionRepository.get_version_code())
+        self.__controller.write_version_message(str(VersionRepository.get_version_code()))
         time.sleep(5)
         self.__controller.write_initialising_message()

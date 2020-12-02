@@ -10,3 +10,4 @@ from WelcomeScreen.data.WelcomeScreenController import WelcomeScreenController
 def show_screen(lcd: I2C_LCD_driver.lcd = Provide[Container.lcd]):
     controller = WelcomeScreenController(lcd)
     #controller.show_welcome_message()
+    controller.test()

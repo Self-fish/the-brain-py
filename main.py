@@ -1,5 +1,10 @@
-from WelcomeScreen.domain import WelcomeScreenUseCase
+import sys
+from WelcomeScreen.WelcomeScreenContainer import Container
+from WelcomeScreen.domain.usecase.UseCase import WelcomeScreenUseCase
 
 if __name__ == '__main__':
-    WelcomeScreenUseCase.show_screen()
+    container = Container()
+    container.wire(modules=[sys.modules[__name__]])
+    useCase = WelcomeScreenUseCase()
+    useCase.show_screen()
 

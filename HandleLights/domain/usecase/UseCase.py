@@ -1,6 +1,4 @@
-import time
-
-from HandleLights.data.repository.Controller import turn_on_lights, turn_off_lights
+import time, wiringpi
 
 
 class HandleLightsUseCase:
@@ -10,6 +8,8 @@ class HandleLightsUseCase:
         print("Hola")
 
     def handle_lights(self):
-        turn_on_lights()
+        io = wiringpi.GPIO(wiringpi.GPIO.WPI_MODE_PINS)
+        io.pinMode(11, io.OUTPUT)
+        io.digitalWrite(11, io.HIGH)
         time.sleep(5)
-        turn_off_lights()
+        io.digitalWrite(11, io.LOW)

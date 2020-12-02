@@ -1,6 +1,6 @@
 from dependency_injector.wiring import Provide, inject
-from WelcomeScreen.Containers import Container
-from WelcomeScreen.data.WelcomeScreenController import WelcomeScreenController
+from WelcomeScreen.WelcomeScreenContainer import Container
+from WelcomeScreen.data.LCDController import WelcomeScreenController
 
 
 class WelcomeScreenUseCase:

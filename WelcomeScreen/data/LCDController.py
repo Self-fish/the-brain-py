@@ -145,7 +145,3 @@ class WelcomeScreenController:
     def show_welcome_message(self):
         self.__build_frame()
         self.__write_message()
-
-    def test(self):
-        print("Hola")
-        print(self.lcd)

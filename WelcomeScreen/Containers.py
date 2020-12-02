@@ -4,6 +4,5 @@ from WelcomeScreen.data import I2C_LCD_driver
 
 class Container(containers.DeclarativeContainer):
 
-    config = providers.Configuration()
     lcd = providers.Singleton(I2C_LCD_driver.lcd)
 

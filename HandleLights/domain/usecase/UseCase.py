@@ -15,10 +15,6 @@ class HandleLightsUseCase:
 
     def handle_lights(self):
         current_time = datetime.now(timezone('Europe/Madrid')).strftime("%H:%M")
-        print(current_time)
-        preferences = Preferences.get_light_preferences()
-        print(preferences.starting_hour + ":" + preferences.finishing_hour)
-
         if should_turn_on_lights(current_time, Preferences.get_light_preferences()):
             print("Encendemos la luces")
         else:

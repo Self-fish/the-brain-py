@@ -1,4 +1,3 @@
-
 class LightPreferences:
 
     def __init__(self, starting_hour, finishing_hour):

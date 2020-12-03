@@ -1,7 +1,7 @@
 import time
 
 from dependency_injector.wiring import Provide, inject
-from WelcomeScreen.WelcomeScreenContainer import Container
+from WelcomeScreen.WelcomeScreenContainer import WelcomeContainer
 from WelcomeScreen.data.controller.LCDController import WelcomeScreenController
 from WelcomeScreen.data.repository import VersionRepository
 from WelcomeScreen.domain.exception.NoVersionException import NoVersionException
@@ -10,7 +10,7 @@ from WelcomeScreen.domain.exception.NoVersionException import NoVersionException
 class WelcomeScreenUseCase:
 
     @inject
-    def __init__(self, controller: WelcomeScreenController = Provide[Container.welcomeController]):
+    def __init__(self, controller: WelcomeScreenController = Provide[WelcomeContainer.welcomeController]):
         self.__controller = controller
 
     def show_screen(self):

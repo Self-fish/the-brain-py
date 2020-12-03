@@ -1,3 +1,6 @@
+from dependency_injector.wiring import inject, Provide
+
+from HandleLights.HandleLightsContainer import HandleLightsContainer
 from HandleLights.data.repository import Preferences
 from HandleLights.data.repository.LightStatus import LightStatusRepository
 from HandleLights.domain.model.LightPreferences import LightPreferences
@@ -12,8 +15,9 @@ def should_turn_on_lights(current_time, light_preferences: LightPreferences):
 
 class HandleLightsUseCase:
 
-    def __init__(self):
-        self.__light_repository = LightStatusRepository()
+    @inject
+    def __init__(self, light_repository: LightStatusRepository = Provide[HandleLightsContainer.light_status_repository]):
+        self.__light_repository = light_repository
 
     def handle_lights(self):
         current_time = datetime.now(timezone('Europe/Madrid')).strftime("%H:%M")

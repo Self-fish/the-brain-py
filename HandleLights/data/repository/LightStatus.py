@@ -1,5 +1,4 @@
 from HandleLights.data.controller.Controller import LightsController
-from HandleLights.domain.model.LightStatus import LightStatus
 
 
 class LightStatusRepository:

@@ -1,4 +1,4 @@
-import time, wiringpi
+import wiringpi
 
 from HandleLights.domain.model.LightStatus import LightStatus
 

@@ -16,4 +16,4 @@ class LightsController:
             self.__io.digitalWrite(0, self.__io.HIGH)
 
     def get_current_light_status(self):
-        print(self.__io.digitalRead(0))
+        return self.__io.digitalRead(0)

@@ -1,5 +1,7 @@
 import time, wiringpi
 
+from HandleLights.domain.model.LightStatus import LightStatus
+
 
 class LightsController:
 
@@ -7,9 +9,8 @@ class LightsController:
         self.__io = wiringpi.GPIO(wiringpi.GPIO.WPI_MODE_PINS)
         self.__io.pinMode(0, self.__io.OUTPUT)
 
-    def turn_on_lights(self):
-        self.__io.digitalWrite(0, self.__io.LOW)
-
-    def turn_off_lights(self):
-        self.__io.digitalWrite(0, self.__io.HIGH)
-
+    def update_light_status(self, light_status: LightStatus):
+        if light_status == LightStatus.ON:
+            self.__io.digitalWrite(0, self.__io.LOW)
+        else:
+            self.__io.digitalWrite(0, self.__io.HIGH)

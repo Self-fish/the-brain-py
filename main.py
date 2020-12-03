@@ -8,7 +8,8 @@ from WelcomeScreen.domain.usecase.UseCase import WelcomeScreenUseCase
 
 
 def handle_lights(use_case: HandleLightsUseCase):
-    use_case.handle_lights()
+    while True:
+        use_case.handle_lights()
 
 
 if __name__ == '__main__':

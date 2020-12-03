@@ -11,7 +11,7 @@ from WelcomeScreen.domain.usecase.UseCase import WelcomeScreenUseCase
 def handle_lights(use_case: HandleLightsUseCase):
     while True:
         use_case.handle_lights()
-        time.sleep(5)
+        time.sleep(60)
 
 
 if __name__ == '__main__':

@@ -2,4 +2,4 @@ from HandleLights.domain.model.LightPreferences import LightPreferences
 
 
 def get_light_preferences():
-    return LightPreferences("15:00", "23:00")
+    return LightPreferences("10:00", "10:30")

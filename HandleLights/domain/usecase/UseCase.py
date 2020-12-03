@@ -14,14 +14,14 @@ class HandleLightsUseCase:
         self.__controller = LightsController()
 
     def handle_lights(self):
-        now_utc = now_utc = datetime.now(timezone('Europe/Madrid'))
-        print(now_utc)
+        current_time = datetime.now(timezone('Europe/Madrid')).strftime("%H:%M")
+        print(current_time)
         preferences = Preferences.get_light_preferences()
         print(preferences.starting_hour + ":" + preferences.finishing_hour)
 
-        #if should_turn_on_lights(current_time, Preferences.get_light_preferences()):
-        #    print("Encendemos la luces")
-        #else:
-        #    print("Apagamos las luces")
+        if should_turn_on_lights(current_time, Preferences.get_light_preferences()):
+            print("Encendemos la luces")
+        else:
+            print("Apagamos las luces")
 
 

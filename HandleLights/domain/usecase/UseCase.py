@@ -2,7 +2,7 @@ from HandleLights.data.controller.Controller import LightsController
 from HandleLights.data.repository import Preferences
 from HandleLights.domain.model.LightPreferences import LightPreferences
 from datetime import datetime
-import pytz
+from pytz import timezone
 
 def should_turn_on_lights(current_time, light_preferences: LightPreferences):
     return light_preferences.starting_hour <= current_time < light_preferences.finishing_hour
@@ -14,8 +14,7 @@ class HandleLightsUseCase:
         self.__controller = LightsController()
 
     def handle_lights(self):
-        timezone = pytz.timezone("Europe/Madrid")
-        current_time = timezone.localize(datetime.now()).strftime("%H:%M")
+        current_time = timezone('US/Pacific').localize(datetime.now())
         preferences = Preferences.get_light_preferences()
         print(current_time)
         print(preferences.starting_hour + ":" + preferences.finishing_hour)

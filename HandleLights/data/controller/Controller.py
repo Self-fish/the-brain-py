@@ -10,6 +10,7 @@ class LightsController:
         self.__io.pinMode(0, self.__io.OUTPUT)
 
     def update_light_status(self, light_status: LightStatus):
+        print("Light Controller: " + light_status)
         if light_status == LightStatus.ON:
             self.__io.digitalWrite(0, self.__io.LOW)
         else:

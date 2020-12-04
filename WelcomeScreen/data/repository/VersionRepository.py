@@ -4,6 +4,6 @@ from WelcomeScreen.domain.exception.NoVersionException import NoVersionException
 
 def get_version_code():
     try:
-        return subprocess.check_output(["git", "describe"]).strip()
+        return "1.0"
     except:
         raise NoVersionException

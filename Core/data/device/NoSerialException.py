@@ -1,3 +1,3 @@
 
-class NoSerialException(BaseException):
+class NoSerialException(Exception):
     pass

@@ -6,4 +6,4 @@ def get_light_preferences():
     if preferences.status_code !=200:
         print("Fuck")
     else:
-        print(preferences.json())
+        print(preferences.json()['id'])

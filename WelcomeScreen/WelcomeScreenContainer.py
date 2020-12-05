@@ -1,5 +1,5 @@
 from dependency_injector import providers, containers
-from Core.data import I2C_LCD_driver
+from Core.data.driver import I2C_LCD_driver
 from WelcomeScreen.data.controller.LCDController import WelcomeScreenController
 
 

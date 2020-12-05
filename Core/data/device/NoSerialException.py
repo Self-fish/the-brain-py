@@ -1,0 +1,3 @@
+
+class NoSerialException(Exception):
+    pass

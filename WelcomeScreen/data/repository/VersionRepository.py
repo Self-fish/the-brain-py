@@ -1,4 +1,3 @@
-import subprocess
 from WelcomeScreen.domain.exception.NoVersionException import NoVersionException
 
 

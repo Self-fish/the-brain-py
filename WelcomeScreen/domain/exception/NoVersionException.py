@@ -1,4 +1,4 @@
 
-class NoVersionException(Exception):
+class NoVersionException(BaseException):
     pass
 

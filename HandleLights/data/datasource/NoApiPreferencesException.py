@@ -1,3 +1,3 @@
 
-class NoApiPreferenceException(Exception):
+class NoApiPreferenceException(BaseException):
     pass

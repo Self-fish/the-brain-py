@@ -1,5 +1,4 @@
-from Core.data.device.NoSerialException import NoSerialException
-from HandleLights.data.datasource import LocalDataSource, ApiDataSource, NoApiPreferencesException
+from HandleLights.data.datasource import LocalDataSource, ApiDataSource
 
 
 def get_light_preferences():

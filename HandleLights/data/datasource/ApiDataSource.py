@@ -7,4 +7,4 @@ def get_light_preferences():
         print("Fuck")
     else:
         for preference in preferences.json():
-            print(preference["id"])
+            print(preference['id'])

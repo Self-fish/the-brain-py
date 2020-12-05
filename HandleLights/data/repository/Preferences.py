@@ -5,6 +5,6 @@ from HandleLights.data.datasource import LocalDataSource, ApiDataSource, NoApiPr
 def get_light_preferences():
     try:
         return ApiDataSource.get_light_preferences()
-    except (NoSerialException, NoApiPreferencesException):
+    except Exception:
         print("Oh shit!")
         return LocalDataSource.get_light_preferences()

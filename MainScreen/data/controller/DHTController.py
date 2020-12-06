@@ -2,7 +2,7 @@ import Adafruit_DHT
 
 
 DHT_SENSOR = Adafruit_DHT.DHT22
-DHT_PIN = 2
+DHT_PIN = 13
 
 def get_temperature():
 

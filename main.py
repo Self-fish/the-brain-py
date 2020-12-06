@@ -16,9 +16,7 @@ def handle_lights(lights_use_case: HandleLightsUseCase):
 
 
 def handle_main_screen(main_screen_use_case: MainScreenUseCase):
-    while True:
-        main_screen_use_case.show_next_value()
-        time.sleep(5)
+    main_screen_use_case.show_next_value()
 
 
 if __name__ == '__main__':
@@ -33,7 +31,7 @@ if __name__ == '__main__':
     handle_light_use_case = HandleLightsUseCase()
     handle_lights_thread = threading.Thread(target=handle_lights, args=(handle_light_use_case,))
     handle_lights_thread.start()
-    
+
     main_screen_use_case = MainScreenUseCase()
     handle_main_screen_thread = threading.Thread(target=handle_main_screen, args=(main_screen_use_case,))
     handle_main_screen_thread.start()

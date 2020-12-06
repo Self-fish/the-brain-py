@@ -1,0 +1,12 @@
+from MainScreen.data.controller import DHTController
+from MainScreen.domain.model.MainScreenStep import MainScreenStep
+
+
+class MainScreenUseCase:
+
+    def __init__(self):
+        self.__step = MainScreenStep.NONE
+
+    def show_next_value(self):
+        DHTController.get_temperature()
+

@@ -3,7 +3,8 @@ from time import sleep
 
 DHT = 2
 
-def read_temperature:
+
+def read_temperature():
     while True:
         #Read Temp and Hum from DHT22
         h,t = dht.read_retry(dht.DHT22, DHT)

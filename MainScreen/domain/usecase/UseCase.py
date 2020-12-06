@@ -8,5 +8,5 @@ class MainScreenUseCase:
         self.__step = MainScreenStep.NONE
 
     def show_next_value(self):
-        DHTController.get_temperature()
+        DHTController.read_temperature()
 

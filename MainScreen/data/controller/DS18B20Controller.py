@@ -7,6 +7,7 @@ devices_folder = glob.glob(base_dir + '28*')
 
 
 def read_device_temperature(device):
+    temperature = 0
     f = open(devices_folder[device] + '/w1_slave', 'r')
     lines = f.readlines()
     f.close()
@@ -16,11 +17,11 @@ def read_device_temperature(device):
     equals_pos = lines[1].find('t=')
     if equals_pos != -1:
         temp1_string = lines[1][equals_pos + 2:]
-        temp1_c = float(temp1_string) / 1000.0
-        print(temp1_c)
-    return lines
+        temperature = float(temp1_string) / 1000.0
+    return temperature
 
 
 def read_temperature():
-    read_device_temperature(0)
+    temperature1 = read_device_temperature(0)
+    print(temperature1)
 

@@ -17,11 +17,12 @@ def handle_lights(lights_use_case: HandleLightsUseCase):
 
 def handle_main_screen(main_screen_use_case: MainScreenUseCase):
     main_screen_use_case.show_next_value()
+    time.sleep(5)
 
 
 if __name__ == '__main__':
-    welcome_container = WelcomeContainer()
-    welcome_container.wire(modules=[sys.modules[__name__]])
+    # welcome_container = WelcomeContainer()
+    # welcome_container.wire(modules=[sys.modules[__name__]])
     handle_lights_container = HandleLightsContainer()
     handle_lights_container.wire(modules=[sys.modules[__name__]])
 

@@ -1,4 +1,4 @@
-from MainScreen.data.controller import DHTController
+from MainScreen.data.controller import DHTController, DS18B20Controller
 from MainScreen.domain.model.MainScreenStep import MainScreenStep
 
 
@@ -8,5 +8,4 @@ class MainScreenUseCase:
         self.__step = MainScreenStep.NONE
 
     def show_next_value(self):
-        DHTController.read_temperature()
-
+        DS18B20Controller.read_temperature()

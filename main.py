@@ -21,13 +21,13 @@ def handle_main_screen(main_screen_use_case: MainScreenUseCase):
 
 
 if __name__ == '__main__':
-    # welcome_container = WelcomeContainer()
-    # welcome_container.wire(modules=[sys.modules[__name__]])
+    welcome_container = WelcomeContainer()
+    welcome_container.wire(modules=[sys.modules[__name__]])
     handle_lights_container = HandleLightsContainer()
     handle_lights_container.wire(modules=[sys.modules[__name__]])
 
-    welcome_screen_use_case = WelcomeScreenUseCase()
-    welcome_screen_use_case.show_screen()
+    #welcome_screen_use_case = WelcomeScreenUseCase()
+    #welcome_screen_use_case.show_screen()
 
     handle_light_use_case = HandleLightsUseCase()
     handle_lights_thread = threading.Thread(target=handle_lights, args=(handle_light_use_case,))

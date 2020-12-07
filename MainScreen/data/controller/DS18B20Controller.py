@@ -23,5 +23,7 @@ def read_device_temperature(device):
 
 def read_temperature():
     temperature1 = read_device_temperature(0)
+    temperature2 = read_device_temperature(1)
     print(temperature1)
+    print(temperature2)
 

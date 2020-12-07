@@ -3,43 +3,27 @@ import time
 
 
 base_dir = '/sys/bus/w1/devices/'
-first_device_folder = glob.glob(base_dir + '28*')[0]
-second_device_folder = glob.glob(base_dir + '28*')[1]
-first_device_file = first_device_folder + '/w1_slave'
-second_device_file = second_device_folder + '/w1_slave'
+devices_folder = glob.glob(base_dir + '28*')
 
 
-def read_first_temperature_raw():
-    f = open(first_device_file, 'r')
-    lines = f.readlines()
-    f.close()
-    return lines
-
-
-def read_second_temperature_raw():
-    f = open(second_device_file, 'r')
+def read_temperature_raw(device):
+    f = open(devices_folder[device] + '/w1_slave', 'r')
     lines = f.readlines()
     f.close()
     return lines
 
 
 def read_temperature():
-    lines1 = read_first_temperature_raw()
-    lines2 = read_second_temperature_raw()
-    while lines1[0].strip()[-3:] != 'YES':
+    temp_raw = (read_temperature_raw(0), read_temperature_raw(1))
+    while temp_raw[0][0].strip()[-3:] != 'YES':
         time.sleep(0.2)
-        lines1 = read_first_temperature_raw()
-    equals_pos = lines1[1].find('t=')
+        temp_raw = (read_temperature_raw(0), read_temperature_raw(1))
+    equals_pos = temp_raw[0][1].find('t=')
     if equals_pos != -1:
-        temp_string = lines1[1][equals_pos + 2:]
-        temp_c = float(temp_string) / 1000.0
-        print(temp_c)
+        temp1_string = temp_raw[0][1][equals_pos + 2:]
+        temp1_c = float(temp1_string) / 1000.0
+        temp2_string = temp_raw[0][1][equals_pos + 2:]
+        temp2_c = float(temp2_string) / 1000.0
+        print(temp1_c)
+        print(temp2_c)
 
-    while lines2[0].strip()[-3:] != 'YES':
-        time.sleep(0.2)
-        lines2 = read_second_temperature_raw()
-    equals_pos2 = lines2[1].find('t=')
-    if equals_pos2 != -1:
-        temp_string2 = lines2[1][equals_pos2 + 2:]
-        temp_c2 = float(temp_string2) / 1000.0
-        print(temp_c2)

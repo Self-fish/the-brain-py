@@ -6,7 +6,7 @@ base_dir = '/sys/bus/w1/devices/'
 devices_folder = glob.glob(base_dir + '28*')
 
 
-def read_temperature(device):
+def read_device_temperature(device):
     f = open(devices_folder[device] + '/w1_slave', 'r')
     lines = f.readlines()
     f.close()
@@ -22,5 +22,5 @@ def read_temperature(device):
 
 
 def read_temperature():
-    read_temperature(0)
+    read_device_temperature(0)
 

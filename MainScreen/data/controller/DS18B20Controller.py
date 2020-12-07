@@ -16,13 +16,30 @@ def read_first_temperature_raw():
     return lines
 
 
+def read_second_temperature_raw():
+    f = open(second_device_file, 'r')
+    lines = f.readlines()
+    f.close()
+    return lines
+
+
 def read_temperature():
-    lines = read_first_temperature_raw()
-    while lines[0].strip()[-3:] != 'YES':
+    lines1 = read_first_temperature_raw()
+    lines2 = read_second_temperature_raw()
+    while lines1[0].strip()[-3:] != 'YES':
         time.sleep(0.2)
-        lines = read_first_temperature_raw()
-    equals_pos = lines[1].find('t=')
+        lines1 = read_first_temperature_raw()
+    equals_pos = lines1[1].find('t=')
     if equals_pos != -1:
-        temp_string = lines[1][equals_pos + 2:]
+        temp_string = lines1[1][equals_pos + 2:]
         temp_c = float(temp_string) / 1000.0
         print(temp_c)
+
+    while lines2[0].strip()[-3:] != 'YES':
+        time.sleep(0.2)
+        lines2 = read_second_temperature_raw()
+    equals_pos2 = lines2[1].find('t=')
+    if equals_pos2 != -1:
+        temp_string2 = lines2[1][equals_pos2 + 2:]
+        temp_c2 = float(temp_string2) / 1000.0
+        print(temp_c2)

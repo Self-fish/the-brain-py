@@ -1,4 +1,5 @@
 from Core.data.device import LCDStatus
+from MainScreen.domain.model.MainScreenStep import MainScreenStep
 
 
 class MainScreenController:
@@ -92,5 +93,7 @@ class MainScreenController:
             self.__lcd.lcd_write_char_with_position(5, 4, 4)
             LCDStatus.lcd_status = LCDStatus.LCDStatus.MAIN_SCREEN
 
-    def show_temperature(self, temperature):
-        self.__lcd.lcd_display_string(str(temperature) + " C", 3, 12)
+    def show_temperature(self, temperature, current_step: MainScreenStep):
+        if current_step != MainScreenStep.WATER_TEMPERATURE:
+            self.__lcd.lcd_write_char_with_position(6, 3, 9)
+        self.__lcd.lcd_display_string(str(temperature) + " C", 3, 11)

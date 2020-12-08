@@ -1,12 +1,11 @@
 from Core.data.device import LCDStatus
-from MainScreen.data.controller import CurrentTimeController
 from MainScreen.domain.model.MainScreenStep import MainScreenStep
 
 
 class MainScreenController:
 
     main_font = [
-        # Up Left cornet
+        # Anchor
         [0b00000,
          0b00000,
          0b00100,
@@ -16,7 +15,7 @@ class MainScreenController:
          0b00100,
          0b00100],
 
-        # Down left corner
+        # Anchor
         [0b00000,
          0b00000,
          0b11111,
@@ -26,7 +25,7 @@ class MainScreenController:
          0b00000,
          0b00000],
 
-        # Up right corner
+        # Anchor
         [0b00100,
          0b00100,
          0b11111,
@@ -36,7 +35,7 @@ class MainScreenController:
          0b00100,
          0b00100],
 
-        # Down right corner
+        # Anchor
         [0b00100,
          0b00100,
          0b00100,
@@ -46,7 +45,7 @@ class MainScreenController:
          0b00100,
          0b11111],
 
-        # Left side
+        # Anchor
         [0b00000,
          0b00000,
          0b11110,
@@ -56,7 +55,7 @@ class MainScreenController:
          0b00001,
          0b00000],
 
-        # Right side
+        # Anchor
         [0b00000,
          0b00000,
          0b01111,
@@ -66,7 +65,7 @@ class MainScreenController:
          0b10000,
          0b00000],
 
-        # Up side
+        # Water temperature icon
         [0b00100,
          0b01010,
          0b01010,

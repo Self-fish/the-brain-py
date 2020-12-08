@@ -1,3 +1,5 @@
+from Core.data.device import LCDStatus
+
 
 class WelcomeScreenController:
 
@@ -135,6 +137,7 @@ class WelcomeScreenController:
         # Left frame
         self.__lcd.lcd_write_char_with_position(4, 3, 0)
         self.__lcd.lcd_write_char_with_position(4, 2, 0)
+        LCDStatus.lcd_status = LCDStatus.LCDStatus.WELCOME_SCREEN
 
     def write_user_message(self, user_name):
         self.__lcd.lcd_display_string("Hello " + user_name + "!", 2, 4)

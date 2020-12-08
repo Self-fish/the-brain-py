@@ -30,8 +30,8 @@ if __name__ == '__main__':
     main_screen_container = MainScreenContainer()
     main_screen_container.wire(modules=[sys.modules[__name__]])
 
-    #welcome_screen_use_case = WelcomeScreenUseCase()
-    #welcome_screen_use_case.show_screen()
+    welcome_screen_use_case = WelcomeScreenUseCase()
+    welcome_screen_use_case.show_screen()
 
     handle_light_use_case = HandleLightsUseCase()
     handle_lights_thread = threading.Thread(target=handle_lights, args=(handle_light_use_case,))

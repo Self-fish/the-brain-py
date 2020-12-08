@@ -15,7 +15,6 @@ class MainScreenUseCase:
 
     def show_next_value(self):
         water_temperature = DS18B20Controller.read_temperature()
-        self.__screen_controller.clear_screen()
         self.__screen_controller.pain_template()
         self.__screen_controller.show_temperature(water_temperature)
 

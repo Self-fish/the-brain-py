@@ -1,3 +1,4 @@
+from Core.data.device import LCDStatus
 
 
 class MainScreenController:
@@ -79,17 +80,17 @@ class MainScreenController:
         self.__lcd = lcd
         self.__lcd.lcd_load_custom_chars(self.main_font)
 
-    def clear_screen(self):
-        self.__lcd.lcd_clear()
-
     def pain_template(self):
-        self.__lcd.lcd_write_char_with_position(0, 2, 3)
-        self.__lcd.lcd_write_char_with_position(1, 3, 2)
-        self.__lcd.lcd_write_char_with_position(1, 3, 4)
-        self.__lcd.lcd_write_char_with_position(2, 3, 3)
-        self.__lcd.lcd_write_char_with_position(3, 4, 3)
-        self.__lcd.lcd_write_char_with_position(4, 4, 2)
-        self.__lcd.lcd_write_char_with_position(5, 4, 4)
+        if LCDStatus.lcd_status != LCDStatus.LCDStatus.MAIN_SCREEN:
+            self.__lcd.lcd_clear()
+            self.__lcd.lcd_write_char_with_position(0, 2, 3)
+            self.__lcd.lcd_write_char_with_position(1, 3, 2)
+            self.__lcd.lcd_write_char_with_position(1, 3, 4)
+            self.__lcd.lcd_write_char_with_position(2, 3, 3)
+            self.__lcd.lcd_write_char_with_position(3, 4, 3)
+            self.__lcd.lcd_write_char_with_position(4, 4, 2)
+            self.__lcd.lcd_write_char_with_position(5, 4, 4)
+            LCDStatus.lcd_status = LCDStatus.LCDStatus.MAIN_SCREEN
 
     def show_temperature(self, temperature):
         self.__lcd.lcd_display_string(str(temperature) + " C", 3, 12)

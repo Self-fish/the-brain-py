@@ -12,7 +12,7 @@ def send_water_temperature(water_temp):
         serial_number = ReadSerialNumber.get_serial_number()
         body = {"type": "WATER_TEMP", "value": water_temp, "deviceId": "sf-" + serial_number}
         resp = requests.post(API_URI, json=body)
-        if resp.status_code != 201:
+        if resp.status_code != 200:
             raise NoMeasuresApiException
         else:
             print('Created task. ID: {}'.format(resp.json()["id"]))

@@ -12,21 +12,21 @@ from HandleLights.HandleLightsContainer import HandleLightsContainer
 from WelcomeScreen.domain.usecase.UseCase import WelcomeScreenUseCase
 
 
-def handle_lights(lights_use_case: HandleLightsUseCase):
+def handle_lights(use_case: HandleLightsUseCase):
     while True:
-        lights_use_case.handle_lights()
+        use_case.handle_lights()
         time.sleep(60)
 
 
-def handle_main_screen(main_screen_use_case: MainScreenUseCase):
+def handle_main_screen(use_case: MainScreenUseCase):
     while True:
-        main_screen_use_case.show_next_value()
+        use_case.show_next_value()
         time.sleep(5)
 
 
-def measure_water_temp(measure_water_temp_use_case: MeasureWaterTempUseCase):
+def measure_water_temp(use_case: MeasureWaterTempUseCase):
     while True:
-        measure_water_temp_use_case.track_water_temp()
+        use_case.track_water_temp()
         time.sleep(60)
 
 

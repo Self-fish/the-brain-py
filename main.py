@@ -52,6 +52,6 @@ if __name__ == '__main__':
     handle_main_screen_thread.start()
 
     measure_water_temp_use_case = MeasureWaterTempUseCase()
-    measure_water_temp_thread = threading.Thread(target=handle_main_screen, args=(measure_water_temp_use_case,))
+    measure_water_temp_thread = threading.Thread(target=measure_water_temp, args=(measure_water_temp_use_case,))
     measure_water_temp_thread.start()
 

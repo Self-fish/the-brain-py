@@ -1,7 +1,8 @@
 from dependency_injector.wiring import Provide, inject
 
 from MainScreen.MainScreenContainer import MainScreenContainer
-from MainScreen.data.controller import DS18B20Controller, CurrentTimeController
+from MainScreen.data.controller import CurrentTimeController
+from MeasureWaterTemp.data.controller import DS18B20Controller
 from MainScreen.data.controller.LCDController import MainScreenController
 from MainScreen.domain.model.MainScreenStep import MainScreenStep
 

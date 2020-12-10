@@ -1,0 +1,4 @@
+
+
+class NoMeasuresApiException(Exception):
+    pass

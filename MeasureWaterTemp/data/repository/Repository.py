@@ -6,6 +6,7 @@ class WaterTemperatureRepository:
 
     def __init__(self):
         self.__water_temperature = 0
+        print("Hola")
 
     def track_water_temp(self):
         self.__water_temperature = DS18B20Controller.read_temperature()

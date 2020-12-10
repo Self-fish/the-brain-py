@@ -13,3 +13,6 @@ class WaterTemperatureRepository:
             ApiDataSource.send_water_temperature(self.__water_temperature)
         except Exception:
             print("Repository: Exception!")
+
+    def get_water_temp(self):
+        return self.__water_temperature

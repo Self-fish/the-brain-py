@@ -14,8 +14,6 @@ def send_water_temperature(water_temp):
         resp = requests.post(API_URI, json=body)
         if resp.status_code != 200:
             raise NoMeasuresApiException
-        else:
-            print('Created task. ID: {}'.format(resp.json()["id"]))
 
     except NoSerialException:
         raise NoSerialException

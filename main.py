@@ -5,7 +5,6 @@ import time
 from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
 from MainScreen.MainScreenContainer import MainScreenContainer
 from MainScreen.domain.usecase.UseCase import MainScreenUseCase
-from MeasureWaterTemp.MeasureWaterTempContainer import MeasureWaterTempContainer
 from MeasureWaterTemp.domain.usecase.UseCase import MeasureWaterTempUseCase
 from WelcomeScreen.WelcomeScreenContainer import WelcomeContainer
 from HandleLights.HandleLightsContainer import HandleLightsContainer
@@ -37,8 +36,6 @@ if __name__ == '__main__':
     handle_lights_container.wire(modules=[sys.modules[__name__]])
     main_screen_container = MainScreenContainer()
     main_screen_container.wire(modules=[sys.modules[__name__]])
-    measure_water_temp_container = MeasureWaterTempContainer()
-    measure_water_temp_container.wire(modules=[sys.modules[__name__]])
 
     welcome_screen_use_case = WelcomeScreenUseCase()
     welcome_screen_use_case.show_screen()

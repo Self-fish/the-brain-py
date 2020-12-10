@@ -18,8 +18,8 @@ class MainScreenUseCase:
         self.__water_temp_repository = water_temp_repository
 
     def show_next_value(self):
-        #water_temperature = DS18B20Controller.read_temperature()
-        water_temperature = self.__water_temp_repository.get_water_temp()
+        water_temperature = DS18B20Controller.read_temperature()
+        #water_temperature = self.__water_temp_repository.get_water_temp()
         self.__screen_controller.show_date(CurrentTimeController.get_current_hour())
         self.__screen_controller.pain_template()
         self.__screen_controller.show_temperature(water_temperature, self.__step)

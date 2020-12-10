@@ -44,9 +44,9 @@ if __name__ == '__main__':
     handle_lights_thread = threading.Thread(target=handle_lights, args=(handle_light_use_case,))
     handle_lights_thread.start()
 
-    measure_water_temp_use_case = MeasureWaterTempUseCase()
-    measure_water_temp_thread = threading.Thread(target=measure_water_temp, args=(measure_water_temp_use_case,))
-    measure_water_temp_thread.start()
+    #measure_water_temp_use_case = MeasureWaterTempUseCase()
+    #measure_water_temp_thread = threading.Thread(target=measure_water_temp, args=(measure_water_temp_use_case,))
+    #measure_water_temp_thread.start()
 
     main_screen_use_case = MainScreenUseCase()
     handle_main_screen_thread = threading.Thread(target=handle_main_screen, args=(main_screen_use_case,))

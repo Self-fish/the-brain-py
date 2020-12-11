@@ -15,7 +15,8 @@ def should_turn_on_lights(current_time, light_preferences: LightPreferences):
 class HandleLightsUseCase:
 
     @inject
-    def __init__(self, light_repository: LightStatusRepository = Provide[HandleLightsContainer.light_status_repository]):
+    def __init__(self,
+                 light_repository: LightStatusRepository = Provide[HandleLightsContainer.light_status_repository]):
         self.__light_repository = light_repository
 
     def handle_lights(self):

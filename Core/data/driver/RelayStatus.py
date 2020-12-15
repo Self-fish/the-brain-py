@@ -1,6 +1,6 @@
 from enum import Enum
 
 
-class LightStatus(Enum):
+class RelayStatus(Enum):
     ON = 1
     OFF = 0

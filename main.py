@@ -3,6 +3,8 @@ import threading
 import time
 
 from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
+from HeatingControl.HeatingControlContainer import HeatingControlContainer
+from HeatingControl.domain.usecase.UseCase import HeatingControlUseCase
 from MainScreen.MainScreenContainer import MainScreenContainer
 from MainScreen.domain.usecase.UseCase import MainScreenUseCase
 from MeasureWaterTemp.domain.usecase.UseCase import MeasureWaterTempUseCase
@@ -29,6 +31,12 @@ def measure_water_temp(use_case: MeasureWaterTempUseCase):
         time.sleep(60)
 
 
+def control_heating(use_case: HeatingControlUseCase):
+    while True:
+        use_case.control_heating()
+        time.sleep(60)
+
+
 if __name__ == '__main__':
     welcome_container = WelcomeContainer()
     welcome_container.wire(modules=[sys.modules[__name__]])
@@ -36,6 +44,8 @@ if __name__ == '__main__':
     handle_lights_container.wire(modules=[sys.modules[__name__]])
     main_screen_container = MainScreenContainer()
     main_screen_container.wire(modules=[sys.modules[__name__]])
+    heating_control_container = HeatingControlContainer()
+    heating_control_container.wire(modules=[sys.modules[__name__]])
 
     welcome_screen_use_case = WelcomeScreenUseCase()
     welcome_screen_use_case.show_screen()
@@ -51,4 +61,8 @@ if __name__ == '__main__':
     main_screen_use_case = MainScreenUseCase()
     handle_main_screen_thread = threading.Thread(target=handle_main_screen, args=(main_screen_use_case,))
     handle_main_screen_thread.start()
+
+    heating_control_use_case = HeatingControlUseCase()
+    handle_heating_control_thread = threading.Thread(target=control_heating, args=(heating_control_use_case,))
+    handle_heating_control_thread.start()
 

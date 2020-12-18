@@ -12,3 +12,6 @@ class StartingTime:
         if not isinstance(other, DayOfWeek):
             return False
         return self.__day == other.__day and self.__hour == other.__hour and self.__minute == other.__minute
+
+    def get_day(self):
+        return self.__day

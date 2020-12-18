@@ -1,4 +1,5 @@
 from HandleAlerts.data.datasource import ApiDataSource
+from HandleAlerts.domain.model.Alert import Alert
 
 
 class GetAlertsRepository:
@@ -14,11 +15,12 @@ class GetAlertsRepository:
             print("Exception")
             pass
 
-    def __add_alert(self, alert):
+    def __add_alert(self, alert: Alert):
         if alert not in self.__alerts:
             self.__alerts.append(alert)
         print(len(self.__alerts))
-        print(self.__alerts[0])
+        first: Alert = self.__alerts[0]
+        print(first.get_starting().get_day())
 
     def get_local_alerts(self):
         print()

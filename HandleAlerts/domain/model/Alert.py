@@ -11,3 +11,6 @@ class Alert:
         if not isinstance(other, Alert):
             return False
         return self.__starting == other.__starting and self.__message == other.__message
+
+    def get_starting(self):
+        return self.__starting

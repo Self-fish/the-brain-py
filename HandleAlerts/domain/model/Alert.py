@@ -11,8 +11,5 @@ class Alert:
     def __eq__(self, other):
         if not isinstance(other, Alert):
             return False
-        if self.__starting == other.__starting:
-            print("Starting equal")
-
         return self.__starting == other.__starting and self.__message == other.__message
 

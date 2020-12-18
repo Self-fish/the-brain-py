@@ -18,9 +18,7 @@ class HeatingControlUseCase:
         desired_water_temperature = HeatingTemperatureRepository.get_heating_temperature()
         current_water_temperature = LocalDataSource.water_temperature
         if current_water_temperature < desired_water_temperature:
-            print("Encendemos el calentador")
             self.__heating_status_repository.update_heating_status(RelayStatus.ON)
         else:
-            print("Apagamos el calendador")
             self.__heating_status_repository.update_heating_status(RelayStatus.OFF)
 

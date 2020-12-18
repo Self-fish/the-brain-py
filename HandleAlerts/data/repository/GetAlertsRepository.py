@@ -18,7 +18,6 @@ class GetAlertsRepository:
     def __add_alert(self, alert: Alert):
         if alert not in self.__alerts:
             self.__alerts.append(alert)
-        print(len(self.__alerts))
 
 
     def get_local_alerts(self):

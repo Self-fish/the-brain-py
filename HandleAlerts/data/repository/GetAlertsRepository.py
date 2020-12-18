@@ -18,8 +18,7 @@ class GetAlertsRepository:
         if alert not in self.__alerts:
             self.__alerts.append(alert)
         print(len(self.__alerts))
-        print(self.__alerts[0].__starting.__day)
-        print(self.__alerts[0].__message)
+        print(self.__alerts[0])
 
     def get_local_alerts(self):
         print()

@@ -2,6 +2,8 @@ import sys
 import threading
 import time
 
+from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
+from HandleAlerts.domain.usecase.GetAlertsUseCase import GetAlertsUseCase
 from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
 from HeatingControl.HeatingControlContainer import HeatingControlContainer
 from HeatingControl.domain.usecase.UseCase import HeatingControlUseCase
@@ -37,6 +39,12 @@ def control_heating(use_case: HeatingControlUseCase):
         time.sleep(60)
 
 
+def get_alerts(use_case: GetAlertsUseCase):
+    while True:
+        use_case.get_alerts()
+        time.sleep(60)
+
+
 if __name__ == '__main__':
     welcome_container = WelcomeContainer()
     welcome_container.wire(modules=[sys.modules[__name__]])
@@ -46,6 +54,8 @@ if __name__ == '__main__':
     main_screen_container.wire(modules=[sys.modules[__name__]])
     heating_control_container = HeatingControlContainer()
     heating_control_container.wire(modules=[sys.modules[__name__]])
+    handle_alerts_container = HandleAlertsContainer()
+    handle_alerts_container.wire(modules=[sys.modules[__name__]])
 
     welcome_screen_use_case = WelcomeScreenUseCase()
     welcome_screen_use_case.show_screen()
@@ -65,4 +75,8 @@ if __name__ == '__main__':
     heating_control_use_case = HeatingControlUseCase()
     handle_heating_control_thread = threading.Thread(target=control_heating, args=(heating_control_use_case,))
     handle_heating_control_thread.start()
+
+    get_alerts_use_case = GetAlertsUseCase()
+    get_alerts_thread = threading.Thread(target=get_alerts, args=(get_alerts_use_case,))
+    get_alerts_thread.start()
 

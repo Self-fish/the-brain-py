@@ -14,3 +14,6 @@ class Alert:
 
     def get_starting(self):
         return self.__starting
+
+    def get_message(self):
+        return self.__message

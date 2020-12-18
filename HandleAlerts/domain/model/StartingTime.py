@@ -15,3 +15,9 @@ class StartingTime:
 
     def get_day(self):
         return self.__day
+
+    def get_hour(self):
+        return self.__hour
+
+    def get_minute(self):
+        return self.__minute

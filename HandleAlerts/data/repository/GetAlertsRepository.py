@@ -21,6 +21,9 @@ class GetAlertsRepository:
         print(len(self.__alerts))
         first: Alert = self.__alerts[0]
         print(first.get_starting().get_day())
+        print(first.get_starting().get_hour())
+        print(first.get_starting().get_minute())
+        print(first.get_message())
 
     def get_local_alerts(self):
         print()

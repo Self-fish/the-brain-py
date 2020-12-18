@@ -10,6 +10,10 @@ class Alert:
     def __eq__(self, other):
         if not isinstance(other, Alert):
             return False
+        if self.__starting == other.__starting:
+            print("Starting equal")
+        if self.__message == other.__message:
+            print("Other equal")
         return self.__starting == other.__starting and self.__message == other.__message
 
     def get_starting(self):

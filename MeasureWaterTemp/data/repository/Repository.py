@@ -7,6 +7,5 @@ def track_water_temp():
     try:
         ApiDataSource.send_water_temperature(LocalDataSource.water_temperature)
     except Exception:
-        print("Repository: Exception!")
-
+        pass
 

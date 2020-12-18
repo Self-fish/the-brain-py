@@ -1,4 +1,5 @@
 import requests
+import datetime
 
 from HandleAlerts.data.datasource.NoApiAlertsException import NoApiAlertsException
 from HandleAlerts.domain.model.Alert import Alert
@@ -13,4 +14,5 @@ def get_alerts():
         raise NoApiAlertsException
     else:
         return Alert(StartingTime(alerts.json()['starts']['day'], alerts.json()['starts']['hour'],
-                                  alerts.json()['starts']['minute']), alerts.json()['text'])
+                                  alerts.json()['starts']['minute']),
+                     alerts.json()['text'], datetime.datetime.now().timestamp())

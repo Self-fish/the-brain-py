@@ -11,22 +11,5 @@ class StartingTime:
     def __eq__(self, other):
         if not isinstance(other, StartingTime):
             return False
-        if self.__day == other.__day:
-            print("Day equal")
-
-        if self.__hour == other.__hour:
-            print("Hour equal")
-
-        if self.__minute == other.__minute:
-            print("Minute equal")
-
         return self.__day == other.__day and self.__hour == other.__hour and self.__minute == other.__minute
 
-    def get_day(self):
-        return self.__day
-
-    def get_hour(self):
-        return self.__hour
-
-    def get_minute(self):
-        return self.__minute

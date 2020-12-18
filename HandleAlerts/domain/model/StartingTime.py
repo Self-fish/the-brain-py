@@ -9,8 +9,17 @@ class StartingTime:
         self.__minute = minute
 
     def __eq__(self, other):
-        if not isinstance(other, DayOfWeek):
+        if not isinstance(other, StartingTime):
             return False
+        if self.__day == other.__day:
+            print("Day equal")
+
+        if self.__hour == other.__hour:
+            print("Hour equal")
+
+        if self.__minute == other.__minute:
+            print("Minute equal")
+
         return self.__day == other.__day and self.__hour == other.__hour and self.__minute == other.__minute
 
     def get_day(self):

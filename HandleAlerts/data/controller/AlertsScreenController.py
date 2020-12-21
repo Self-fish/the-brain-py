@@ -77,10 +77,11 @@ class AlertsScreenController:
 
     def __init__(self, lcd):
         self.__lcd = lcd
-        self.__lcd.lcd_load_custom_chars(self.main_font)
+
 
     def show_alerts_advice(self):
         if LCDStatus.lcd_status != LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
+            self.__lcd.lcd_load_custom_chars(self.main_font)
             self.__lcd.lcd_display_string("", 2, 2)
             self.__lcd.lcd_display_string("", 2, 3)
             self.__lcd.lcd_display_string("", 2, 4)

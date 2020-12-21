@@ -11,8 +11,8 @@ class GetAlertsRepository:
         try:
             next_alert = ApiDataSource.get_alerts()
             self.__add_alert(next_alert)
+            print("New alert Added")
         except Exception:
-            print("Exception")
             pass
 
     def __add_alert(self, alert: Alert):

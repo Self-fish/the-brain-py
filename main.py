@@ -4,6 +4,7 @@ import time
 
 from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
 from HandleAlerts.domain.usecase.GetAlertsUseCase import GetAlertsUseCase
+from HandleAlerts.domain.usecase.ShowAlertsAdviseUseCase import ShowAlertsAdviseUseCase
 from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
 from HeatingControl.HeatingControlContainer import HeatingControlContainer
 from HeatingControl.domain.usecase.UseCase import HeatingControlUseCase
@@ -45,6 +46,12 @@ def get_alerts(use_case: GetAlertsUseCase):
         time.sleep(60)
 
 
+def show_alert_advice(use_case: ShowAlertsAdviseUseCase):
+    while True:
+        use_case.show_alert_advice()
+        time.sleep(60)
+
+
 if __name__ == '__main__':
     welcome_container = WelcomeContainer()
     welcome_container.wire(modules=[sys.modules[__name__]])
@@ -79,4 +86,8 @@ if __name__ == '__main__':
     get_alerts_use_case = GetAlertsUseCase()
     get_alerts_thread = threading.Thread(target=get_alerts, args=(get_alerts_use_case,))
     get_alerts_thread.start()
+
+    show_alert_advice_use_case = ShowAlertsAdviseUseCase()
+    show_alerts_advice_thread = threading.Thread(target=show_alert_advice, args=(show_alert_advice_use_case,))
+    show_alerts_advice_thread.start()
 

@@ -8,4 +8,5 @@ class LCDStatus(Enum):
     ALERTS_ADVICE_SCREEN = 3
 
 
-lcd_status = LCDStatus.NONE
+lcd_current_status = LCDStatus.NONE
+lcd_next_status = LCDStatus.MAIN_SCREEN

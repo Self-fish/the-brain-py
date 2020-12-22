@@ -164,7 +164,8 @@ class MainScreenController:
 
     def pain_template(self):
 
-        if LCDStatus.lcd_status == LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
+        if LCDStatus.lcd_next_status == LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN and \
+                LCDStatus.lcd_current_status != LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
             print("Pintamos el warning")
             self.__lcd.lcd_load_custom_chars(self.warning_font)
             self.__lcd.lcd_clear()
@@ -177,10 +178,10 @@ class MainScreenController:
             self.__lcd.lcd_write_char_with_position(5, 4, 2)
             self.__lcd.lcd_write_char_with_position(1, 4, 3)
             self.__lcd.lcd_write_char_with_position(6, 4, 4)
-            LCDStatus.lcd_status = LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN
+            LCDStatus.lcd_current_status = LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN
 
-        if LCDStatus.lcd_status != LCDStatus.LCDStatus.MAIN_SCREEN or \
-                LCDStatus.lcd_status != LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
+        if LCDStatus.lcd_next_status == LCDStatus.LCDStatus.MAIN_SCREEN and \
+                LCDStatus.lcd_current_status != LCDStatus.LCDStatus.MAIN_SCREEN:
             self.__lcd.lcd_load_custom_chars(self.anchor_font)
             self.__lcd.lcd_clear()
             self.__lcd.lcd_write_char_with_position(0, 2, 3)
@@ -190,7 +191,7 @@ class MainScreenController:
             self.__lcd.lcd_write_char_with_position(3, 4, 3)
             self.__lcd.lcd_write_char_with_position(4, 4, 2)
             self.__lcd.lcd_write_char_with_position(5, 4, 4)
-            LCDStatus.lcd_status = LCDStatus.LCDStatus.MAIN_SCREEN
+            LCDStatus.lcd_current_status = LCDStatus.LCDStatus.MAIN_SCREEN
 
     def show_date(self, date):
         self.__lcd.lcd_display_string(date, 1, 1)

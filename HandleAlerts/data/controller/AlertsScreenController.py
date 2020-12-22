@@ -7,7 +7,7 @@ class AlertsScreenController:
         self.__lcd = lcd
 
     def show_alerts_advice(self):
-        if LCDStatus.lcd_status != LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
+        if LCDStatus.lcd_current_status != LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
             self.__lcd.lcd_load_custom_chars(self.main_font)
             self.__lcd.lcd_display_string("", 2, 2)
             self.__lcd.lcd_display_string("", 2, 3)
@@ -29,4 +29,4 @@ class AlertsScreenController:
             self.__lcd.lcd_write_char_with_position(5, 4, 2)
             self.__lcd.lcd_write_char_with_position(1, 4, 3)
             self.__lcd.lcd_write_char_with_position(6, 4, 4)
-            LCDStatus.lcd_status = LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN
+            LCDStatus.lcd_current_status = LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN

@@ -16,5 +16,5 @@ class ShowAlertsAdviseUseCase:
     def show_alert_advice(self):
         if len(self.__repository.get_local_alerts()) != 0:
             print("Mostraríamos el warning")
-            LCDStatus.lcd_status = LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN
+            LCDStatus.lcd_next_status = LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN
             #self.__screen_controller.show_alerts_advice()

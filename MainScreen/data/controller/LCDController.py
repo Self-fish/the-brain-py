@@ -147,6 +147,15 @@ class MainScreenController:
          0b00000,
          0b00000],
 
+        [0b00000,
+         0b00000,
+         0b00000,
+         0b00000,
+         0b00000,
+         0b00000,
+         0b00000,
+         0b00000],
+
         # Water temperature icon
         [0b00100,
          0b01010,

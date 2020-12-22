@@ -165,6 +165,7 @@ class MainScreenController:
     def pain_template(self):
 
         if LCDStatus.lcd_status == LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
+            print("Pintamos el warning")
             self.__lcd.lcd_load_custom_chars(self.warning_font)
             self.__lcd.lcd_clear()
             self.__lcd.lcd_write_char_with_position(0, 2, 2)

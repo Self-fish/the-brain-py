@@ -65,6 +65,15 @@ class MainScreenController:
          0b10000,
          0b00000],
 
+        [0b00000,
+         0b00000,
+         0b00000,
+         0b00000,
+         0b00000,
+         0b00000,
+         0b00000,
+         0b00000],
+
         # Water temperature icon
         [0b00100,
          0b01010,
@@ -147,15 +156,6 @@ class MainScreenController:
          0b00000,
          0b00000],
 
-        [0b00000,
-         0b00000,
-         0b00000,
-         0b00000,
-         0b00000,
-         0b00000,
-         0b00000,
-         0b00000],
-
         # Water temperature icon
         [0b00100,
          0b01010,
@@ -177,7 +177,16 @@ class MainScreenController:
                 LCDStatus.lcd_current_status != LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
             print("Pintamos el warning")
             self.__lcd.lcd_load_custom_chars(self.warning_font)
-            self.__lcd.lcd_clear()
+            self.__lcd.lcd_display_string("", 2, 2)
+            self.__lcd.lcd_display_string("", 2, 3)
+            self.__lcd.lcd_display_string("", 2, 4)
+            self.__lcd.lcd_display_string("", 3, 2)
+            self.__lcd.lcd_display_string("", 3, 3)
+            self.__lcd.lcd_display_string("", 3, 4)
+            self.__lcd.lcd_display_string("", 4, 2)
+            self.__lcd.lcd_display_string("", 4, 3)
+            self.__lcd.lcd_display_string("", 4, 4)
+
             self.__lcd.lcd_write_char_with_position(0, 2, 2)
             self.__lcd.lcd_write_char_with_position(1, 2, 3)
             self.__lcd.lcd_write_char_with_position(2, 2, 4)
@@ -192,15 +201,7 @@ class MainScreenController:
         if LCDStatus.lcd_next_status == LCDStatus.LCDStatus.MAIN_SCREEN and \
                 LCDStatus.lcd_current_status != LCDStatus.LCDStatus.MAIN_SCREEN:
             self.__lcd.lcd_load_custom_chars(self.anchor_font)
-            self.__lcd.lcd_display_string("", 2, 2)
-            self.__lcd.lcd_display_string("", 2, 3)
-            self.__lcd.lcd_display_string("", 2, 4)
-            self.__lcd.lcd_display_string("", 3, 2)
-            self.__lcd.lcd_display_string("", 3, 3)
-            self.__lcd.lcd_display_string("", 3, 4)
-            self.__lcd.lcd_display_string("", 4, 2)
-            self.__lcd.lcd_display_string("", 4, 3)
-            self.__lcd.lcd_display_string("", 4, 4)
+            self.__lcd.lcd_clear()
             self.__lcd.lcd_write_char_with_position(0, 2, 3)
             self.__lcd.lcd_write_char_with_position(1, 3, 2)
             self.__lcd.lcd_write_char_with_position(1, 3, 4)
@@ -215,6 +216,6 @@ class MainScreenController:
 
     def show_temperature(self, temperature, current_step: MainScreenStep):
         if current_step != MainScreenStep.WATER_TEMPERATURE:
-            self.__lcd.lcd_write_char_with_position(6, 3, 9)
+            self.__lcd.lcd_write_char_with_position(7, 3, 9)
         self.__lcd.lcd_display_string(str(temperature) + " C", 3, 11)
 

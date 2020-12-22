@@ -80,7 +80,6 @@ class MainScreenController:
     def __init__(self, lcd):
         self.__lcd = lcd
 
-
     def pain_template(self):
         if LCDStatus.lcd_status != LCDStatus.LCDStatus.MAIN_SCREEN or \
                 LCDStatus.lcd_status != LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:

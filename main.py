@@ -87,7 +87,7 @@ if __name__ == '__main__':
     get_alerts_thread = threading.Thread(target=get_alerts, args=(get_alerts_use_case,))
     get_alerts_thread.start()
 
-    show_alert_advice_use_case = ShowAlertsAdviseUseCase()
-    show_alerts_advice_thread = threading.Thread(target=show_alert_advice, args=(show_alert_advice_use_case,))
-    show_alerts_advice_thread.start()
+    #show_alert_advice_use_case = ShowAlertsAdviseUseCase()
+    #show_alerts_advice_thread = threading.Thread(target=show_alert_advice, args=(show_alert_advice_use_case,))
+    #show_alerts_advice_thread.start()
 

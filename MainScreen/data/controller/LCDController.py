@@ -178,7 +178,8 @@ class MainScreenController:
             self.__lcd.lcd_write_char_with_position(6, 4, 4)
             LCDStatus.lcd_status = LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN
 
-        if LCDStatus.lcd_status != LCDStatus.LCDStatus.MAIN_SCREEN:
+        if LCDStatus.lcd_status != LCDStatus.LCDStatus.MAIN_SCREEN or \
+                LCDStatus.lcd_status != LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
             self.__lcd.lcd_load_custom_chars(self.anchor_font)
             self.__lcd.lcd_clear()
             self.__lcd.lcd_write_char_with_position(0, 2, 3)

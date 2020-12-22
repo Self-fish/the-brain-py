@@ -46,10 +46,10 @@ def get_alerts(use_case: GetAlertsUseCase):
         time.sleep(60)
 
 
-def show_alert_advice(use_case: ShowAlertsAdviseUseCase):
-    while True:
-        use_case.show_alert_advice()
-        time.sleep(60)
+#def show_alert_advice(use_case: ShowAlertsAdviseUseCase):
+#    while True:
+#        use_case.show_alert_advice()
+#        time.sleep(60)
 
 
 if __name__ == '__main__':

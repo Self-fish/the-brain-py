@@ -192,7 +192,15 @@ class MainScreenController:
         if LCDStatus.lcd_next_status == LCDStatus.LCDStatus.MAIN_SCREEN and \
                 LCDStatus.lcd_current_status != LCDStatus.LCDStatus.MAIN_SCREEN:
             self.__lcd.lcd_load_custom_chars(self.anchor_font)
-            self.__lcd.lcd_clear()
+            self.__lcd.lcd_display_string("", 2, 2)
+            self.__lcd.lcd_display_string("", 2, 3)
+            self.__lcd.lcd_display_string("", 2, 4)
+            self.__lcd.lcd_display_string("", 3, 2)
+            self.__lcd.lcd_display_string("", 3, 3)
+            self.__lcd.lcd_display_string("", 3, 4)
+            self.__lcd.lcd_display_string("", 4, 2)
+            self.__lcd.lcd_display_string("", 4, 3)
+            self.__lcd.lcd_display_string("", 4, 4)
             self.__lcd.lcd_write_char_with_position(0, 2, 3)
             self.__lcd.lcd_write_char_with_position(1, 3, 2)
             self.__lcd.lcd_write_char_with_position(1, 3, 4)

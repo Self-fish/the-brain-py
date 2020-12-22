@@ -172,43 +172,18 @@ class MainScreenController:
         self.__lcd = lcd
 
     def pain_template(self):
-
         if LCDStatus.lcd_next_status == LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN and \
                 LCDStatus.lcd_current_status != LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
-            print("Pintamos el warning")
             self.__lcd.lcd_load_custom_chars(self.warning_font)
-            self.__lcd.lcd_display_string("", 2, 2)
-            self.__lcd.lcd_display_string("", 2, 3)
-            self.__lcd.lcd_display_string("", 2, 4)
-            self.__lcd.lcd_display_string("", 3, 2)
-            self.__lcd.lcd_display_string("", 3, 3)
-            self.__lcd.lcd_display_string("", 3, 4)
-            self.__lcd.lcd_display_string("", 4, 2)
-            self.__lcd.lcd_display_string("", 4, 3)
-            self.__lcd.lcd_display_string("", 4, 4)
-
-            self.__lcd.lcd_write_char_with_position(0, 2, 2)
-            self.__lcd.lcd_write_char_with_position(1, 2, 3)
-            self.__lcd.lcd_write_char_with_position(2, 2, 4)
-            self.__lcd.lcd_write_char_with_position(3, 3, 2)
-            self.__lcd.lcd_write_char_with_position(4, 3, 3)
-            self.__lcd.lcd_write_char_with_position(3, 3, 4)
-            self.__lcd.lcd_write_char_with_position(5, 4, 2)
-            self.__lcd.lcd_write_char_with_position(1, 4, 3)
-            self.__lcd.lcd_write_char_with_position(6, 4, 4)
+            self.__clean_anchor_icon()
+            self.__paint_warning_icon()
             LCDStatus.lcd_current_status = LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN
 
         if LCDStatus.lcd_next_status == LCDStatus.LCDStatus.MAIN_SCREEN and \
                 LCDStatus.lcd_current_status != LCDStatus.LCDStatus.MAIN_SCREEN:
             self.__lcd.lcd_load_custom_chars(self.anchor_font)
             self.__lcd.lcd_clear()
-            self.__lcd.lcd_write_char_with_position(0, 2, 3)
-            self.__lcd.lcd_write_char_with_position(1, 3, 2)
-            self.__lcd.lcd_write_char_with_position(1, 3, 4)
-            self.__lcd.lcd_write_char_with_position(2, 3, 3)
-            self.__lcd.lcd_write_char_with_position(3, 4, 3)
-            self.__lcd.lcd_write_char_with_position(4, 4, 2)
-            self.__lcd.lcd_write_char_with_position(5, 4, 4)
+            self.__paint_anchor_icon()
             LCDStatus.lcd_current_status = LCDStatus.LCDStatus.MAIN_SCREEN
 
     def show_date(self, date):
@@ -219,3 +194,33 @@ class MainScreenController:
             self.__lcd.lcd_write_char_with_position(7, 3, 9)
         self.__lcd.lcd_display_string(str(temperature) + " C", 3, 11)
 
+    def __paint_anchor_icon(self):
+        self.__lcd.lcd_write_char_with_position(0, 2, 3)
+        self.__lcd.lcd_write_char_with_position(1, 3, 2)
+        self.__lcd.lcd_write_char_with_position(1, 3, 4)
+        self.__lcd.lcd_write_char_with_position(2, 3, 3)
+        self.__lcd.lcd_write_char_with_position(3, 4, 3)
+        self.__lcd.lcd_write_char_with_position(4, 4, 2)
+        self.__lcd.lcd_write_char_with_position(5, 4, 4)
+
+    def __clean_anchor_icon(self):
+        self.__lcd.lcd_display_string("", 2, 2)
+        self.__lcd.lcd_display_string("", 2, 3)
+        self.__lcd.lcd_display_string("", 2, 4)
+        self.__lcd.lcd_display_string("", 3, 2)
+        self.__lcd.lcd_display_string("", 3, 3)
+        self.__lcd.lcd_display_string("", 3, 4)
+        self.__lcd.lcd_display_string("", 4, 2)
+        self.__lcd.lcd_display_string("", 4, 3)
+        self.__lcd.lcd_display_string("", 4, 4)
+
+    def __paint_warning_icon(self):
+        self.__lcd.lcd_write_char_with_position(0, 2, 2)
+        self.__lcd.lcd_write_char_with_position(1, 2, 3)
+        self.__lcd.lcd_write_char_with_position(2, 2, 4)
+        self.__lcd.lcd_write_char_with_position(3, 3, 2)
+        self.__lcd.lcd_write_char_with_position(4, 3, 3)
+        self.__lcd.lcd_write_char_with_position(3, 3, 4)
+        self.__lcd.lcd_write_char_with_position(5, 4, 2)
+        self.__lcd.lcd_write_char_with_position(1, 4, 3)
+        self.__lcd.lcd_write_char_with_position(6, 4, 4)

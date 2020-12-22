@@ -4,7 +4,7 @@ from MainScreen.domain.model.MainScreenStep import MainScreenStep
 
 class MainScreenController:
 
-    main_font = [
+    anchor_font = [
         # Anchor
         [0b00000,
          0b00000,
@@ -74,15 +74,112 @@ class MainScreenController:
          0b11111,
          0b11111,
          0b01110],
+    ]
+
+    warning_font = [
+        # Warning
+        [0b00000,
+         0b00000,
+         0b00000,
+         0b00000,
+         0b00111,
+         0b00100,
+         0b00100,
+         0b00100],
+
+        # Warning
+        [0b00000,
+         0b00000,
+         0b00000,
+         0b00000,
+         0b11111,
+         0b00000,
+         0b00000,
+         0b00000],
+
+        # Warning
+        [0b00000,
+         0b00000,
+         0b00000,
+         0b00000,
+         0b11100,
+         0b00100,
+         0b00100,
+         0b00100],
+
+        # Warning
+        [0b00100,
+         0b00100,
+         0b00100,
+         0b00100,
+         0b00100,
+         0b00100,
+         0b00100,
+         0b00100],
+
+        # Warning
+        [0b00100,
+         0b00100,
+         0b00100,
+         0b00100,
+         0b00100,
+         0b00100,
+         0b00000,
+         0b00100],
+
+        # Warning
+        [0b00100,
+         0b00100,
+         0b00100,
+         0b00100,
+         0b00111,
+         0b00000,
+         0b00000,
+         0b00000],
+
+        # Warning
+        [0b00100,
+         0b00100,
+         0b00100,
+         0b00100,
+         0b11100,
+         0b00000,
+         0b00000,
+         0b00000],
+
+        # Water temperature icon
+        [0b00100,
+         0b01010,
+         0b01010,
+         0b01110,
+         0b01110,
+         0b11111,
+         0b11111,
+         0b01110]
 
     ]
 
     def __init__(self, lcd):
         self.__lcd = lcd
-        self.__lcd.lcd_load_custom_chars(self.main_font)
 
     def pain_template(self):
+
+        if LCDStatus.lcd_status == LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
+            self.__lcd.lcd_load_custom_chars(self.warning_font)
+            self.__lcd.lcd_clear()
+            self.__lcd.lcd_write_char_with_position(0, 2, 2)
+            self.__lcd.lcd_write_char_with_position(1, 2, 3)
+            self.__lcd.lcd_write_char_with_position(2, 2, 4)
+            self.__lcd.lcd_write_char_with_position(3, 3, 2)
+            self.__lcd.lcd_write_char_with_position(4, 3, 3)
+            self.__lcd.lcd_write_char_with_position(3, 3, 4)
+            self.__lcd.lcd_write_char_with_position(5, 4, 2)
+            self.__lcd.lcd_write_char_with_position(1, 4, 3)
+            self.__lcd.lcd_write_char_with_position(6, 4, 4)
+            LCDStatus.lcd_status = LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN
+
         if LCDStatus.lcd_status != LCDStatus.LCDStatus.MAIN_SCREEN:
+            self.__lcd.lcd_load_custom_chars(self.anchor_font)
             self.__lcd.lcd_clear()
             self.__lcd.lcd_write_char_with_position(0, 2, 3)
             self.__lcd.lcd_write_char_with_position(1, 3, 2)

@@ -79,11 +79,10 @@ class MainScreenController:
 
     def __init__(self, lcd):
         self.__lcd = lcd
+        self.__lcd.lcd_load_custom_chars(self.main_font)
 
     def pain_template(self):
-        if LCDStatus.lcd_status != LCDStatus.LCDStatus.MAIN_SCREEN or \
-                LCDStatus.lcd_status != LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
-            self.__lcd.lcd_load_custom_chars(self.main_font)
+        if LCDStatus.lcd_status != LCDStatus.LCDStatus.MAIN_SCREEN:
             self.__lcd.lcd_clear()
             self.__lcd.lcd_write_char_with_position(0, 2, 3)
             self.__lcd.lcd_write_char_with_position(1, 3, 2)

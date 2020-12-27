@@ -23,6 +23,7 @@ class NetworkController:
                 self.__alerts_repository.create_local_alert()
                 raise NoApiException
         else:
+            print("Estamos en el else")
             if self.__errors_amount != 0:
                 print("Network controller: decrementamos")
                 self.__errors_amount -= 1

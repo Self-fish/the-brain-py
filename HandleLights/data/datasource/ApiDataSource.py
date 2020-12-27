@@ -26,4 +26,4 @@ def get_light_preferences():
         return LightPreferences("-1", "-1")
 
     except requests.exceptions.ConnectionError as e:
-        raise e
+        print("Oeee")

@@ -22,5 +22,7 @@ def get_light_preferences():
 
     except Exception:
         print("No serial exception")
-        return LightPreferences("-1", "-1")
+        raise
+
+
 

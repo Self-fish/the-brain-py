@@ -24,6 +24,6 @@ def get_light_preferences():
         print("No serial exception")
         raise NoSerialException
 
-    except ConnectionError:
+    except requests.exceptions.ConnectionError:
         print("Connection Error")
         raise NoApiPreferencesException

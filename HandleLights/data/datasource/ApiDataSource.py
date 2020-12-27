@@ -26,4 +26,4 @@ def get_light_preferences():
 
     except requests.exceptions.ConnectionError:
         print("Connection Error")
-        raise NoApiPreferencesException
+        pass

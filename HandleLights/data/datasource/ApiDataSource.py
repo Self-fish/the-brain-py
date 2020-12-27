@@ -12,12 +12,7 @@ QUERY_PARAMS = "preferences?deviceId=sf-"
 def get_light_preferences():
     try:
         serial_number = ReadSerialNumber.get_serial_number()
-        try:
-            preferences = NetworkController.get_request(QUERY_PARAMS + serial_number)
-        except NoApiException:
-            print("ApiDataSource: No API")
-            raise NoApiPreferencesException
-
+        preferences = NetworkController.get_request(QUERY_PARAMS + serial_number)
         return LightPreferences(preferences['lightsPreferences']['range']['starting'],
                                 preferences['lightsPreferences']['range']['finishing'])
 

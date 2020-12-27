@@ -11,7 +11,11 @@ URI = "http://192.168.0.25:8080/preferences?deviceId=sf-"
 def get_light_preferences():
     try:
         serial_number = ReadSerialNumber.get_serial_number()
-        preferences = requests.get(URI + serial_number)
+        try:
+            preferences = requests.get(URI + serial_number)
+        except requests.exceptions.ConnectionError:
+            print("No connection exception")
+            raise NoApiPreferencesException
         if preferences.status_code == 200:
             print("Tenemos preferencias")
             return LightPreferences(preferences.json()['lightsPreferences']['range']['starting'],
@@ -23,7 +27,3 @@ def get_light_preferences():
     except NoSerialException:
         print("No serial exception")
         raise NoSerialException
-
-    except requests.exceptions.ConnectionError:
-        print("Connection Error")
-        raise Exception

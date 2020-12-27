@@ -9,6 +9,8 @@ from Core.data.driver.RelayStatus import RelayStatus
 
 
 def should_turn_on_lights(current_time, light_preferences: LightPreferences):
+    print("Should turn on lights")
+    print(light_preferences.starting_hour)
     return light_preferences.starting_hour <= current_time < light_preferences.finishing_hour
 
 

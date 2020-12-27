@@ -27,4 +27,5 @@ class ApiDataSource:
                 raise NoApiPreferencesException
 
         except NoSerialException:
+            print("No serial exception")
             raise NoSerialException

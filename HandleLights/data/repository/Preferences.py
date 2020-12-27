@@ -1,5 +1,4 @@
 from HandleLights.data.datasource import LocalDataSource, ApiDataSource
-from HandleLights.data.datasource.NoApiPreferencesException import NoApiPreferenceException
 
 
 def get_light_preferences():

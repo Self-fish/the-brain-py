@@ -20,15 +20,16 @@ def get_light_preferences():
         if preferences.status_code == 200:
             print("Tenemos preferencias")
             return LightPreferences(preferences.json()['lightsPreferences']['range']['starting'],
-                                        preferences.json()['lightsPreferences']['range']['finishing'])
+                                    preferences.json()['lightsPreferences']['range']['finishing'])
         else:
             print("No preferencias")
-            raise NoApiPreferencesException
+            return LightPreferences("-1", "-1")
 
-    #except NoSerialException:
-    #    print("No serial exception")
-    #    raise NoSerialException
+    except NoSerialException:
+        print("No serial exception")
+        return LightPreferences("-1", "-1")
 
     except requests.exceptions.ConnectionError:
         print("No connection exception")
-        return LightPreferences()
+        raise Exception('Failed to connect to') from None
+        #return LightPreferences("-1", "-1")

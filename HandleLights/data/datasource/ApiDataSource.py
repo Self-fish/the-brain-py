@@ -3,6 +3,7 @@ import requests
 from Core.data.device import ReadSerialNumber
 from Core.data.device.NoSerialException import NoSerialException
 from Core.data.net import NetworkController, NoApiException
+from HandleLights.data.datasource import NoApiPreferencesException
 from HandleLights.domain.model.LightPreferences import LightPreferences
 
 QUERY_PARAMS = "preferences?deviceId=sf-"
@@ -23,6 +24,7 @@ class ApiDataSource:
                                         preferences.json()['lightsPreferences']['range']['finishing'])
             else:
                 print("No preferencias")
+                raise NoApiPreferencesException
 
         except NoSerialException:
             raise NoSerialException

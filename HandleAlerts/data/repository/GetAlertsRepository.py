@@ -19,5 +19,9 @@ class GetAlertsRepository:
         if alert not in self.__alerts:
             self.__alerts.append(alert)
 
-    def get_local_alerts(self):
+    def get_alerts(self):
         return self.__alerts
+
+    def create_local_alert(self):
+        print("New local alert")
+

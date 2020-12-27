@@ -25,5 +25,5 @@ def get_light_preferences():
         print("No serial exception")
         return LightPreferences("-1", "-1")
 
-    except:
-        raise
+    except requests.exceptions.ConnectionError:
+        raise NoApiPreferenceException("sdfdas") 

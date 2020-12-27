@@ -14,7 +14,8 @@ class NetworkController:
 
     def get_request(self, query_params):
         current_request = requests.get(API_URI + query_params)
-        if current_request.status_code != 200:
+
+        if current_request.status_code == 500:
             if self.__errors_amount < 3:
                 print("Network controller: Incrementamos")
                 self.__errors_amount += 1
@@ -25,4 +26,4 @@ class NetworkController:
             if self.__errors_amount != 0:
                 print("Network controller: decrementamos")
                 self.__errors_amount -= 1
-            return current_request.json()
+            return current_request

@@ -23,3 +23,7 @@ def get_light_preferences():
     except NoSerialException:
         print("No serial exception")
         raise NoSerialException
+
+    except ConnectionError:
+        print("Connection Error")
+        raise NoApiPreferencesException

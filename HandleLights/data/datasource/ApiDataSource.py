@@ -26,4 +26,5 @@ def get_light_preferences():
         return LightPreferences("-1", "-1")
 
     except requests.exceptions.ConnectionError:
-        raise NoApiPreferenceException("sdfdas") 
+        print("Su puta madre")
+        raise NoApiPreferenceException("sdfdas") from NoApiPreferenceException

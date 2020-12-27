@@ -18,10 +18,11 @@ class ApiDataSource:
             serial_number = ReadSerialNumber.get_serial_number()
             preferences = self.__network_controller.get_request(QUERY_PARAMS + serial_number)
             if preferences.status_code == 200:
+                print("Tenemos preferencias")
                 return LightPreferences(preferences.json()['lightsPreferences']['range']['starting'],
                                         preferences.json()['lightsPreferences']['range']['finishing'])
             else:
-                print("No preferencesss")
+                print("No preferencias")
 
         except NoSerialException:
             raise NoSerialException

@@ -17,7 +17,7 @@ class HandleLightsUseCase:
     @inject
     def __init__(self,
                  light_repository: LightStatusRepository = Provide[HandleLightsContainer.light_status_repository],
-                 preferences_repository: PreferencesRepository = Provide[HandleLightsContainer.light_status_repository]):
+                 preferences_repository: PreferencesRepository = Provide[HandleLightsContainer.preferences_repository]):
         self.__light_repository = light_repository
         self.__preferences_repository = preferences_repository
 

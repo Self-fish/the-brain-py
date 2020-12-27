@@ -2,7 +2,6 @@ import requests
 
 from Core.data.device import ReadSerialNumber
 from Core.data.device.NoSerialException import NoSerialException
-from HandleLights.data.datasource.NoApiPreferencesException import NoApiPreferenceException
 from HandleLights.domain.model.LightPreferences import LightPreferences
 
 URI = "http://192.168.0.25:8080/preferences?deviceId=sf-"
@@ -21,10 +20,7 @@ def get_light_preferences():
             print("No preferencias")
             return LightPreferences("-1", "-1")
 
-    except NoSerialException:
+    except Exception:
         print("No serial exception")
         return LightPreferences("-1", "-1")
 
-    except requests.exceptions.ConnectionError:
-        print("Su puta madre")
-        raise NoApiPreferenceException("sdfdas")

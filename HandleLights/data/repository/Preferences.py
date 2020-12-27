@@ -5,6 +5,6 @@ from HandleLights.data.datasource.NoApiPreferencesException import NoApiPreferen
 def get_light_preferences():
     try:
         ApiDataSource.get_light_preferences()
-    except NoApiPreferenceException:
+    except Exception:
         print("Use Case: No API")
         return LocalDataSource.get_light_preferences()

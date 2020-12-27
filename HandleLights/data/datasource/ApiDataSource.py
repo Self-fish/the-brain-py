@@ -5,7 +5,7 @@ from Core.data.device.NoSerialException import NoSerialException
 from HandleLights.data.datasource import NoApiPreferencesException
 from HandleLights.domain.model.LightPreferences import LightPreferences
 
-API_URI = "http://192.168.0.16:8080/preferences?deviceId=sf-"
+API_URI = "http://192.168.0.25:8080/preferences?deviceId=sf-"
 
 
 def get_light_preferences():

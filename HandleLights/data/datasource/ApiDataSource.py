@@ -15,12 +15,7 @@ class NoApiPreferencesException(object):
 def get_light_preferences():
     try:
         serial_number = ReadSerialNumber.get_serial_number()
-
-        try:
-            preferences = requests.get(URI + serial_number)
-        except requests.exceptions.ConnectionError:
-            print("No connection exception")
-            raise NoApiPreferenceException
+        preferences = requests.get(URI + serial_number)
 
         if preferences.status_code == 200:
             print("Tenemos preferencias")
@@ -33,3 +28,7 @@ def get_light_preferences():
     except NoSerialException:
         print("No serial exception")
         raise NoSerialException
+
+    except requests.exceptions.ConnectionError:
+        print("No connection exception")
+        raise NoApiPreferenceException

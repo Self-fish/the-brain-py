@@ -22,4 +22,5 @@ def get_light_preferences():
                                 preferences['lightsPreferences']['range']['finishing'])
 
     except NoSerialException:
+        print("Exception")
         raise NoSerialException

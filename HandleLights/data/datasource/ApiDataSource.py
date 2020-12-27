@@ -8,10 +8,6 @@ from HandleLights.domain.model.LightPreferences import LightPreferences
 URI = "http://192.168.0.25:8080/preferences?deviceId=sf-"
 
 
-class NoApiPreferencesException(object):
-    pass
-
-
 def get_light_preferences():
     try:
         serial_number = ReadSerialNumber.get_serial_number()
@@ -30,6 +26,4 @@ def get_light_preferences():
         return LightPreferences("-1", "-1")
 
     except requests.exceptions.ConnectionError:
-        print("No connection exception")
-        raise Exception('Failed to connect to') from None
-        #return LightPreferences("-1", "-1")
+        raise Exception('Failed to connect to')

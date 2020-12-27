@@ -1,6 +1,6 @@
 from dependency_injector import containers, providers
 
-from Core.data.driver.Controller import RelayController
+from Core.data.driver.RelayController import RelayController
 from HeatingControl.data.repository.HeatingStatusRepository import HeatingStatusRepository
 
 

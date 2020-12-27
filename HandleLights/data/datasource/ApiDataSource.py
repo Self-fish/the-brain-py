@@ -2,21 +2,24 @@ import requests
 
 from Core.data.device import ReadSerialNumber
 from Core.data.device.NoSerialException import NoSerialException
+from Core.data.net import NetworkController, NoApiException
 from HandleLights.data.datasource import NoApiPreferencesException
 from HandleLights.domain.model.LightPreferences import LightPreferences
 
-API_URI = "http://192.168.0.25:8080/preferences?deviceId=sf-"
+QUERY_PARAMS = "preferences?deviceId=sf-"
 
 
 def get_light_preferences():
     try:
         serial_number = ReadSerialNumber.get_serial_number()
-        preferences = requests.get(API_URI + serial_number)
-        if preferences.status_code != 200:
+        try:
+            preferences = NetworkController.get_request(QUERY_PARAMS + serial_number)
+        except NoApiException:
+            print("ApiDataSource: No API")
             raise NoApiPreferencesException
-        else:
-            return LightPreferences(preferences.json()['lightsPreferences']['range']['starting'],
-                                    preferences.json()['lightsPreferences']['range']['finishing'])
+
+        return LightPreferences(preferences['lightsPreferences']['range']['starting'],
+                                preferences['lightsPreferences']['range']['finishing'])
 
     except NoSerialException:
         raise NoSerialException

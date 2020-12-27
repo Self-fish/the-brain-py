@@ -8,7 +8,7 @@ URI = "http://192.168.0.25:8080/preferences?deviceId=sf-"
 
 
 def get_light_preferences():
-    try:
+    #try:
         serial_number = ReadSerialNumber.get_serial_number()
         preferences = requests.get(URI + serial_number)
 
@@ -20,9 +20,9 @@ def get_light_preferences():
             print("No preferencias")
             return LightPreferences("-1", "-1")
 
-    except Exception:
-        print("No serial exception")
-        raise
+    #except Exception:
+    #    print("No serial exception")
+    #    raise
 
 
 

@@ -9,7 +9,7 @@ class MeasureWaterTempUseCase:
 
     def __init__(self, alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
         self.__alerts_repository = alerts_repository
-        self.__api_error_count = 0
+        self.__api_errors_count = 0
 
     def track_water_temp(self):
         request_success = Repository.track_water_temp()

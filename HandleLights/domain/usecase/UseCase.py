@@ -1,5 +1,6 @@
 from dependency_injector.wiring import inject, Provide
 
+from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
 from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
 from HandleLights.HandleLightsContainer import HandleLightsContainer
 from HandleLights.data.repository import Preferences
@@ -20,7 +21,7 @@ class HandleLightsUseCase:
     @inject
     def __init__(self,
                  light_repository: LightStatusRepository = Provide[HandleLightsContainer.light_status_repository],
-                 alerts_repository: AlertsRepository = Provide[HandleLightsContainer.alerts_repository]):
+                 alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
         self.__light_repository = light_repository
         self.__alerts_repository = alerts_repository
         self.__api_errors_count = 0

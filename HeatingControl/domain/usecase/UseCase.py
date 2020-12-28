@@ -28,6 +28,7 @@ class HeatingControlUseCase:
             self.__heating_status_repository.update_heating_status(RelayStatus.ON)
         else:
             self.__heating_status_repository.update_heating_status(RelayStatus.OFF)
+        self.__handle_possible_api_errors(desired_water_temperature)
 
     def __handle_possible_api_errors(self, preferences: WaterTemperaturePreferences):
         if preferences.source != WaterTemperaturePreferencesSource.API and self.__api_errors_count < 3:

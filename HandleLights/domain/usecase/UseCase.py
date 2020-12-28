@@ -1,6 +1,6 @@
 from dependency_injector.wiring import inject, Provide
 from HandleLights.HandleLightsContainer import HandleLightsContainer
-from HandleLights.data.datasource import ApiDataSource
+from HandleLights.data.repository import Preferences
 from HandleLights.data.repository.LightStatus import LightStatusRepository
 from HandleLights.domain.model.LightPreferences import LightPreferences
 from datetime import datetime
@@ -23,7 +23,7 @@ class HandleLightsUseCase:
 
     def handle_lights(self):
         current_time = datetime.now(timezone('Europe/Madrid')).strftime("%H:%M")
-        if should_turn_on_lights(current_time, ApiDataSource.get_light_preferences()):
+        if should_turn_on_lights(current_time, Preferences.get_light_preferences()):
             self.__light_repository.update_light_status(RelayStatus.ON)
         else:
             self.__light_repository.update_light_status(RelayStatus.OFF)

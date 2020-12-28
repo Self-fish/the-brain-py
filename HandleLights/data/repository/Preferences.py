@@ -8,5 +8,5 @@ def get_light_preferences():
     try:
         return ApiDataSource.get_light_preferences()
     except NoApiPreferenceException:
-        print("Use Case: No API")
+        print("Oeeee")
         return LocalDataSource.get_light_preferences()

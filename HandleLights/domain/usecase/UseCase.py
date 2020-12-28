@@ -28,6 +28,7 @@ class HandleLightsUseCase:
             self.__light_repository.update_light_status(RelayStatus.ON)
         else:
             self.__light_repository.update_light_status(RelayStatus.OFF)
+        self.__handle_possible_api_errors(preferences)
 
     def __handle_possible_api_errors(self, preferences: LightPreferences):
         if preferences.source != LightPreferencesSource.API and self.__api_errors_count < 3:

@@ -22,9 +22,9 @@ class HeatingControlUseCase:
         self.__api_errors_count = 0
 
     def control_heating(self):
-        desired_water_temperature = HeatingTemperatureRepository.get_heating_temperature()
-        current_water_temperature: WaterTemperaturePreferences = LocalDataSource.water_temperature
-        if current_water_temperature.temperature < desired_water_temperature:
+        desired_water_temperature: WaterTemperaturePreferences = HeatingTemperatureRepository.get_heating_temperature()
+        current_water_temperature = LocalDataSource.water_temperature
+        if current_water_temperature < desired_water_temperature.temperature:
             self.__heating_status_repository.update_heating_status(RelayStatus.ON)
         else:
             self.__heating_status_repository.update_heating_status(RelayStatus.OFF)

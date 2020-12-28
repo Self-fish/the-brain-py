@@ -1,5 +1,5 @@
-from HandleLights.domain.model.LightPreferences import LightPreferences
+from HandleLights.data.datamodel.LightPreferencesDataModel import LightPreferencesDataModel
 
 
 def get_light_preferences():
-    return LightPreferences("15:00", "23:00")
+    return LightPreferencesDataModel("15:00", "23:00")

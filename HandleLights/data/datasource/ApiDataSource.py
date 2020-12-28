@@ -1,9 +1,11 @@
 import requests
 
+from requests.exceptions import ConnectionError, ConnectTimeout
+
 from Core.data.device import ReadSerialNumber
 from Core.data.device.NoSerialException import NoSerialException
+from HandleLights.data.datamodel.LightPreferencesDataModel import LightPreferencesDataModel
 from HandleLights.data.datasource.NoApiPreferencesException import NoApiPreferenceException
-from HandleLights.domain.model.LightPreferences import LightPreferences
 
 API_URI = "http://192.168.0.25:8080/preferences?deviceId=sf-"
 
@@ -15,11 +17,11 @@ def get_light_preferences():
         if preferences.status_code != 200:
             raise NoApiPreferenceException
         else:
-            return LightPreferences(preferences.json()['lightsPreferences']['range']['starting'],
-                                    preferences.json()['lightsPreferences']['range']['finishing'])
+            return LightPreferencesDataModel(preferences.json()['lightsPreferences']['range']['starting'],
+                                             preferences.json()['lightsPreferences']['range']['finishing'])
 
     except NoSerialException:
         raise NoSerialException
 
-    except requests.exceptions.ConnectionError:
+    except (ConnectionError, ConnectTimeout):
         raise NoApiPreferenceException

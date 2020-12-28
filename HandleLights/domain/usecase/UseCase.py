@@ -9,8 +9,6 @@ from Core.data.driver.RelayStatus import RelayStatus
 
 
 def should_turn_on_lights(current_time, light_preferences: LightPreferences):
-    print("Should turn on lights")
-    print(light_preferences.starting_hour)
     return light_preferences.starting_hour <= current_time < light_preferences.finishing_hour
 
 
@@ -23,9 +21,9 @@ class HandleLightsUseCase:
 
     def handle_lights(self):
         current_time = datetime.now(timezone('Europe/Madrid')).strftime("%H:%M")
-        if should_turn_on_lights(current_time, Preferences.get_light_preferences()):
+        preferences = Preferences.get_light_preferences()
+        if should_turn_on_lights(current_time, preferences):
             self.__light_repository.update_light_status(RelayStatus.ON)
         else:
             self.__light_repository.update_light_status(RelayStatus.OFF)
-
 

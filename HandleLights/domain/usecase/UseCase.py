@@ -45,5 +45,5 @@ class HandleLightsUseCase:
 
         if self.__api_errors_count == 3:
             print("Creamos una alerta local")
-            self.__alerts_repository.create_local_alert()
+            self.__alerts_repository.create_local_alert("Preference Error")
             self.__api_errors_count = 0

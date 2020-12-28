@@ -6,6 +6,7 @@ from HandleLights.domain.model.LightPreferences import LightPreferences
 from datetime import datetime
 from pytz import timezone
 from Core.data.driver.RelayStatus import RelayStatus
+from HandleLights.domain.model.LightPreferencesSource import LightPreferencesSource
 
 
 def should_turn_on_lights(current_time, light_preferences: LightPreferences):
@@ -18,6 +19,7 @@ class HandleLightsUseCase:
     def __init__(self,
                  light_repository: LightStatusRepository = Provide[HandleLightsContainer.light_status_repository]):
         self.__light_repository = light_repository
+        self.__api_errors_count = 0
 
     def handle_lights(self):
         current_time = datetime.now(timezone('Europe/Madrid')).strftime("%H:%M")
@@ -27,3 +29,15 @@ class HandleLightsUseCase:
         else:
             self.__light_repository.update_light_status(RelayStatus.OFF)
 
+    def __handle_possible_api_errors(self, preferences: LightPreferences):
+        if preferences.source != LightPreferencesSource.API and self.__api_errors_count < 3:
+            self.__api_errors_count += 1
+            print("Incrementamos")
+        else:
+            if self.__api_errors_count > 0:
+                self.__api_errors_count -= 1
+                print("Decrementamos")
+
+        if self.__api_errors_count == 3:
+            print("Creamos una alerta local")
+            self.__api_errors_count = 0

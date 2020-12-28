@@ -2,14 +2,14 @@ from dependency_injector.wiring import Provide, inject
 
 from Core.data.device import LCDStatus
 from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
-from HandleAlerts.data.repository.GetAlertsRepository import GetAlertsRepository
+from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
 
 
 class ShowAlertsAdviseUseCase:
 
     @inject
     def __init__(self,
-                 repository: GetAlertsRepository = Provide[HandleAlertsContainer.alerts_repository_repository]):
+                 repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
         self.__repository = repository
 
     def show_alert_advice(self):

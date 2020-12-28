@@ -1,4 +1,6 @@
 from dependency_injector.wiring import inject, Provide
+
+from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
 from HandleLights.HandleLightsContainer import HandleLightsContainer
 from HandleLights.data.repository import Preferences
 from HandleLights.data.repository.LightStatus import LightStatusRepository
@@ -17,8 +19,10 @@ class HandleLightsUseCase:
 
     @inject
     def __init__(self,
-                 light_repository: LightStatusRepository = Provide[HandleLightsContainer.light_status_repository]):
+                 light_repository: LightStatusRepository = Provide[HandleLightsContainer.light_status_repository],
+                 alerts_repository: AlertsRepository = Provide[HandleLightsContainer.alerts_repository]):
         self.__light_repository = light_repository
+        self.__alerts_repository = alerts_repository
         self.__api_errors_count = 0
 
     def handle_lights(self):
@@ -41,4 +45,5 @@ class HandleLightsUseCase:
 
         if self.__api_errors_count == 3:
             print("Creamos una alerta local")
+            self.__alerts_repository.create_local_alert()
             self.__api_errors_count = 0

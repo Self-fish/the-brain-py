@@ -12,11 +12,15 @@ API_URI = "http://192.168.0.25:8082/alerts/next"
 def get_alerts():
     try:
         alerts = requests.get(API_URI)
-        if alerts.status_code != 200:
-            raise NoApiAlertsException
-        else:
+        if alerts.status_code == 200:
             return Alert(StartingTime(alerts.json()['starts']['day'], alerts.json()['starts']['hour'],
                                       alerts.json()['starts']['minute']),
-                                      alerts.json()['text'], datetime.datetime.now().timestamp())
+                         alerts.json()['text'], datetime.datetime.now().timestamp())
+        elif alerts.status_code == 404:
+            return None
+
+        else:
+            raise NoApiAlertsException
+
     except (ConnectionError, ConnectTimeout):
-        raise NoApiAlertsException()
+        raise NoApiAlertsException

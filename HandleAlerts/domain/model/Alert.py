@@ -5,11 +5,11 @@ class Alert:
 
     def __init__(self, starting: StartingTime, message, timestamp):
         self.__starting = starting
-        self.__message = message
+        self.message = message
         self.__timestamp = timestamp
 
     def __eq__(self, other):
         if not isinstance(other, Alert):
             return False
-        return self.__starting == other.__starting and self.__message == other.__message
+        return self.__starting == other.__starting and self.message == other.message
 

@@ -15,14 +15,13 @@ class AlertsRepository:
         try:
             next_alert = ApiDataSource.get_alerts()
             self.__add_alert(next_alert)
-            print("New alert Added")
         except Exception:
             pass
 
     def __add_alert(self, alert: Alert):
         if alert not in self.__alerts:
             self.__alerts.append(alert)
-            print("Alert Added")
+            print("Alert Added: " + alert.message)
 
     def get_alerts(self):
         return self.__alerts
@@ -30,5 +29,4 @@ class AlertsRepository:
     def create_local_alert(self, text):
         alert = Alert(StartingTime(DayOfWeek.MONDAY, 12, 0), text, datetime.datetime.now().timestamp())
         self.__add_alert(alert)
-        print("New local alert")
 

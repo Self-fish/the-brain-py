@@ -37,13 +37,10 @@ class HandleLightsUseCase:
     def __handle_possible_api_errors(self, preferences: LightPreferences):
         if preferences.source != LightPreferencesSource.API and self.__api_errors_count < 3:
             self.__api_errors_count += 1
-            print("Incrementamos")
         else:
             if self.__api_errors_count > 0:
                 self.__api_errors_count -= 1
-                print("Decrementamos")
 
         if self.__api_errors_count == 3:
-            print("Creamos una alerta local")
             self.__alerts_repository.create_local_alert("Preference Error")
             self.__api_errors_count = 0

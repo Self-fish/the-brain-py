@@ -59,6 +59,7 @@ def display_alerts(use_case: ShowAlerts):
         if JoystickDriver.is_switch_pressed():
             print("Joystick pressed")
             use_case.display_alerts()
+        time.sleep(1)
 
 
 if __name__ == '__main__':

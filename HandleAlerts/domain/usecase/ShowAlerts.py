@@ -11,5 +11,5 @@ class ShowAlerts:
         self.__repository = repository
 
     def display_alerts(self):
-        if self.__repository.get_alerts() != 0:
+        if len(self.__repository.get_alerts()) != 0:
             print("Mostraríamos la alerta")

@@ -224,3 +224,7 @@ class MainScreenController:
         self.__lcd.lcd_write_char_with_position(5, 4, 2)
         self.__lcd.lcd_write_char_with_position(1, 4, 3)
         self.__lcd.lcd_write_char_with_position(6, 4, 4)
+
+    def print_alert(self, date, text):
+        self.__lcd.lcd_clear()
+        self.__lcd.lcd_display_string(self, date, 1, 0)

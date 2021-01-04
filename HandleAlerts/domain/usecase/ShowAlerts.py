@@ -5,16 +5,17 @@ from pytz import timezone
 
 from Core.data.device import LCDStatus
 from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
-from HandleAlerts.data.controller.AlertsScreenController import AlertsScreenController
 from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
 from HandleAlerts.domain.model.Alert import Alert
+from MainScreen.MainScreenContainer import MainScreenContainer
+from MainScreen.data.controller.LCDController import MainScreenController
 
 
 class ShowAlerts:
 
     @inject
     def __init__(self, repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository],
-                 screen_controller: AlertsScreenController = Provide[HandleAlertsContainer.alerts_screen_controller]):
+                 screen_controller: MainScreenController = Provide[MainScreenContainer.main_screen_controller]):
         self.__repository = repository
         self.__screen_controller = screen_controller
 

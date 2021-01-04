@@ -27,5 +27,5 @@ class ShowAlerts:
             print("next: " + str(LCDStatus.lcd_next_status))
             alert: Alert = self.__repository.get_alerts()[0]
             date = datetime.fromtimestamp(alert.timestamp, timezone('Europe/Madrid')).strftime("%H:%M  %d %b %Y")
-            self.__screen_controller.print_alert(date, "Prueba")
+            self.__screen_controller.print_alert(date, alert.message)
 

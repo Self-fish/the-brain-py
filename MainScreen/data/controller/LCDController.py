@@ -233,3 +233,4 @@ class MainScreenController:
         LCDStatus.lcd_current_status = LCDStatus.LCDStatus.SPECIFIC_ALERT
         self.__lcd.lcd_clear()
         self.__lcd.lcd_display_string(date, 1, 1)
+        self.__lcd.lcd_display_string(text, 3, 1)

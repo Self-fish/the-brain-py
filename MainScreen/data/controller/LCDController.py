@@ -187,12 +187,16 @@ class MainScreenController:
             LCDStatus.lcd_current_status = LCDStatus.LCDStatus.MAIN_SCREEN
 
     def show_date(self, date):
-        self.__lcd.lcd_display_string(date, 1, 1)
+        if LCDStatus.lcd_current_status == LCDStatus.LCDStatus.MAIN_SCREEN or \
+                LCDStatus.lcd_current_status == LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
+            self.__lcd.lcd_display_string(date, 1, 1)
 
     def show_temperature(self, temperature, current_step: MainScreenStep):
-        if current_step != MainScreenStep.WATER_TEMPERATURE:
-            self.__lcd.lcd_write_char_with_position(7, 3, 9)
-        self.__lcd.lcd_display_string(str(temperature) + " C", 3, 11)
+        if LCDStatus.lcd_current_status == LCDStatus.LCDStatus.MAIN_SCREEN or \
+                LCDStatus.lcd_current_status == LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
+            if current_step != MainScreenStep.WATER_TEMPERATURE:
+                self.__lcd.lcd_write_char_with_position(7, 3, 9)
+            self.__lcd.lcd_display_string(str(temperature) + " C", 3, 11)
 
     def __paint_anchor_icon(self):
         self.__lcd.lcd_write_char_with_position(0, 2, 3)
@@ -226,5 +230,6 @@ class MainScreenController:
         self.__lcd.lcd_write_char_with_position(6, 4, 4)
 
     def print_alert(self, date, text):
+        LCDStatus.lcd_current_status = LCDStatus.LCDStatus.SPECIFIC_ALERT
         self.__lcd.lcd_clear()
-        self.__lcd.lcd_display_string(date, 1, 0)
+        self.__lcd.lcd_display_string(date, 1, 1)

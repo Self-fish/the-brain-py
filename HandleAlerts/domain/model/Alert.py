@@ -6,7 +6,7 @@ class Alert:
     def __init__(self, starting: StartingTime, message, timestamp):
         self.__starting = starting
         self.message = message
-        self.__timestamp = timestamp
+        self.timestamp = timestamp
 
     def __eq__(self, other):
         if not isinstance(other, Alert):

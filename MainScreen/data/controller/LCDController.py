@@ -227,4 +227,4 @@ class MainScreenController:
 
     def print_alert(self, date, text):
         self.__lcd.lcd_clear()
-        self.__lcd.lcd_display_string(self, date, 1, 0)
+        self.__lcd.lcd_display_string(date, 1, 0)

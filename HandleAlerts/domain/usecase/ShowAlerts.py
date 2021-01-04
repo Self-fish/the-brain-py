@@ -21,10 +21,7 @@ class ShowAlerts:
 
     def display_alerts(self):
         if len(self.__repository.get_alerts()) != 0:
-            print("Mostraríamos la alerta")
             LCDStatus.lcd_next_status = LCDStatus.LCDStatus.SPECIFIC_ALERT
-            print("current: " + str(LCDStatus.lcd_current_status))
-            print("next: " + str(LCDStatus.lcd_next_status))
             alert: Alert = self.__repository.get_alerts()[0]
             date = datetime.fromtimestamp(alert.timestamp, timezone('Europe/Madrid')).strftime("%H:%M  %d %b %Y")
             self.__screen_controller.print_alert(date, alert.message)

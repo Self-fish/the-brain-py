@@ -16,9 +16,6 @@ class MainScreenUseCase:
         self.__screen_controller = screen_controller
 
     def show_next_value(self):
-        print("Show next value")
-        print("current" + str(LCDStatus.lcd_current_status))
-        print("next" + str(LCDStatus.lcd_next_status))
         water_temperature = LocalDataSource.water_temperature
         self.__screen_controller.show_date(CurrentTimeController.get_current_hour())
         self.__screen_controller.pain_template()

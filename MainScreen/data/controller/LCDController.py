@@ -237,4 +237,4 @@ class MainScreenController:
 
     def print_alerts_complete(self):
         self.__lcd.lcd_clear()
-        self.__lcd.lcd_display_string("Press button", 3, 5)
+        self.__lcd.lcd_display_string("Press button", 3, 4)

@@ -37,6 +37,6 @@ class HeatingControlUseCase:
             if self.__api_errors_count > 0:
                 self.__api_errors_count -= 1
 
-        if self.__api_errors_count == 3:
+        if self.__api_errors_count == 10:
             self.__alerts_repository.create_local_alert("Temp Preference Error")
             self.__api_errors_count = 0

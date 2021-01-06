@@ -22,6 +22,6 @@ class GetAlertsUseCase:
             if self.__api_errors_count > 0:
                 self.__api_errors_count -= 1
 
-        if self.__api_errors_count == 3:
+        if self.__api_errors_count == 10:
             self.__repository.create_local_alert("Remote Alerts Error")
             self.__api_errors_count = 0

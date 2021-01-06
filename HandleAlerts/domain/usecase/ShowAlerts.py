@@ -22,12 +22,14 @@ class ShowAlerts:
         self.__screen_controller = screen_controller
 
     def display_alerts(self, position):
-        if len(self.__repository.get_alerts()) != 0 :
+        if len(self.__repository.get_alerts()) != 0:
+            print(len(self.__repository.get_alerts()))
             if position + 1 <= len(self.__repository.get_alerts()):
                 LCDStatus.lcd_next_status = LCDStatus.LCDStatus.SPECIFIC_ALERT
                 alert: Alert = self.__repository.get_alerts()[0]
                 date = datetime.fromtimestamp(alert.timestamp, timezone('Europe/Madrid')).strftime("%H:%M  %d %b %Y")
                 self.__screen_controller.print_alert(date, alert.message)
+                time.sleep(5)
                 while True:
                     if JoystickDriver.is_joystick_right():
                         self.display_alerts(position + 1)

@@ -26,7 +26,7 @@ class ShowAlerts:
             print(len(self.__repository.get_alerts()))
             if position + 1 <= len(self.__repository.get_alerts()):
                 LCDStatus.lcd_next_status = LCDStatus.LCDStatus.SPECIFIC_ALERT
-                alert: Alert = self.__repository.get_alerts()[0]
+                alert: Alert = self.__repository.get_alerts()[position]
                 date = datetime.fromtimestamp(alert.timestamp, timezone('Europe/Madrid')).strftime("%H:%M  %d %b %Y")
                 self.__screen_controller.print_alert(date, alert.message)
                 time.sleep(5)

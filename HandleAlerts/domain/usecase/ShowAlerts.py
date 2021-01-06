@@ -29,7 +29,7 @@ class ShowAlerts:
                 alert: Alert = self.__repository.get_alerts()[position]
                 date = datetime.fromtimestamp(alert.timestamp, timezone('Europe/Madrid')).strftime("%H:%M  %d %b %Y")
                 self.__screen_controller.print_alert(date, alert.message)
-                time.sleep(5)
+                time.sleep(1)
                 while True:
                     if JoystickDriver.is_joystick_right():
                         self.display_alerts(position + 1)

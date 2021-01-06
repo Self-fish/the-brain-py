@@ -33,9 +33,21 @@ class ShowAlerts:
                 while True:
                     if JoystickDriver.is_joystick_right():
                         self.display_alerts(position + 1)
+                    elif position != 0 and JoystickDriver.is_joystick_left():
+                        self.display_alerts(position - 1)
                     time.sleep(1)
             else:
-                print("Ya no hay más alertas que mostrar")
-                self.__repository.reset_alerts()
-                LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN
+                self.__screen_controller.print_alerts_complete()
+                should_wait = True
+                while should_wait:
+                    if JoystickDriver.is_switch_pressed():
+                        should_wait = False
+                        self.__repository.reset_alerts()
+                        LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN
+                    elif position != 0 and JoystickDriver.is_joystick_left():
+                        self.display_alerts(position - 1)
+                    time.sleep(1)
+
+
+
 

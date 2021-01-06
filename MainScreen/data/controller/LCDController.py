@@ -234,3 +234,7 @@ class MainScreenController:
         self.__lcd.lcd_clear()
         self.__lcd.lcd_display_string(date, 1, 1)
         self.__lcd.lcd_display_string(text, 3, 1)
+
+    def print_alerts_complete(self):
+        self.__lcd.lcd_clear()
+        self.__lcd.lcd_display_string("Press button to exit", 3, 1)

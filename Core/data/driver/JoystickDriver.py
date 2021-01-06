@@ -21,3 +21,10 @@ def is_switch_pressed():
         return True
     else:
         return False
+
+
+def is_joystick_right():
+    if __read_channel(vrx_channel) == 1000:
+        return True
+    else:
+        return False

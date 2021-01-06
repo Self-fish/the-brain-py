@@ -33,3 +33,6 @@ class AlertsRepository:
         alert = Alert(StartingTime(DayOfWeek.MONDAY, 12, 0), text, datetime.datetime.now().timestamp())
         self.__add_alert(alert)
 
+    def reset_alerts(self):
+        self.__alerts = []
+

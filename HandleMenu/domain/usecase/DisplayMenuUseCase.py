@@ -1,3 +1,5 @@
+import time
+
 from dependency_injector.wiring import Provide, inject
 
 from Core.data.device import LCDStatus
@@ -36,11 +38,13 @@ class DisplayMenuUseCase:
                     print("Joystick Down")
                     self.__selected_option += 1
                     print(self.__selected_option)
+                    time.sleep(1)
             elif JoystickController.is_joystick_up():
                 if self.__selected_option != 0:
                     print("Joystic Up")
                     self.__selected_option -= 1
                     print(self.__selected_option)
+                    time.sleep(1)
             elif JoystickController.is_switch_pressed():
                 LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN
                 should_wait = False

@@ -55,6 +55,7 @@ def show_alert_advice(use_case: ShowAlertsAdviseUseCase):
 
 
 def display_alerts(use_case: ShowAlerts):
+    print("Display Alerts")
     while True:
         print("Estamos esperando")
         if JoystickController.is_switch_pressed():

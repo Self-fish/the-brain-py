@@ -6,6 +6,7 @@ from Core.data.device import LCDStatus
 from Core.data.driver import JoystickController
 from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
 from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
+from HandleAlerts.domain.usecase.ShowAlerts import ShowAlerts
 from HandleMenu.domain.MenuOptions import MenuOptions
 from MainScreen.MainScreenContainer import MainScreenContainer
 from MainScreen.data.controller.LCDController import MainScreenController
@@ -15,9 +16,11 @@ class DisplayMenuUseCase:
 
     @inject
     def __init__(self, alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository],
-                 screen_controller: MainScreenController = Provide[MainScreenContainer.main_screen_controller]):
+                 screen_controller: MainScreenController = Provide[MainScreenContainer.main_screen_controller],
+                 show_alerts_use_case = ShowAlerts):
         self.__alerts_repository = alerts_repository
         self.__screen_controller = screen_controller
+        self.__show_alerts_use_case = ShowAlerts()
         self.__menu_options = [MenuOptions.SHOW_ALERTS, MenuOptions.LIGHT_CONTROL]
         self.__selected_option = 0
 
@@ -37,20 +40,23 @@ class DisplayMenuUseCase:
         while should_wait:
             if JoystickController.is_joystick_down():
                 if self.__selected_option != len(self.__menu_options) - 1:
-                    print("Joystick Down")
                     self.__selected_option += 1
                     self.__print_menu()
                     time.sleep(1)
             elif JoystickController.is_joystick_up():
                 if self.__selected_option != 0:
-                    print("Joystic Up")
                     self.__selected_option -= 1
                     self.__print_menu()
                     time.sleep(1)
             elif JoystickController.is_switch_pressed():
-                LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN
                 should_wait = False
-                time.sleep(1)
+                self.__select_option()
 
     def __print_menu(self):
         self.__screen_controller.print_menu(self.__menu_options, self.__menu_options[self.__selected_option])
+
+    def __select_option(self):
+        if self.__menu_options[self.__selected_option] == MenuOptions.SHOW_ALERTS:
+            self.__show_alerts_use_case.display_alerts(0)
+        else:
+            LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN

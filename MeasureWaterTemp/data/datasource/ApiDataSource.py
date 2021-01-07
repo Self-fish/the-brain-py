@@ -1,5 +1,6 @@
 import requests
 
+from requests.exceptions import ConnectionError, ConnectTimeout
 from Core.data.device import ReadSerialNumber
 from Core.data.device.NoSerialException import NoSerialException
 from MeasureWaterTemp.data.datasource.NoMeasuresApiException import NoMeasuresApiException
@@ -17,3 +18,6 @@ def send_water_temperature(water_temp):
 
     except NoSerialException:
         raise NoSerialException
+
+    except (ConnectionError, ConnectTimeout):
+        raise NoMeasuresApiException

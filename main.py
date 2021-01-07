@@ -2,6 +2,11 @@ import sys
 import threading
 import time
 
+from Core.data.driver import JoystickController
+from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
+from HandleAlerts.domain.usecase.GetAlertsUseCase import GetAlertsUseCase
+from HandleAlerts.domain.usecase.ShowAlerts import ShowAlerts
+from HandleAlerts.domain.usecase.ShowAlertsAdviseUseCase import ShowAlertsAdviseUseCase
 from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
 from HeatingControl.HeatingControlContainer import HeatingControlContainer
 from HeatingControl.domain.usecase.UseCase import HeatingControlUseCase
@@ -37,6 +42,25 @@ def control_heating(use_case: HeatingControlUseCase):
         time.sleep(60)
 
 
+def get_alerts(use_case: GetAlertsUseCase):
+    while True:
+        use_case.get_alerts()
+        time.sleep(60)
+
+
+def show_alert_advice(use_case: ShowAlertsAdviseUseCase):
+    while True:
+        use_case.show_alert_advice()
+        time.sleep(60)
+
+
+def display_alerts(use_case: ShowAlerts):
+    while True:
+        if JoystickController.is_switch_pressed():
+            use_case.display_alerts(0)
+        time.sleep(1)
+
+
 if __name__ == '__main__':
     welcome_container = WelcomeContainer()
     welcome_container.wire(modules=[sys.modules[__name__]])
@@ -46,6 +70,8 @@ if __name__ == '__main__':
     main_screen_container.wire(modules=[sys.modules[__name__]])
     heating_control_container = HeatingControlContainer()
     heating_control_container.wire(modules=[sys.modules[__name__]])
+    handle_alerts_container = HandleAlertsContainer()
+    handle_alerts_container.wire(modules=[sys.modules[__name__]])
 
     welcome_screen_use_case = WelcomeScreenUseCase()
     welcome_screen_use_case.show_screen()
@@ -65,4 +91,18 @@ if __name__ == '__main__':
     heating_control_use_case = HeatingControlUseCase()
     handle_heating_control_thread = threading.Thread(target=control_heating, args=(heating_control_use_case,))
     handle_heating_control_thread.start()
+
+    get_alerts_use_case = GetAlertsUseCase()
+    get_alerts_thread = threading.Thread(target=get_alerts, args=(get_alerts_use_case,))
+    get_alerts_thread.start()
+
+    show_alert_advice_use_case = ShowAlertsAdviseUseCase()
+    show_alerts_advice_thread = threading.Thread(target=show_alert_advice, args=(show_alert_advice_use_case,))
+    show_alerts_advice_thread.start()
+
+    display_alerts_use_case = ShowAlerts()
+    display_alerts_thread = threading.Thread(target=display_alerts, args=(display_alerts_use_case,))
+    display_alerts_thread.start()
+
+
 

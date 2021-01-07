@@ -1,4 +1,4 @@
-from Core.data.driver.Controller import RelayController
+from Core.data.driver.RelayController import RelayController
 
 
 class LightStatusRepository:

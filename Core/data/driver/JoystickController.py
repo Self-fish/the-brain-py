@@ -17,7 +17,6 @@ def __read_channel(channel):
 
 
 def is_switch_pressed():
-    print("Was pressed?")
     return __read_channel(swt_channel) == 0
 
 

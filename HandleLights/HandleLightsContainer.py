@@ -1,7 +1,6 @@
 from dependency_injector import containers, providers
 
 from Core.data.driver.RelayController import RelayController
-from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
 from HandleLights.data.repository.LightStatus import LightStatusRepository
 
 

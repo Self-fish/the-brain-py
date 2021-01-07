@@ -7,6 +7,9 @@ from MeasureWaterTemp.data.repository import Repository
 
 class MeasureWaterTempUseCase:
 
+    max_error = 10
+    error_message = "Measure Error"
+
     def __init__(self, alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
         self.__alerts_repository = alerts_repository
         self.__api_errors_count = 0
@@ -22,6 +25,6 @@ class MeasureWaterTempUseCase:
             if self.__api_errors_count > 0:
                 self.__api_errors_count -= 1
 
-        if self.__api_errors_count == 10:
-            self.__alerts_repository.create_local_alert("Measure Error")
+        if self.__api_errors_count == self.max_error:
+            self.__alerts_repository.create_local_alert(self.error_message)
             self.__api_errors_count = 0

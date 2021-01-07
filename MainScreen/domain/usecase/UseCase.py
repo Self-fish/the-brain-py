@@ -1,6 +1,5 @@
 from dependency_injector.wiring import Provide, inject
 
-from Core.data.device import LCDStatus
 from MainScreen.MainScreenContainer import MainScreenContainer
 from MainScreen.data.controller import CurrentTimeController
 from MainScreen.data.controller.LCDController import MainScreenController

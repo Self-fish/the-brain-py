@@ -9,6 +9,5 @@ class LCDStatus(Enum):
     SPECIFIC_ALERT = 4
 
 
-
 lcd_current_status = LCDStatus.NONE
 lcd_next_status = LCDStatus.MAIN_SCREEN

@@ -2,7 +2,7 @@ import sys
 import threading
 import time
 
-from Core.data.driver import JoystickDriver
+from Core.data.driver import JoystickController
 from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
 from HandleAlerts.domain.usecase.GetAlertsUseCase import GetAlertsUseCase
 from HandleAlerts.domain.usecase.ShowAlerts import ShowAlerts
@@ -56,8 +56,7 @@ def show_alert_advice(use_case: ShowAlertsAdviseUseCase):
 
 def display_alerts(use_case: ShowAlerts):
     while True:
-        if JoystickDriver.is_switch_pressed():
-            print("Joystick pressed")
+        if JoystickController.is_switch_pressed():
             use_case.display_alerts(0)
         time.sleep(1)
 

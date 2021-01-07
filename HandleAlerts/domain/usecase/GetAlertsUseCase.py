@@ -6,6 +6,9 @@ from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
 
 class GetAlertsUseCase:
 
+    max_errors = 10
+    error_message = "Remote Alerts Error"
+
     @inject
     def __init__(self, repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
         self.__repository = repository
@@ -22,6 +25,6 @@ class GetAlertsUseCase:
             if self.__api_errors_count > 0:
                 self.__api_errors_count -= 1
 
-        if self.__api_errors_count == 10:
-            self.__repository.create_local_alert("Remote Alerts Error")
+        if self.__api_errors_count == self.max_errors:
+            self.__repository.create_local_alert(self.error_message)
             self.__api_errors_count = 0

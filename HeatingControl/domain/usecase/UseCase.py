@@ -13,6 +13,9 @@ from MeasureWaterTemp.data.datasource import LocalDataSource
 
 class HeatingControlUseCase:
 
+    max_errors = 10
+    error_message = "Temp Preference Error"
+
     @inject
     def __init__(self, heating_status_repository:
                  HeatingStatusRepository = Provide[HeatingControlContainer.heating_status_repository],
@@ -37,6 +40,6 @@ class HeatingControlUseCase:
             if self.__api_errors_count > 0:
                 self.__api_errors_count -= 1
 
-        if self.__api_errors_count == 10:
-            self.__alerts_repository.create_local_alert("Temp Preference Error")
+        if self.__api_errors_count == self.max_errors:
+            self.__alerts_repository.create_local_alert(self.error_message)
             self.__api_errors_count = 0

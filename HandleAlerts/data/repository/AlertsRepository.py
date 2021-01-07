@@ -24,7 +24,6 @@ class AlertsRepository:
     def __add_alert(self, alert: Alert):
         if alert not in self.__alerts:
             self.__alerts.append(alert)
-            print("Alert Added: " + alert.message)
 
     def get_alerts(self):
         return self.__alerts

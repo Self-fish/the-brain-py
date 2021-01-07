@@ -18,6 +18,9 @@ def should_turn_on_lights(current_time, light_preferences: LightPreferences):
 
 class HandleLightsUseCase:
 
+    max_errors = 10
+    error_message = "Light Preference Error"
+
     @inject
     def __init__(self,
                  light_repository: LightStatusRepository = Provide[HandleLightsContainer.light_status_repository],
@@ -42,6 +45,6 @@ class HandleLightsUseCase:
             if self.__api_errors_count > 0:
                 self.__api_errors_count -= 1
 
-        if self.__api_errors_count == 10:
-            self.__alerts_repository.create_local_alert("Light Preference Error")
+        if self.__api_errors_count == self.max_errors:
+            self.__alerts_repository.create_local_alert(self.error_message)
             self.__api_errors_count = 0

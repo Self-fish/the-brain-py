@@ -25,9 +25,7 @@ def handle_lights(use_case: HandleLightsUseCase):
 
 
 def handle_main_screen(use_case: MainScreenUseCase):
-    print("Handle main screen")
     while True:
-        print("Inside While")
         use_case.show_next_value()
         time.sleep(5)
 

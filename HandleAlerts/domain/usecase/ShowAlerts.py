@@ -24,15 +24,15 @@ class ShowAlerts:
     def display_alerts(self, position):
         print("total alerts: " + str(len(self.__repository.get_alerts())))
         print("Position: " + str(position))
-        if len(self.__repository.get_alerts()) != 0:
-            if self.__there_are_still_more_alerts(position):
-                LCDStatus.lcd_next_status = LCDStatus.LCDStatus.SPECIFIC_ALERT
-                self.__print_alert(position)
-                time.sleep(1)
-                self.__handle_joystick_movements_when_alert_displayed(position)
-            else:
-                self.__screen_controller.print_alerts_complete()
-                self.__handle_joystick_movements_when_finish(position)
+        #if len(self.__repository.get_alerts()) != 0:
+        #    if self.__there_are_still_more_alerts(position):
+        #        LCDStatus.lcd_next_status = LCDStatus.LCDStatus.SPECIFIC_ALERT
+        #        self.__print_alert(position)
+        #        time.sleep(1)
+        #        self.__handle_joystick_movements_when_alert_displayed(position)
+        #    else:
+        #        self.__screen_controller.print_alerts_complete()
+        #        self.__handle_joystick_movements_when_finish(position)
 
     def __print_alert(self, position):
         alert: Alert = self.__repository.get_alerts()[position]

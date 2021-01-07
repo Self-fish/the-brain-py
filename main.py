@@ -50,7 +50,6 @@ def get_alerts(use_case: GetAlertsUseCase):
 
 def show_alert_advice(use_case: ShowAlertsAdviseUseCase):
     while True:
-        print("Advise")
         use_case.show_alert_advice()
         time.sleep(60)
 
@@ -63,6 +62,9 @@ def display_alerts(use_case: ShowAlerts):
             print("Joystick pressed")
             use_case.display_alerts(0)
         time.sleep(1)
+        print("Terminamos el while")
+    print("Terminamos el metodo")
+
 
 
 if __name__ == '__main__':

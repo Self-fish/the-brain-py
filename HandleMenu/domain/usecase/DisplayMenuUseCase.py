@@ -26,6 +26,7 @@ class DisplayMenuUseCase:
         if len(self.__alerts_repository.get_alerts()) == 0:
             self.__menu_options.remove(MenuOptions.SHOW_ALERTS)
         self.__screen_controller.print_menu(self.__menu_options, self.__menu_options[0])
+        time.sleep(1)
         self.__wait_joystick_interaction()
         self.__menu_options = [MenuOptions.SHOW_ALERTS, MenuOptions.LIGHT_CONTROL]
 

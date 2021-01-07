@@ -25,7 +25,7 @@ class DisplayMenuUseCase:
         LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MENU
         if len(self.__alerts_repository.get_alerts()) == 0:
             self.__menu_options.remove(MenuOptions.SHOW_ALERTS)
-        self.__screen_controller.print_menu(self.__menu_options, self.__menu_options[0])
+        self.__print_menu()
         time.sleep(1)
         self.__wait_joystick_interaction()
         self.__menu_options = [MenuOptions.SHOW_ALERTS, MenuOptions.LIGHT_CONTROL]
@@ -39,15 +39,18 @@ class DisplayMenuUseCase:
                 if self.__selected_option != len(self.__menu_options) - 1:
                     print("Joystick Down")
                     self.__selected_option += 1
-                    print(self.__selected_option)
+                    self.__print_menu()
                     time.sleep(1)
             elif JoystickController.is_joystick_up():
                 if self.__selected_option != 0:
                     print("Joystic Up")
                     self.__selected_option -= 1
-                    print(self.__selected_option)
+                    self.__print_menu()
                     time.sleep(1)
             elif JoystickController.is_switch_pressed():
                 LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN
                 should_wait = False
                 time.sleep(1)
+
+    def __print_menu(self):
+        self.__screen_controller.print_menu(self.__menu_options, self.__menu_options[self.__selected_option])

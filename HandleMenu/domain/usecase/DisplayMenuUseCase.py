@@ -12,10 +12,10 @@ class DisplayMenuUseCase:
     @inject
     def __init__(self, alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
         self.__alerts_repository = alerts_repository
-        self.__menu_options = [MenuOptions.LIGHT_CONTROL]
+        self.__menu_options = [MenuOptions.SHOW_ALERTS, MenuOptions.LIGHT_CONTROL]
 
     def display_menu(self):
-        if len(self.__alerts_repository.get_alerts()) != 0:
-            self.__menu_options.insert(0, MenuOptions.SHOW_ALERTS)
+        if len(self.__alerts_repository.get_alerts()) == 0:
+            self.__menu_options.remove(MenuOptions.SHOW_ALERTS)
         option: Enum = self.__menu_options[0]
         print(option.value)

@@ -13,6 +13,7 @@ class ShowAlertsAdviseUseCase:
         self.__repository = repository
 
     def show_alert_advice(self):
-        if LCDStatus.lcd_next_status != LCDStatus.LCDStatus.SPECIFIC_ALERT and \
+        if (LCDStatus.lcd_next_status != LCDStatus.LCDStatus.SPECIFIC_ALERT or
+            LCDStatus.lcd_next_status != LCDStatus.LCDStatus.MENU) and \
                 len(self.__repository.get_alerts()) != 0:
             LCDStatus.lcd_next_status = LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN

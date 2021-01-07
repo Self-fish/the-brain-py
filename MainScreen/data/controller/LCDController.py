@@ -1,3 +1,5 @@
+from enum import Enum
+
 from Core.data.device import LCDStatus
 from MainScreen.domain.model.MainScreenStep import MainScreenStep
 
@@ -238,3 +240,12 @@ class MainScreenController:
     def print_alerts_complete(self):
         self.__lcd.lcd_clear()
         self.__lcd.lcd_display_string("Press button", 3, 4)
+
+    def print_menu(self, options, option_selected: Enum):
+        LCDStatus.lcd_current_status = LCDStatus.LCDStatus.MENU
+        self.__lcd.lcd_clear()
+        first_line = 2
+        for option in options:
+            self.__lcd.lcd_display_string(option.value, first_line, 1)
+            first_line += 1
+

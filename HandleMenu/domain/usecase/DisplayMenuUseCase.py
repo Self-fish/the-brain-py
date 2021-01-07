@@ -29,6 +29,7 @@ class DisplayMenuUseCase:
         time.sleep(1)
         self.__wait_joystick_interaction()
         self.__menu_options = [MenuOptions.SHOW_ALERTS, MenuOptions.LIGHT_CONTROL]
+        self.__selected_option = 0
 
 
     def __wait_joystick_interaction(self):
@@ -49,3 +50,4 @@ class DisplayMenuUseCase:
             elif JoystickController.is_switch_pressed():
                 LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN
                 should_wait = False
+                time.sleep(1)

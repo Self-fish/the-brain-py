@@ -15,8 +15,14 @@ class GetAlertsUseCase:
         self.__api_errors_count = 0
 
     def get_alerts(self):
-        request_success = self.__repository.ask_for_alerts()
-        self.__handle_possible_api_errors(request_success)
+        alert_id = self.__repository.ask_for_alerts()
+        print(alert_id)
+        if alert_id != -1:
+            executed_success = self.__repository.execute_alert(alert_id)
+            self.__handle_possible_api_errors(True)
+            self.__handle_possible_api_errors(executed_success)
+        else:
+            self.__handle_possible_api_errors(False)
 
     def __handle_possible_api_errors(self, request_success: bool):
         if not request_success and self.__api_errors_count < 3:

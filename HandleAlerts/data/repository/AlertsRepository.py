@@ -17,6 +17,13 @@ class AlertsRepository:
             next_alert = ApiDataSource.get_alerts()
             if next_alert is not None:
                 self.__add_alert(next_alert)
+            return next_alert.alert_id
+        except NoApiAlertsException:
+            return -1
+
+    def execute_alert(self, alert_id):
+        try:
+            ApiDataSource.execute_alert(alert_id)
             return True
         except NoApiAlertsException:
             return False
@@ -29,7 +36,7 @@ class AlertsRepository:
         return self.__alerts
 
     def create_local_alert(self, text):
-        alert = Alert(StartingTime(DayOfWeek.MONDAY, 12, 0), text, datetime.datetime.now().timestamp())
+        alert = Alert("-1", StartingTime(DayOfWeek.MONDAY, 12, 0), text, datetime.datetime.now().timestamp())
         self.__add_alert(alert)
 
     def reset_alerts(self):

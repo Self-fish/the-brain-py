@@ -3,7 +3,8 @@ from HandleAlerts.domain.model.StartingTime import StartingTime
 
 class Alert:
 
-    def __init__(self, starting: StartingTime, message, timestamp):
+    def __init__(self, alert_id, starting: StartingTime, message, timestamp):
+        self.alert_id = alert_id
         self.__starting = starting
         self.message = message
         self.timestamp = timestamp

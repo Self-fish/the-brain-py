@@ -25,7 +25,9 @@ def handle_lights(use_case: HandleLightsUseCase):
 
 
 def handle_main_screen(use_case: MainScreenUseCase):
+    print("Handle main screen")
     while True:
+        print("Inside While")
         use_case.show_next_value()
         time.sleep(5)
 
@@ -55,16 +57,11 @@ def show_alert_advice(use_case: ShowAlertsAdviseUseCase):
 
 
 def display_alerts(use_case: ShowAlerts):
-    print("Display Alerts")
     while True:
-        print("Estamos esperando")
         if JoystickController.is_switch_pressed():
             print("Joystick pressed")
             use_case.display_alerts(0)
         time.sleep(1)
-        print("Terminamos el while")
-    print("Terminamos el metodo")
-
 
 
 if __name__ == '__main__':

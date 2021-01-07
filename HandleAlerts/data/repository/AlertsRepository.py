@@ -17,7 +17,10 @@ class AlertsRepository:
             next_alert = ApiDataSource.get_alerts()
             if next_alert is not None:
                 self.__add_alert(next_alert)
-            return next_alert.alert_id
+                return next_alert.alert_id
+            else:
+                return 0
+
         except NoApiAlertsException:
             return -1
 

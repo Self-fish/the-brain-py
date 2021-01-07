@@ -3,10 +3,10 @@ from enum import Enum
 
 class LCDStatus(Enum):
     NONE = 0,
-    WELCOME_SCREEN = 1,
-    MAIN_SCREEN = 2,
-    ALERTS_ADVICE_SCREEN = 3,
-    SPECIFIC_ALERT = 4,
+    WELCOME_SCREEN = 1
+    MAIN_SCREEN = 2
+    ALERTS_ADVICE_SCREEN = 3
+    SPECIFIC_ALERT = 4
     MENU = 5
 
 

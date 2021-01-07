@@ -1,8 +1,6 @@
-from enum import Enum
-
 from dependency_injector.wiring import Provide, inject
 
-from Core.data.device.LCDStatus import LCDStatus
+from Core.data.device import LCDStatus
 from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
 from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
 from HandleMenu.domain.MenuOptions import MenuOptions

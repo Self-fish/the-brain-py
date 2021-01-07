@@ -50,6 +50,7 @@ def get_alerts(use_case: GetAlertsUseCase):
 
 def show_alert_advice(use_case: ShowAlertsAdviseUseCase):
     while True:
+        print("Advise")
         use_case.show_alert_advice()
         time.sleep(60)
 

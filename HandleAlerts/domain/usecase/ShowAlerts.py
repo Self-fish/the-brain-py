@@ -27,9 +27,9 @@ class ShowAlerts:
         if len(self.__repository.get_alerts()) != 0:
             if self.__there_are_still_more_alerts(position):
                 print("Alerts to show")
-        #        LCDStatus.lcd_next_status = LCDStatus.LCDStatus.SPECIFIC_ALERT
-        #        self.__print_alert(position)
-        #        time.sleep(1)
+                LCDStatus.lcd_next_status = LCDStatus.LCDStatus.SPECIFIC_ALERT
+                self.__print_alert(position)
+                time.sleep(1)
         #        self.__handle_joystick_movements_when_alert_displayed(position)
             else:
                 print("No alerts to show")

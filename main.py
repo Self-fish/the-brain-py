@@ -5,9 +5,9 @@ import time
 from Core.data.driver import JoystickController
 from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
 from HandleAlerts.domain.usecase.GetAlertsUseCase import GetAlertsUseCase
-from HandleAlerts.domain.usecase.ShowAlerts import ShowAlerts
 from HandleAlerts.domain.usecase.ShowAlertsAdviseUseCase import ShowAlertsAdviseUseCase
 from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
+from HandleMenu.domain.usecase.DisplayMenuUseCase import DisplayMenuUseCase
 from HeatingControl.HeatingControlContainer import HeatingControlContainer
 from HeatingControl.domain.usecase.UseCase import HeatingControlUseCase
 from MainScreen.MainScreenContainer import MainScreenContainer
@@ -54,10 +54,10 @@ def show_alert_advice(use_case: ShowAlertsAdviseUseCase):
         time.sleep(60)
 
 
-def display_alerts(use_case: ShowAlerts):
+def display_menu(use_case: DisplayMenuUseCase):
     while True:
         if JoystickController.is_switch_pressed():
-            use_case.display_alerts(0)
+            use_case.display_menu()
         time.sleep(1)
 
 
@@ -100,9 +100,9 @@ if __name__ == '__main__':
     show_alerts_advice_thread = threading.Thread(target=show_alert_advice, args=(show_alert_advice_use_case,))
     show_alerts_advice_thread.start()
 
-    display_alerts_use_case = ShowAlerts()
-    display_alerts_thread = threading.Thread(target=display_alerts, args=(display_alerts_use_case,))
-    display_alerts_thread.start()
+    display_menu_use_case = DisplayMenuUseCase()
+    display_menu_thread = threading.Thread(target=display_menu, args=(display_menu_use_case,))
+    display_menu_thread.start()
 
 
 

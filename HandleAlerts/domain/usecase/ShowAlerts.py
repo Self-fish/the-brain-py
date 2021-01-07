@@ -45,10 +45,13 @@ class ShowAlerts:
         return position + 1 <= len(self.__repository.get_alerts())
 
     def __handle_joystick_movements_when_alert_displayed(self, position):
-        while True:
+        should_wait = True
+        while should_wait:
             if JoystickController.is_joystick_right():
+                should_wait = False
                 self.display_alerts(position + 1)
             elif position != 0 and JoystickController.is_joystick_left():
+                should_wait = False
                 self.display_alerts(position - 1)
             time.sleep(1)
 

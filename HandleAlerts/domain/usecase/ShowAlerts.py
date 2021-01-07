@@ -63,5 +63,6 @@ class ShowAlerts:
                 self.__repository.reset_alerts()
                 LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN
             elif position != 0 and JoystickController.is_joystick_left():
+                should_wait = False
                 self.display_alerts(position - 1)
             time.sleep(1)

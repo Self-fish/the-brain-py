@@ -30,7 +30,7 @@ class ShowAlerts:
                 LCDStatus.lcd_next_status = LCDStatus.LCDStatus.SPECIFIC_ALERT
                 self.__print_alert(position)
                 time.sleep(1)
-        #        self.__handle_joystick_movements_when_alert_displayed(position)
+                self.__handle_joystick_movements_when_alert_displayed(position)
             else:
                 print("No alerts to show")
         #        self.__screen_controller.print_alerts_complete()

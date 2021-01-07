@@ -16,10 +16,9 @@ class GetAlertsUseCase:
 
     def get_alerts(self):
         alert_id = self.__repository.ask_for_alerts()
-        print(alert_id)
         if alert_id != -1 and alert_id != 0:
-            executed_success = self.__repository.execute_alert(alert_id)
             self.__handle_possible_api_errors(True)
+            executed_success = self.__repository.execute_alert(alert_id)
             self.__handle_possible_api_errors(executed_success)
         elif alert_id == -1:
             self.__handle_possible_api_errors(False)

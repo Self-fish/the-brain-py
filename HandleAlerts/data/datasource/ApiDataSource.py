@@ -1,5 +1,3 @@
-import json
-
 import requests
 import datetime
 
@@ -33,14 +31,11 @@ def get_alerts():
 
 def execute_alert(alert_id):
     try:
-        print(ALERTS_BASE_URL + alert_id + EXECUTE_ALERT_PATH)
         response = requests.post(ALERTS_BASE_URL + alert_id + EXECUTE_ALERT_PATH)
         if response.status_code == 200:
-            print("Executed")
             return True
 
         else:
-            print("Not executed")
             raise NoApiAlertsException
 
     except (ConnectionError, ConnectTimeout):

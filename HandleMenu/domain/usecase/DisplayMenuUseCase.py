@@ -14,8 +14,9 @@ class DisplayMenuUseCase:
         self.__alerts_repository = alerts_repository
         self.__menu_options = [MenuOptions.SHOW_ALERTS, MenuOptions.LIGHT_CONTROL]
 
-    def display_menu(self):
+    def display_general_menu(self):
         if len(self.__alerts_repository.get_alerts()) == 0:
             self.__menu_options.remove(MenuOptions.SHOW_ALERTS)
         option: Enum = self.__menu_options[0]
         print(option.value)
+        self.__menu_options = [MenuOptions.SHOW_ALERTS, MenuOptions.LIGHT_CONTROL]

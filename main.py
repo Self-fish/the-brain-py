@@ -57,7 +57,7 @@ def show_alert_advice(use_case: ShowAlertsAdviseUseCase):
 def display_menu(use_case: DisplayMenuUseCase):
     while True:
         if JoystickController.is_switch_pressed():
-            use_case.display_menu()
+            use_case.display_general_menu()
         time.sleep(1)
 
 

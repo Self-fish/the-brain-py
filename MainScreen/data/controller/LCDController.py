@@ -246,6 +246,9 @@ class MainScreenController:
         self.__lcd.lcd_clear()
         first_line = 2
         for option in options:
-            self.__lcd.lcd_display_string(option.value, first_line, 1)
+            if option == option_selected:
+                self.__lcd.lcd_display_string("-> " + str(option.value), first_line, 1)
+            else:
+                self.__lcd.lcd_display_string(option.value, first_line, 1)
             first_line += 1
 

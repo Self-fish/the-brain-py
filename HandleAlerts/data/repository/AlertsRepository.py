@@ -9,6 +9,9 @@ from HandleAlerts.domain.model.StartingTime import StartingTime
 
 class AlertsRepository:
 
+    alert_id_when_null = 0
+    alert_id_when_error = -1
+
     def __init__(self):
         self.__alerts = []
 
@@ -19,10 +22,10 @@ class AlertsRepository:
                 self.__add_alert(next_alert)
                 return next_alert.alert_id
             else:
-                return 0
+                return self.alert_id_when_null
 
         except NoApiAlertsException:
-            return -1
+            return self.alert_id_when_error
 
     def execute_alert(self, alert_id):
         try:

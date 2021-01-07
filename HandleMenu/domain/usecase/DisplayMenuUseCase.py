@@ -21,5 +21,5 @@ class DisplayMenuUseCase:
         LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MENU
         if len(self.__alerts_repository.get_alerts()) == 0:
             self.__menu_options.remove(MenuOptions.SHOW_ALERTS)
-        self.__screen_controller.print_menu(self.__menu_options, MenuOptions.LIGHT_CONTROL)
+        self.__screen_controller.print_menu(self.__menu_options, self.__menu_options[0])
         self.__menu_options = [MenuOptions.SHOW_ALERTS, MenuOptions.LIGHT_CONTROL]

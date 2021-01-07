@@ -249,6 +249,6 @@ class MainScreenController:
             if option == option_selected:
                 self.__lcd.lcd_display_string("-> " + str(option.value), first_line, 1)
             else:
-                self.__lcd.lcd_display_string(option.value, first_line, 1)
+                self.__lcd.lcd_display_string(option.value, first_line, 4)
             first_line += 1
 

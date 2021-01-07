@@ -25,6 +25,7 @@ def is_joystick_down():
 
 
 def is_joystick_up():
+    print(__read_channel(vrx_channel))
     return __read_channel(vrx_channel) <= 500
 
 

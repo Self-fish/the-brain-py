@@ -1,3 +1,5 @@
+from enum import Enum
+
 from dependency_injector.wiring import Provide, inject
 
 from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
@@ -15,5 +17,5 @@ class DisplayMenuUseCase:
     def display_menu(self):
         if len(self.__alerts_repository.get_alerts()) != 0:
             self.__menu_options.insert(0, MenuOptions.SHOW_ALERTS)
-        for option in self.__menu_options:
-            print(option.value)
+        option: Enum = self.__menu_options[0]
+        print(option.value)

@@ -18,3 +18,5 @@ class ShowAlertsAdviseUseCase:
             LCDStatus.lcd_next_status != LCDStatus.LCDStatus.MENU) and \
                 len(self.__repository.get_alerts()) != 0:
             LCDStatus.lcd_next_status = LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN
+
+

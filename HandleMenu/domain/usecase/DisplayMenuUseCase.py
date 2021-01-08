@@ -29,6 +29,7 @@ class DisplayMenuUseCase:
 
     def display_general_menu(self):
         LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MENU
+        print("DisplayMenuUseCase: display_general_menu")
         if len(self.__alerts_repository.get_alerts()) == 0:
             self.__menu_options.remove(MenuOptions.SHOW_ALERTS)
         self.__print_menu()
@@ -60,6 +61,7 @@ class DisplayMenuUseCase:
 
     def __select_option(self):
         if self.__menu_options[self.__selected_option] == MenuOptions.SHOW_ALERTS:
+            print("DisplayMenuUseCase: __select_option")
             print(len(self.__alerts_repository.get_alerts()))
             print("Llamamos al show alerts use case")
             self.__show_alerts_use_case.display_alerts(0)

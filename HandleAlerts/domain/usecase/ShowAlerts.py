@@ -22,6 +22,7 @@ class ShowAlerts:
         self.__screen_controller = screen_controller
 
     def display_alerts(self, position):
+        print("ShowAlertsUseCase: display_alerts")
         print(len(self.__repository.get_alerts()))
         if len(self.__repository.get_alerts()) != 0:
             if self.__there_are_still_more_alerts(position):
@@ -34,11 +35,13 @@ class ShowAlerts:
                 self.__handle_joystick_movements_when_finish(position)
 
     def __print_alert(self, position):
+        print("ShowAlertsUseCase: __print_alert")
         alert: Alert = self.__repository.get_alerts()[position]
         date = datetime.fromtimestamp(alert.timestamp, timezone('Europe/Madrid')).strftime("%H:%M  %d %b %Y")
         self.__screen_controller.print_alert(date, alert.message)
 
     def __there_are_still_more_alerts(self, position):
+        print("ShowAlertsUseCase: __there_are_still_more_alerts")
         return position + 1 <= len(self.__repository.get_alerts())
 
     def __handle_joystick_movements_when_alert_displayed(self, position):

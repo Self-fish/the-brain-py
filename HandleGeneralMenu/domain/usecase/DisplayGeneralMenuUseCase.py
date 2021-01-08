@@ -24,9 +24,9 @@ class DisplayGeneralMenuUseCase(MenuUseCase):
 
     def build_menu_options(self):
         if len(self.__alerts_repository.get_alerts()) == 0:
-            super().__menu_options = [GeneralMenuOptions.LIGHT_CONTROL]
+            super().menu_options = [GeneralMenuOptions.LIGHT_CONTROL]
         else:
-            super().__menu_options = [GeneralMenuOptions.SHOW_ALERTS, GeneralMenuOptions.LIGHT_CONTROL]
+            super().menu_options = [GeneralMenuOptions.SHOW_ALERTS, GeneralMenuOptions.LIGHT_CONTROL]
 
     def select_option(self):
         if self.__menu_options[self.__selected_option] == GeneralMenuOptions.SHOW_ALERTS:

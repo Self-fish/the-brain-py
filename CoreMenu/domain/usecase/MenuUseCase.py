@@ -14,8 +14,8 @@ class MenuUseCase(abc.ABC):
     @inject
     def __init__(self, screen_controller: MainScreenController = Provide[MainScreenContainer.main_screen_controller]):
         self.__screen_controller = screen_controller
-        self.__menu_options = None
-        self.__selected_option = 0
+        self.menu_options = None
+        self.selected_option = 0
 
     @abc.abstractmethod
     def build_menu_options(self):

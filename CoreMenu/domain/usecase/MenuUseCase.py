@@ -21,6 +21,10 @@ class MenuUseCase(abc.ABC):
     def build_menu_options(self):
         pass
 
+    @abc.abstractmethod
+    def select_option(self):
+        pass
+
     def display_menu(self):
         LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MENU
         self.build_menu_options()
@@ -50,6 +54,3 @@ class MenuUseCase(abc.ABC):
     def __print_menu(self):
         self.__screen_controller.print_menu(self.__menu_options, self.__menu_options[self.__selected_option])
 
-    @abc.abstractmethod
-    def select_option(self):
-        pass

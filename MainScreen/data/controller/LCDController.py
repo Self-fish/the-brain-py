@@ -241,9 +241,6 @@ class MainScreenController:
         self.__lcd.lcd_clear()
         self.__lcd.lcd_display_string("Press button", 3, 4)
 
-    def print_test(self):
-        print("Test")
-
     def print_menu(self, options, option_selected: Enum):
         LCDStatus.lcd_current_status = LCDStatus.LCDStatus.MENU
         self.__lcd.lcd_clear()

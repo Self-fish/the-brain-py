@@ -7,12 +7,12 @@ from Core.data.driver import JoystickController
 from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
 from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
 from HandleAlerts.domain.usecase.ShowAlerts import ShowAlerts
-from HandleMenu.domain.MenuOptions import MenuOptions
+from HandleGeneralMenu.domain.GeneralMenuOptions import GeneralMenuOptions
 from MainScreen.MainScreenContainer import MainScreenContainer
 from MainScreen.data.controller.LCDController import MainScreenController
 
 
-class DisplayMenuUseCase:
+class DisplayGeneralMenuUseCase:
 
     @inject
     def __init__(self, alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository],
@@ -20,7 +20,7 @@ class DisplayMenuUseCase:
         self.__alerts_repository = alerts_repository
         self.__screen_controller = screen_controller
         self.__show_alerts_use_case = None
-        self.__menu_options = [MenuOptions.SHOW_ALERTS, MenuOptions.LIGHT_CONTROL]
+        self.__menu_options = [GeneralMenuOptions.SHOW_ALERTS, GeneralMenuOptions.LIGHT_CONTROL]
         self.__selected_option = 0
 
     def lazy_injection(self, show_alerts_use_case: ShowAlerts):
@@ -29,13 +29,12 @@ class DisplayMenuUseCase:
     def display_general_menu(self):
         LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MENU
         if len(self.__alerts_repository.get_alerts()) == 0:
-            self.__menu_options.remove(MenuOptions.SHOW_ALERTS)
+            self.__menu_options.remove(GeneralMenuOptions.SHOW_ALERTS)
         self.__print_menu()
         time.sleep(1)
         self.__wait_joystick_interaction()
-        self.__menu_options = [MenuOptions.SHOW_ALERTS, MenuOptions.LIGHT_CONTROL]
+        self.__menu_options = [GeneralMenuOptions.SHOW_ALERTS, GeneralMenuOptions.LIGHT_CONTROL]
         self.__selected_option = 0
-
 
     def __wait_joystick_interaction(self):
         should_wait = True
@@ -58,7 +57,7 @@ class DisplayMenuUseCase:
         self.__screen_controller.print_menu(self.__menu_options, self.__menu_options[self.__selected_option])
 
     def __select_option(self):
-        if self.__menu_options[self.__selected_option] == MenuOptions.SHOW_ALERTS:
+        if self.__menu_options[self.__selected_option] == GeneralMenuOptions.SHOW_ALERTS:
             self.__show_alerts_use_case.display_alerts(0)
         else:
             LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN

@@ -1,6 +1,6 @@
 from enum import Enum
 
 
-class MenuOptions(Enum):
+class GeneralMenuOptions(Enum):
     SHOW_ALERTS = "Show Alerts"
     LIGHT_CONTROL = "Light Control"

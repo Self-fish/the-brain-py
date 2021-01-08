@@ -23,8 +23,10 @@ class DisplayLightMenuUseCase:
         self.__screen_repository.print_menu(self.__menu_options, self.__menu_options[self.__selected_option])
 
     def __build_menu(self):
-        self.__menu_options.remove(LightMenuOptions.MANUAL_OFF)
-        self.__menu_options.remove(LightMenuOptions.MANUAL_ON)
+        if self.__menu_options.__contains__(LightMenuOptions.MANUAL_OFF):
+            self.__menu_options.remove(LightMenuOptions.MANUAL_OFF)
+        if self.__menu_options.__contains__(LightMenuOptions.MANUAL_ON):
+            self.__menu_options.remove(LightMenuOptions.MANUAL_ON)
         self.__menu_options.append(self.__light_status_to_display())
 
     def __light_status_to_display(self):

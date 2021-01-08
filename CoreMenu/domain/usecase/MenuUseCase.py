@@ -52,5 +52,6 @@ class MenuUseCase(abc.ABC):
                 self.select_option()
 
     def __print_menu(self):
+        self.__screen_controller.print_test()
         self.__screen_controller.print_menu(self.menu_options, self.menu_options[self.selected_option])
 

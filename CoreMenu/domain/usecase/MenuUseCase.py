@@ -3,7 +3,7 @@ import abc
 
 from dependency_injector.wiring import Provide, inject
 
-from Core.data.device.LCDStatus import LCDStatus
+from Core.data.device import LCDStatus
 from Core.data.driver import JoystickController
 from MainScreen.MainScreenContainer import MainScreenContainer
 from MainScreen.data.controller.LCDController import MainScreenController

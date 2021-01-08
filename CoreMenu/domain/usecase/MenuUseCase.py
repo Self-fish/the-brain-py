@@ -45,11 +45,11 @@ class MenuUseCase(abc.ABC):
                     time.sleep(1)
             elif JoystickController.is_switch_pressed():
                 should_wait = False
-                self.__select_option()
+                self.select_option()
 
     def __print_menu(self):
         self.__screen_controller.print_menu(self.__menu_options, self.__menu_options[self.__selected_option])
 
     @abc.abstractmethod
-    def __select_option(self):
+    def select_option(self):
         pass

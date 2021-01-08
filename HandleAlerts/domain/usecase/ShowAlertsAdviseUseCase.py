@@ -10,11 +10,9 @@ class ShowAlertsAdviseUseCase:
     @inject
     def __init__(self,
                  repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
-        print("Creamos el ShowAlertsAdviseUseCase")
         self.__repository = repository
 
     def show_alert_advice(self):
-        print("ShowAlertsAdviseUseCase: show_alert_advice")
         if (LCDStatus.lcd_next_status != LCDStatus.LCDStatus.SPECIFIC_ALERT and
             LCDStatus.lcd_next_status != LCDStatus.LCDStatus.MENU) and \
                 len(self.__repository.get_alerts()) != 0:

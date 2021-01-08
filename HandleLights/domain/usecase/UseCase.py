@@ -25,7 +25,6 @@ class HandleLightsUseCase:
     def __init__(self,
                  light_repository: LightStatusRepository = Provide[HandleLightsContainer.light_status_repository],
                  alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
-        print("Creamos el HandleLightsUseCase")
         self.__light_repository = light_repository
         self.__alerts_repository = alerts_repository
         self.__api_errors_count = 0

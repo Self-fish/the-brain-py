@@ -11,7 +11,6 @@ class GetAlertsUseCase:
 
     @inject
     def __init__(self, repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
-        print("Creamos GetAlertsUseCase")
         self.__repository = repository
         self.__api_errors_count = 0
 

@@ -11,7 +11,6 @@ class MeasureWaterTempUseCase:
     error_message = "Measure Error"
 
     def __init__(self, alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
-        print("Creamos el MeasureWaterTempUseCase")
         self.__alerts_repository = alerts_repository
         self.__api_errors_count = 0
 

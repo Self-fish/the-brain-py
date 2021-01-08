@@ -15,13 +15,12 @@ from MainScreen.data.controller.LCDController import MainScreenController
 
 class DisplayMenuUseCase:
 
-    handle_alerts_container = HandleAlertsContainer()
-    handle_alerts_container.wire(modules=[sys.modules[__name__]])
+    #handle_alerts_container = HandleAlertsContainer()
+    #handle_alerts_container.wire(modules=[sys.modules[__name__]])
 
     @inject
     def __init__(self, alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository],
                  screen_controller: MainScreenController = Provide[MainScreenContainer.main_screen_controller]):
-        print("Creamos el DisplayMenuUseCase")
         self.__alerts_repository = alerts_repository
         self.__screen_controller = screen_controller
         self.__show_alerts_use_case = None
@@ -33,7 +32,6 @@ class DisplayMenuUseCase:
 
     def display_general_menu(self):
         LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MENU
-        print("DisplayMenuUseCase: display_general_menu")
         if len(self.__alerts_repository.get_alerts()) == 0:
             self.__menu_options.remove(MenuOptions.SHOW_ALERTS)
         self.__print_menu()
@@ -65,9 +63,6 @@ class DisplayMenuUseCase:
 
     def __select_option(self):
         if self.__menu_options[self.__selected_option] == MenuOptions.SHOW_ALERTS:
-            print("DisplayMenuUseCase: __select_option")
-            print(len(self.__alerts_repository.get_alerts()))
-            print("Llamamos al show alerts use case")
             self.__show_alerts_use_case.display_alerts(0)
         else:
             LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN

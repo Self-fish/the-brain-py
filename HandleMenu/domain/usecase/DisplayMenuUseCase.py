@@ -24,9 +24,12 @@ class DisplayMenuUseCase:
         print("Creamos el DisplayMenuUseCase")
         self.__alerts_repository = alerts_repository
         self.__screen_controller = screen_controller
-        self.__show_alerts_use_case = ShowAlerts()
+        self.__show_alerts_use_case = None
         self.__menu_options = [MenuOptions.SHOW_ALERTS, MenuOptions.LIGHT_CONTROL]
         self.__selected_option = 0
+
+    def __lazy_injection(self, show_alerts_use_case: ShowAlerts):
+        self.__show_alerts_use_case = show_alerts_use_case
 
     def display_general_menu(self):
         LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MENU

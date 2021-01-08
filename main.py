@@ -100,6 +100,8 @@ if __name__ == '__main__':
     show_alerts_advice_thread = threading.Thread(target=show_alert_advice, args=(show_alert_advice_use_case,))
     show_alerts_advice_thread.start()
 
+
+
     display_menu_use_case = DisplayMenuUseCase()
     display_menu_thread = threading.Thread(target=display_menu, args=(display_menu_use_case,))
     display_menu_thread.start()

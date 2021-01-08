@@ -31,6 +31,6 @@ class DisplayLightMenuUseCase:
 
     def __light_status_to_display(self):
         if self.__light_repository.current_light_status == RelayStatus.ON:
-            return LightMenuOptions.MANUAL.OFF
+            return LightMenuOptions.MANUAL_OFF
         else:
-            return LightMenuOptions.MANUAL.ON
+            return LightMenuOptions.MANUAL_ON

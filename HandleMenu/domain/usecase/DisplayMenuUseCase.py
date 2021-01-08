@@ -60,6 +60,7 @@ class DisplayMenuUseCase:
 
     def __select_option(self):
         if self.__menu_options[self.__selected_option] == MenuOptions.SHOW_ALERTS:
+            print("Llamamos al show alerts use case")
             self.__show_alerts_use_case.display_alerts(0)
         else:
             LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN

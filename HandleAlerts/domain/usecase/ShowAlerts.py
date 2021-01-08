@@ -22,6 +22,7 @@ class ShowAlerts:
         self.__screen_controller = screen_controller
 
     def display_alerts(self, position):
+        print(len(self.__repository.get_alerts()))
         if len(self.__repository.get_alerts()) != 0:
             if self.__there_are_still_more_alerts(position):
                 LCDStatus.lcd_next_status = LCDStatus.LCDStatus.SPECIFIC_ALERT

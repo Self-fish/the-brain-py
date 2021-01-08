@@ -1,18 +1,15 @@
 import time
 import abc
 
-from dependency_injector.wiring import Provide, inject
 
 from Core.data.device import LCDStatus
 from Core.data.driver import JoystickController
-from MainScreen.MainScreenContainer import MainScreenContainer
 from MainScreen.data.controller.LCDController import MainScreenController
 
 
 class MenuUseCase(abc.ABC):
 
-    @inject
-    def __init__(self, screen_controller: MainScreenController = Provide[MainScreenContainer.main_screen_controller]):
+    def __init__(self, screen_controller: MainScreenController):
         self.__screen_controller = screen_controller
         self.menu_options = None
         self.selected_option = 0

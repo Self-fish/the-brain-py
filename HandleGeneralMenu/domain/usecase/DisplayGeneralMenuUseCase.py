@@ -6,14 +6,17 @@ from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
 from HandleAlerts.domain.usecase.ShowAlerts import ShowAlerts
 from HandleGeneralMenu.domain.model.GeneralMenuOptions import GeneralMenuOptions
 from HandleLightMenu.domain.usecase.DisplayLightMenuUseCase import DisplayLightMenuUseCase
+from MainScreen.MainScreenContainer import MainScreenContainer
+from MainScreen.data.controller.LCDController import MainScreenController
 
 
 @MenuUseCase.register
 class DisplayGeneralMenuUseCase(MenuUseCase):
 
     @inject
-    def __init__(self, alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
-        super().__init__()
+    def __init__(self, alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository],
+                 screen_controller: MainScreenController = Provide[MainScreenContainer.main_screen_controller]):
+        super().__init__(screen_controller)
         self.__alerts_repository = alerts_repository
         self.__show_alerts_use_case: ShowAlerts = None
         self.__display_light_menu_use_case: DisplayLightMenuUseCase = None

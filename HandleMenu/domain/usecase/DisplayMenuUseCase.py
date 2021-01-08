@@ -21,6 +21,7 @@ class DisplayMenuUseCase:
     @inject
     def __init__(self, alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository],
                  screen_controller: MainScreenController = Provide[MainScreenContainer.main_screen_controller]):
+        print("Creamos el DisplayMenuUseCase")
         self.__alerts_repository = alerts_repository
         self.__screen_controller = screen_controller
         self.__show_alerts_use_case = ShowAlerts()

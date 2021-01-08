@@ -20,6 +20,7 @@ class HeatingControlUseCase:
     def __init__(self, heating_status_repository:
                  HeatingStatusRepository = Provide[HeatingControlContainer.heating_status_repository],
                  alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
+        print("Creamos el HeatingControlUseCase")
         self.__heating_status_repository = heating_status_repository
         self.__alerts_repository = alerts_repository
         self.__api_errors_count = 0

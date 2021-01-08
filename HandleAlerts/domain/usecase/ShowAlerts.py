@@ -18,6 +18,7 @@ class ShowAlerts:
     @inject
     def __init__(self, repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository],
                  screen_controller: MainScreenController = Provide[MainScreenContainer.main_screen_controller]):
+        print("Creamos el ShowAlertsUseCase")
         self.__repository = repository
         self.__screen_controller = screen_controller
 

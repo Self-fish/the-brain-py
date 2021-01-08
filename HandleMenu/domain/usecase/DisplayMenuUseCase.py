@@ -28,7 +28,7 @@ class DisplayMenuUseCase:
         self.__menu_options = [MenuOptions.SHOW_ALERTS, MenuOptions.LIGHT_CONTROL]
         self.__selected_option = 0
 
-    def __lazy_injection(self, show_alerts_use_case: ShowAlerts):
+    def lazy_injection(self, show_alerts_use_case: ShowAlerts):
         self.__show_alerts_use_case = show_alerts_use_case
 
     def display_general_menu(self):

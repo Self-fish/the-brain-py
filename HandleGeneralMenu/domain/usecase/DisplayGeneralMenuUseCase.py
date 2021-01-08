@@ -35,4 +35,4 @@ class DisplayGeneralMenuUseCase(MenuUseCase):
         if self.menu_options[self.selected_option] == GeneralMenuOptions.SHOW_ALERTS:
             self.__show_alerts_use_case.display_alerts(0)
         else:
-            self.__display_light_menu_use_case.display_light_menu()
+            self.__display_light_menu_use_case.display_menu()

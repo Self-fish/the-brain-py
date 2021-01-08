@@ -7,6 +7,7 @@ from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
 from HandleAlerts.domain.usecase.GetAlertsUseCase import GetAlertsUseCase
 from HandleAlerts.domain.usecase.ShowAlerts import ShowAlerts
 from HandleAlerts.domain.usecase.ShowAlertsAdviseUseCase import ShowAlertsAdviseUseCase
+from HandleLightMenu.domain.usecase.DisplayLightMenuUseCase import DisplayLightMenuUseCase
 from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
 from HandleGeneralMenu.domain.usecase.DisplayGeneralMenuUseCase import DisplayGeneralMenuUseCase
 from HeatingControl.HeatingControlContainer import HeatingControlContainer
@@ -102,7 +103,7 @@ if __name__ == '__main__':
     show_alerts_advice_thread.start()
 
     display_menu_use_case = DisplayGeneralMenuUseCase()
-    display_menu_use_case.lazy_injection(ShowAlerts())
+    display_menu_use_case.lazy_injection(ShowAlerts(), DisplayLightMenuUseCase())
     display_menu_thread = threading.Thread(target=display_menu, args=(display_menu_use_case,))
     display_menu_thread.start()
 

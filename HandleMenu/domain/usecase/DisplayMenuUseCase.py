@@ -1,3 +1,4 @@
+import sys
 import time
 
 from dependency_injector.wiring import Provide, inject
@@ -14,10 +15,12 @@ from MainScreen.data.controller.LCDController import MainScreenController
 
 class DisplayMenuUseCase:
 
+    handle_alerts_container = HandleAlertsContainer()
+    handle_alerts_container.wire(modules=[sys.modules[__name__]])
+
     @inject
     def __init__(self, alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository],
-                 screen_controller: MainScreenController = Provide[MainScreenContainer.main_screen_controller],
-                 show_alerts_use_case = ShowAlerts):
+                 screen_controller: MainScreenController = Provide[MainScreenContainer.main_screen_controller]):
         self.__alerts_repository = alerts_repository
         self.__screen_controller = screen_controller
         self.__show_alerts_use_case = ShowAlerts()

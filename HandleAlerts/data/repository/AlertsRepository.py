@@ -14,6 +14,7 @@ class AlertsRepository:
 
     def __init__(self):
         self.__alerts = []
+        print("Creamos el alerts repository")
 
     def ask_for_alerts(self):
         try:
@@ -39,6 +40,7 @@ class AlertsRepository:
             self.__alerts.append(alert)
 
     def get_alerts(self):
+        print("Preguntamos por las alertas: " + str(len(self.__alerts)))
         return self.__alerts
 
     def create_local_alert(self, text):

@@ -201,6 +201,7 @@ class MainScreenController:
             self.__lcd.lcd_display_string(str(temperature) + " C", 3, 11)
 
     def __paint_anchor_icon(self):
+        print("Paint anchor icon")
         self.__lcd.lcd_write_char_with_position(0, 2, 3)
         self.__lcd.lcd_write_char_with_position(1, 3, 2)
         self.__lcd.lcd_write_char_with_position(1, 3, 4)

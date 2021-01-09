@@ -21,6 +21,7 @@ def get_light_preferences():
             print("Preferences from API")
             print(preferences.json()['lightsPreferences']['mode'])
             if preferences.json()['lightsPreferences']['mode'] == "MANUAL_OFF":
+                print("Genera Manual OFF")
                 light_mode = LightMode.MANUAL_OFF
             elif preferences.json()['lightsPreferences']['mode'] == "MANUAL_ON":
                 light_mode = LightMode.MANUAL_ON

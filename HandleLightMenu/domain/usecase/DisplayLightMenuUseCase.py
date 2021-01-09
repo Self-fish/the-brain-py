@@ -15,6 +15,8 @@ from MainScreen.data.controller.LCDController import MainScreenController
 @MenuUseCase.register
 class DisplayLightMenuUseCase(MenuUseCase):
 
+    error_message = "Ups, error :("
+
     @inject
     def __init__(self, screen_controller: MainScreenController = Provide[MainScreenContainer.main_screen_controller],
                  light_repository: LightStatusRepository = Provide[HandleLightsContainer.light_status_repository]):
@@ -32,7 +34,7 @@ class DisplayLightMenuUseCase(MenuUseCase):
     def select_option(self):
         update_result = HandleLightMenuRepository.update_light_preferences(self.menu_options[self.selected_option])
         if not update_result:
-            self.display_error_message("Ups, error!")
+            self.display_error_message(self.error_message)
         else:
             self.__handle_lights_use_case.handle_lights()
         LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN

@@ -15,8 +15,8 @@ class HeatingStatusRepository:
         self.__number_of_tries = 0
         self.__previous_temperature = 0
 
-    def update_heating_status(self, heating_status, current_temperature):
-        if heating_status == RelayStatus.ON:
+    def update_heating_status(self, heating_status, current_temperature, desired_temperature):
+        if heating_status == RelayStatus.ON and current_temperature is not 0:
             print("Previous Temperature: " + str(self.__previous_temperature))
             print("Current Temperature: " + str(current_temperature))
             print("Queremos activar")
@@ -57,7 +57,7 @@ class HeatingStatusRepository:
     def __both_heating_on(self):
         print("Activamos los dos heatings")
         #self.__second_heating_controller.update_relay_status(RelayStatus.ON)
-        #self.__first_heating_controller.update_relay_status(RelayStatus.ON)
+        self.__first_heating_controller.update_relay_status(RelayStatus.ON)
 
     def __activate_heating(self, current_temperature):
         if self.heating_active == HeatingActive.NONE:
@@ -69,6 +69,9 @@ class HeatingStatusRepository:
         elif self.heating_active == HeatingActive.SECOND_HEATING:
             self.__both_heating_on()
             self.heating_active = HeatingActive.BOTH
+        else:
+            self.__both_heating_on()
+            self.heating_active = HeatingActive.BOTH
         self.__previous_temperature = current_temperature
         self.__number_of_tries = 0
         self.__current_heating_status = RelayStatus.ON
@@ -77,4 +80,4 @@ class HeatingStatusRepository:
         self.__second_heating_controller.update_relay_status(RelayStatus.OFF)
         self.__first_heating_controller.update_relay_status(RelayStatus.OFF)
         self.__current_heating_status = RelayStatus.OFF
-        self.heating_active = HeatingActive.NONE
+

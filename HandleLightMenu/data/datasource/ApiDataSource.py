@@ -15,14 +15,19 @@ def update_light_preferences(light_mode):
         light_range = {"starting": "00:00", "finishing": "00:00"}
         light_preferences = {"mode": light_mode, "range": light_range}
         body = {"lightPreferences": light_preferences, "deviceId": "sf-" + serial_number}
+        print(body)
         preferences = requests.put(API_URI, json=body)
         if preferences.status_code != 200:
+            print("No 200: " + str(preferences.status_code))
             raise NoApiPreferenceException
         else:
+            print("200")
             return True
 
     except NoSerialException:
+        print("NoSerialException")
         raise NoSerialException
 
     except (ConnectionError, ConnectTimeout):
+        print("Other Exception")
         raise NoApiPreferenceException

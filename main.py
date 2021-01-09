@@ -41,7 +41,7 @@ def measure_water_temp(use_case: MeasureWaterTempUseCase):
 def control_heating(use_case: HeatingControlUseCase):
     while True:
         use_case.control_heating()
-        time.sleep(60)
+        time.sleep(30)
 
 
 def get_alerts(use_case: GetAlertsUseCase):

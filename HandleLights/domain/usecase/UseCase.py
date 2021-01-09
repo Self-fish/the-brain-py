@@ -14,10 +14,10 @@ from HandleLights.domain.model.LightPreferencesSource import LightPreferencesSou
 
 
 def should_turn_on_lights(current_time, light_preferences: LightPreferences):
-    if light_preferences == LightMode.MANUAL_ON:
+    if light_preferences.light_mode == LightMode.MANUAL_ON:
         print("Manual ON")
         return True
-    elif light_preferences == LightMode.MANUAL_OFF:
+    elif light_preferences.light_mode == LightMode.MANUAL_OFF:
         print("Manual OFF")
         return False
     else:

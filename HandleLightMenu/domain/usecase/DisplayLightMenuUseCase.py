@@ -3,6 +3,7 @@ from dependency_injector.wiring import Provide, inject
 from Core.data.device import LCDStatus
 from Core.data.driver.RelayStatus import RelayStatus
 from CoreMenu.domain.usecase.MenuUseCase import MenuUseCase
+from HandleLightMenu.data.datasource import ApiDataSource
 from HandleLightMenu.domain.model.LightMenuOptions import LightMenuOptions
 from HandleLights.HandleLightsContainer import HandleLightsContainer
 from HandleLights.data.repository.LightStatus import LightStatusRepository
@@ -25,7 +26,8 @@ class DisplayLightMenuUseCase(MenuUseCase):
         self.menu_options.append(self.__light_status_to_display())
 
     def select_option(self):
-        LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN
+        #LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN
+        ApiDataSource.update_light_preferences(self.menu_options[self.selected_option].value)
 
     def __light_status_to_display(self):
         if self.__light_repository.current_light_status == RelayStatus.ON:

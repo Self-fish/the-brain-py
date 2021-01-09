@@ -18,6 +18,8 @@ def get_light_preferences():
         if preferences.status_code != 200:
             raise NoApiPreferenceException
         else:
+            print("Preferences from API")
+            print(preferences.json()['lightsPreferences']['mode'])
             if preferences.json()['lightsPreferences']['mode'] == "MANUAL_OFF":
                 light_mode = LightMode.MANUAL_OFF
             elif preferences.json()['lightsPreferences']['mode'] == "MANUAL_ON":

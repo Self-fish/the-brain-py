@@ -22,7 +22,6 @@ class HeatingStatusRepository:
             print("Queremos activar")
             if self.__current_heating_status == RelayStatus.OFF:
                 print("Venimos de apagado. Encendemos el primer calentador")
-                print("")
                 self.__activate_heating(current_temperature)
 
             elif self.__previous_temperature == current_temperature:
@@ -33,12 +32,10 @@ class HeatingStatusRepository:
                     self.__number_of_tries += 1
                 else:
                     print("Necesitamos mas potencia")
-                    print("")
                     self.__activate_heating(current_temperature)
 
             elif self.__previous_temperature > current_temperature:
                 print("Necesitamos mas potencia")
-                print("")
                 self.__activate_heating(current_temperature)
 
             elif self.__previous_temperature < current_temperature:
@@ -48,20 +45,22 @@ class HeatingStatusRepository:
 
         else:
             print("Queremos desactivar")
-            print("")
             self.__deactivate_heating()
 
     def __first_heating_on(self):
         print("Activamos el heating 1")
+        print("")
         self.__first_heating_controller.update_relay_status(RelayStatus.ON)
 
     def __second_heating_on(self):
         print("Activamos el heating 2")
+        print("")
         #self.__second_heating_controller.update_relay_status(RelayStatus.ON)
         #self.__first_heating_controller.update_relay_status(RelayStatus.OFF)
 
     def __both_heating_on(self):
         print("Activamos los dos heatings")
+        print("")
         #self.__second_heating_controller.update_relay_status(RelayStatus.ON)
         self.__first_heating_controller.update_relay_status(RelayStatus.ON)
 
@@ -87,4 +86,5 @@ class HeatingStatusRepository:
         self.__first_heating_controller.update_relay_status(RelayStatus.OFF)
         self.__current_heating_status = RelayStatus.OFF
         self.heating_active = HeatingActive.NONE
+        print("")
 

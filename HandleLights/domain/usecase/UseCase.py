@@ -5,6 +5,7 @@ from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
 from HandleLights.HandleLightsContainer import HandleLightsContainer
 from HandleLights.data.repository import Preferences
 from HandleLights.data.repository.LightStatus import LightStatusRepository
+from HandleLights.domain.model.LightMode import LightMode
 from HandleLights.domain.model.LightPreferences import LightPreferences
 from datetime import datetime
 from pytz import timezone
@@ -13,7 +14,15 @@ from HandleLights.domain.model.LightPreferencesSource import LightPreferencesSou
 
 
 def should_turn_on_lights(current_time, light_preferences: LightPreferences):
-    return light_preferences.starting_hour <= current_time < light_preferences.finishing_hour
+    if light_preferences == LightMode.MANUAL_ON:
+        print("Manual ON")
+        return True
+    elif light_preferences == LightMode.MANUAL_OFF:
+        print("Manual OFF")
+        return False
+    else:
+        print("Automatic")
+        return light_preferences.starting_hour <= current_time < light_preferences.finishing_hour
 
 
 class HandleLightsUseCase:

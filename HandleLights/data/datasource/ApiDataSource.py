@@ -6,6 +6,7 @@ from Core.data.device import ReadSerialNumber
 from Core.data.device.NoSerialException import NoSerialException
 from HandleLights.data.datamodel.LightPreferencesDataModel import LightPreferencesDataModel
 from HandleLights.data.datasource.NoApiPreferencesException import NoApiPreferenceException
+from HandleLights.domain.model.LightMode import LightMode
 
 API_URI = "http://192.168.0.25:8080/preferences?deviceId=sf-"
 
@@ -17,8 +18,15 @@ def get_light_preferences():
         if preferences.status_code != 200:
             raise NoApiPreferenceException
         else:
+            if preferences.json()['lightsPreferences']['mode'] == "MANUAL_OFF":
+                light_mode = LightMode.MANUAL_OFF
+            elif preferences.json()['lightsPreferences']['mode'] == "MANUAL_ON":
+                light_mode = LightMode.MANUAL_ON
+            else:
+                light_mode = LightMode.AUTOMATIC
             return LightPreferencesDataModel(preferences.json()['lightsPreferences']['range']['starting'],
-                                             preferences.json()['lightsPreferences']['range']['finishing'])
+                                             preferences.json()['lightsPreferences']['range']['finishing'],
+                                             light_mode)
 
     except NoSerialException:
         raise NoSerialException

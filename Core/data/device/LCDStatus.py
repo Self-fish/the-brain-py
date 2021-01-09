@@ -10,5 +10,5 @@ class LCDStatus(Enum):
     MENU = 5
 
 
-lcd_current_status = LCDStatus.NONE
+lcd_current_status = LCDStatus.MAIN_SCREEN
 lcd_next_status = LCDStatus.MAIN_SCREEN

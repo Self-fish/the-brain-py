@@ -15,7 +15,7 @@ class HeatingStatusRepository:
         self.__number_of_tries = 0
         self.__previous_temperature = 0
 
-    def update_heating_status(self, heating_status, current_temperature, desired_temperature):
+    def update_heating_status(self, heating_status, current_temperature):
         if heating_status == RelayStatus.ON and current_temperature is not 0:
             print("Previous Temperature: " + str(self.__previous_temperature))
             print("Current Temperature: " + str(current_temperature))

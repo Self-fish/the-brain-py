@@ -11,6 +11,7 @@ from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
 from HandleAlerts.domain.model.Alert import Alert
 from MainScreen.MainScreenContainer import MainScreenContainer
 from MainScreen.data.controller.LCDController import MainScreenController
+from MainScreen.domain.usecase.UseCase import MainScreenUseCase
 
 
 class ShowAlerts:
@@ -20,6 +21,10 @@ class ShowAlerts:
                  screen_controller: MainScreenController = Provide[MainScreenContainer.main_screen_controller]):
         self.__repository = repository
         self.__screen_controller = screen_controller
+        self.__main_use_case: MainScreenUseCase = None
+
+    def lazy_injection(self, main_use_case: MainScreenUseCase):
+        self.__main_use_case = main_use_case
 
     def display_alerts(self, position):
         if len(self.__repository.get_alerts()) != 0:
@@ -57,8 +62,12 @@ class ShowAlerts:
             if JoystickController.is_switch_pressed():
                 should_wait = False
                 self.__repository.reset_alerts()
-                LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN
+                self.__close_alerts()
             elif position != 0 and JoystickController.is_joystick_left():
                 should_wait = False
                 self.display_alerts(position - 1)
             time.sleep(0.3)
+
+    def __close_alerts(self):
+        LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN
+        self.__main_use_case.show_next_value()

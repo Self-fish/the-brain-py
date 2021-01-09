@@ -22,27 +22,33 @@ class HeatingStatusRepository:
             print("Queremos activar")
             if self.__current_heating_status == RelayStatus.OFF:
                 print("Venimos de apagado. Encendemos el primer calentador")
+                print("")
                 self.__activate_heating(current_temperature)
 
             elif self.__previous_temperature == current_temperature:
                 print("Venimos de encendido pero la temperatura es igual")
                 if self.__number_of_tries < self.max_retries:
                     print("Probamos otra vez")
+                    print("")
                     self.__number_of_tries += 1
                 else:
                     print("Necesitamos mas potencia")
+                    print("")
                     self.__activate_heating(current_temperature)
 
             elif self.__previous_temperature > current_temperature:
                 print("Necesitamos mas potencia")
+                print("")
                 self.__activate_heating(current_temperature)
 
             elif self.__previous_temperature < current_temperature:
                 print("Vamos mejorando")
+                print("")
                 self.__previous_temperature = current_temperature
 
         else:
             print("Queremos desactivar")
+            print("")
             self.__deactivate_heating()
 
     def __first_heating_on(self):
@@ -80,4 +86,5 @@ class HeatingStatusRepository:
         self.__second_heating_controller.update_relay_status(RelayStatus.OFF)
         self.__first_heating_controller.update_relay_status(RelayStatus.OFF)
         self.__current_heating_status = RelayStatus.OFF
+        self.heating_active = HeatingActive.NONE
 

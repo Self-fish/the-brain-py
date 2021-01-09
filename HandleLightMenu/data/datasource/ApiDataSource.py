@@ -11,7 +11,7 @@ API_URI = "http://192.168.0.25:8080/preferences/updateLightPreferences"
 def update_light_preferences(light_mode):
     try:
         serial_number = ReadSerialNumber.get_serial_number()
-        light_range = {"starting": "00:00", "finishing": "00:00"}
+        light_range = {"starting": "15:00", "finishing": "23:00"}
         light_preferences = {"mode": light_mode, "range": light_range}
         body = {"lightsPreferences": light_preferences, "deviceId": "sf-" + serial_number}
         preferences = requests.put(API_URI, json=body)

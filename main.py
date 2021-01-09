@@ -105,7 +105,7 @@ if __name__ == '__main__':
     display_light_menu_use_case = DisplayLightMenuUseCase()
     display_light_menu_use_case.lazy_injection(HandleLightsUseCase())
     display_menu_use_case = DisplayGeneralMenuUseCase()
-    display_menu_use_case.lazy_injection(ShowAlerts(), display_light_menu_use_case())
+    display_menu_use_case.lazy_injection(ShowAlerts(), display_light_menu_use_case)
     display_menu_thread = threading.Thread(target=display_menu, args=(display_menu_use_case,))
     display_menu_thread.start()
 

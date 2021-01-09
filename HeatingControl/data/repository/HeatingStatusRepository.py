@@ -5,7 +5,7 @@ from HeatingControl.domain.model.HeatingActive import HeatingActive
 
 class HeatingStatusRepository:
 
-    max_retries = 1
+    max_retries = 10
 
     def __init__(self, first_heating_controller: RelayController, second_heating_controller: RelayController):
         self.__first_heating_controller = first_heating_controller

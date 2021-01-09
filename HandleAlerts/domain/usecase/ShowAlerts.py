@@ -26,7 +26,7 @@ class ShowAlerts:
             if self.__there_are_still_more_alerts(position):
                 LCDStatus.lcd_next_status = LCDStatus.LCDStatus.SPECIFIC_ALERT
                 self.__print_alert(position)
-                time.sleep(1)
+                time.sleep(0.1)
                 self.__handle_joystick_movements_when_alert_displayed(position)
             else:
                 self.__screen_controller.print_alerts_complete()
@@ -49,7 +49,7 @@ class ShowAlerts:
             elif position != 0 and JoystickController.is_joystick_left():
                 should_wait = False
                 self.display_alerts(position - 1)
-            time.sleep(1)
+            time.sleep(0.1)
 
     def __handle_joystick_movements_when_finish(self, position):
         should_wait = True
@@ -61,4 +61,4 @@ class ShowAlerts:
             elif position != 0 and JoystickController.is_joystick_left():
                 should_wait = False
                 self.display_alerts(position - 1)
-            time.sleep(1)
+            time.sleep(0.1)

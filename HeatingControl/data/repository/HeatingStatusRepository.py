@@ -5,6 +5,8 @@ from HeatingControl.domain.model.HeatingActive import HeatingActive
 
 class HeatingStatusRepository:
 
+    max_retries = 1
+
     def __init__(self, first_heating_controller: RelayController, second_heating_controller: RelayController):
         self.__first_heating_controller = first_heating_controller
         self.__second_heating_controller = second_heating_controller
@@ -24,7 +26,7 @@ class HeatingStatusRepository:
 
             elif self.__previous_temperature == current_temperature:
                 print("Venimos de encendido pero la temperatura es igual")
-                if self.__number_of_tries < 1:
+                if self.__number_of_tries < self.max_retries:
                     print("Probamos otra vez")
                     self.__number_of_tries += 1
                 else:
@@ -44,15 +46,18 @@ class HeatingStatusRepository:
             self.__deactivate_heating()
 
     def __first_heating_on(self):
+        print("Activamos el heating 1")
         self.__first_heating_controller.update_relay_status(RelayStatus.ON)
 
     def __second_heating_on(self):
-        self.__second_heating_controller.update_relay_status(RelayStatus.ON)
-        self.__first_heating_controller.update_relay_status(RelayStatus.OFF)
+        print("Activamos el heating 2")
+        #self.__second_heating_controller.update_relay_status(RelayStatus.ON)
+        #self.__first_heating_controller.update_relay_status(RelayStatus.OFF)
 
     def __both_heating_on(self):
-        self.__second_heating_controller.update_relay_status(RelayStatus.ON)
-        self.__first_heating_controller.update_relay_status(RelayStatus.ON)
+        print("Activamos los dos heatings")
+        #self.__second_heating_controller.update_relay_status(RelayStatus.ON)
+        #self.__first_heating_controller.update_relay_status(RelayStatus.ON)
 
     def __activate_heating(self, current_temperature):
         if self.heating_active == HeatingActive.NONE:

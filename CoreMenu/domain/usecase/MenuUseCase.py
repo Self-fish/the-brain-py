@@ -4,6 +4,7 @@ import abc
 from Core.data.device import LCDStatus
 from Core.data.driver import JoystickController
 from MainScreen.data.controller.LCDController import MainScreenController
+from MainScreen.domain.usecase.UseCase import MainScreenUseCase
 
 
 class MenuUseCase(abc.ABC):
@@ -12,6 +13,7 @@ class MenuUseCase(abc.ABC):
         self.__screen_controller = screen_controller
         self.menu_options = None
         self.selected_option = 0
+        self.main_Screen_use_case: MainScreenUseCase = None
 
     @abc.abstractmethod
     def build_menu_options(self):
@@ -52,6 +54,10 @@ class MenuUseCase(abc.ABC):
 
     def __print_menu(self):
         self.__screen_controller.print_menu(self.menu_options, self.menu_options[self.selected_option])
+
+    def finish_menu(self):
+        LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN
+        self.main_Screen_use_case.show_next_value()
 
 
 

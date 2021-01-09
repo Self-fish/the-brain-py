@@ -193,7 +193,6 @@ class MainScreenController:
                 LCDStatus.lcd_current_status == LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN or \
                 LCDStatus.lcd_next_status == LCDStatus.LCDStatus.MAIN_SCREEN or \
                 LCDStatus.lcd_next_status == LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
-            print("Print: " + str(date))
             self.__lcd.lcd_display_string(date, 1, 1)
 
     def show_temperature(self, temperature, current_step: MainScreenStep):

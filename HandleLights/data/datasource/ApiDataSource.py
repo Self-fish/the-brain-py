@@ -11,6 +11,10 @@ from HandleLights.domain.model.LightMode import LightMode
 API_URI = "http://192.168.0.25:8080/preferences?deviceId=sf-"
 
 
+MANUAL_OFF = "MANUAL_OFF"
+MANUAL_ON = "MANUAL_ON"
+
+
 def get_light_preferences():
     try:
         serial_number = ReadSerialNumber.get_serial_number()
@@ -18,9 +22,9 @@ def get_light_preferences():
         if preferences.status_code != 200:
             raise NoApiPreferenceException
         else:
-            if preferences.json()['lightsPreferences']['mode'] == "MANUAL_OFF":
+            if preferences.json()['lightsPreferences']['mode'] == MANUAL_OFF:
                 light_mode = LightMode.MANUAL_OFF
-            elif preferences.json()['lightsPreferences']['mode'] == "MANUAL_ON":
+            elif preferences.json()['lightsPreferences']['mode'] == MANUAL_ON:
                 light_mode = LightMode.MANUAL_ON
             else:
                 light_mode = LightMode.AUTOMATIC

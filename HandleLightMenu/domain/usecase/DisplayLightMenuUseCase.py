@@ -1,6 +1,5 @@
 from dependency_injector.wiring import Provide, inject
 
-from Core.data.device import LCDStatus
 from Core.data.driver.RelayStatus import RelayStatus
 from CoreMenu.domain.usecase.MenuUseCase import MenuUseCase
 from HandleLightMenu.data.repository import HandleLightMenuRepository

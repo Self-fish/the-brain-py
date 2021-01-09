@@ -35,16 +35,14 @@ class MenuUseCase(abc.ABC):
     def __wait_joystick_interaction(self):
         should_wait = True
         while should_wait:
-            if JoystickController.is_joystick_down():
-                if self.selected_option != len(self.menu_options) - 1:
-                    self.selected_option += 1
-                    self.__print_menu()
-                    time.sleep(1)
-            elif JoystickController.is_joystick_up():
-                if self.selected_option != 0:
-                    self.selected_option -= 1
-                    self.__print_menu()
-                    time.sleep(1)
+            if JoystickController.is_joystick_down() and self.selected_option != len(self.menu_options) - 1:
+                self.selected_option += 1
+                self.__print_menu()
+                time.sleep(1)
+            elif JoystickController.is_joystick_up() and self.selected_option != 0:
+                self.selected_option -= 1
+                self.__print_menu()
+                time.sleep(1)
             elif JoystickController.is_switch_pressed():
                 should_wait = False
                 self.select_option()

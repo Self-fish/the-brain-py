@@ -1,6 +1,8 @@
 import time
 
 from dependency_injector.wiring import Provide, inject
+
+from Core.data.device import LCDStatus
 from WelcomeScreen.WelcomeScreenContainer import WelcomeContainer
 from WelcomeScreen.data.controller.LCDController import WelcomeScreenController
 from WelcomeScreen.data.repository import VersionRepository
@@ -23,3 +25,4 @@ class WelcomeScreenUseCase:
             pass
 
         self.__controller.write_initialising_message()
+        LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN

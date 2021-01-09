@@ -24,6 +24,7 @@ class DisplayLightMenuUseCase(MenuUseCase):
         self.__handle_lights_use_case: HandleLightsUseCase = None
 
     def lazy_injection(self, handle_light_use_case: HandleLightsUseCase):
+        print(handle_light_use_case)
         self.__handle_lights_use_case = handle_light_use_case
 
     def build_menu_options(self):

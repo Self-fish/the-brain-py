@@ -16,8 +16,8 @@ class MainScreenUseCase:
 
     def show_next_value(self):
         water_temperature = LocalDataSource.water_temperature
-        self.__screen_controller.show_date(CurrentTimeController.get_current_hour())
         self.__screen_controller.pain_template()
+        self.__screen_controller.show_date(CurrentTimeController.get_current_hour())
         self.__screen_controller.show_temperature(water_temperature, self.__step)
         self.__step = MainScreenStep.WATER_TEMPERATURE
 

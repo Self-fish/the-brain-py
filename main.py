@@ -7,7 +7,9 @@ from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
 from HandleAlerts.domain.usecase.GetAlertsUseCase import GetAlertsUseCase
 from HandleAlerts.domain.usecase.ShowAlerts import ShowAlerts
 from HandleAlerts.domain.usecase.ShowAlertsAdviseUseCase import ShowAlertsAdviseUseCase
+from HandleLightMenu.domain.usecase.DisplayLightMenuUseCase import DisplayLightMenuUseCase
 from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
+from HandleGeneralMenu.domain.usecase.DisplayGeneralMenuUseCase import DisplayGeneralMenuUseCase
 from HeatingControl.HeatingControlContainer import HeatingControlContainer
 from HeatingControl.domain.usecase.UseCase import HeatingControlUseCase
 from MainScreen.MainScreenContainer import MainScreenContainer
@@ -54,11 +56,11 @@ def show_alert_advice(use_case: ShowAlertsAdviseUseCase):
         time.sleep(60)
 
 
-def display_alerts(use_case: ShowAlerts):
+def display_menu(use_case: DisplayGeneralMenuUseCase):
     while True:
         if JoystickController.is_switch_pressed():
-            use_case.display_alerts(0)
-        time.sleep(1)
+            use_case.display_menu()
+        time.sleep(0.1)
 
 
 if __name__ == '__main__':
@@ -100,9 +102,14 @@ if __name__ == '__main__':
     show_alerts_advice_thread = threading.Thread(target=show_alert_advice, args=(show_alert_advice_use_case,))
     show_alerts_advice_thread.start()
 
-    display_alerts_use_case = ShowAlerts()
-    display_alerts_thread = threading.Thread(target=display_alerts, args=(display_alerts_use_case,))
-    display_alerts_thread.start()
+    display_light_menu_use_case = DisplayLightMenuUseCase()
+    display_light_menu_use_case.lazy_injection(handle_light_use_case, main_screen_use_case)
+    show_alerts_use_case = ShowAlerts()
+    show_alerts_use_case.lazy_injection(main_screen_use_case)
+    display_menu_use_case = DisplayGeneralMenuUseCase()
+    display_menu_use_case.lazy_injection(show_alerts_use_case, display_light_menu_use_case)
+    display_menu_thread = threading.Thread(target=display_menu, args=(display_menu_use_case,))
+    display_menu_thread.start()
 
 
 

@@ -1,3 +1,5 @@
+from enum import Enum
+
 from Core.data.device import LCDStatus
 from MainScreen.domain.model.MainScreenStep import MainScreenStep
 
@@ -188,7 +190,9 @@ class MainScreenController:
 
     def show_date(self, date):
         if LCDStatus.lcd_current_status == LCDStatus.LCDStatus.MAIN_SCREEN or \
-                LCDStatus.lcd_current_status == LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
+                LCDStatus.lcd_current_status == LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN or \
+                LCDStatus.lcd_next_status == LCDStatus.LCDStatus.MAIN_SCREEN or \
+                LCDStatus.lcd_next_status == LCDStatus.LCDStatus.ALERTS_ADVICE_SCREEN:
             self.__lcd.lcd_display_string(date, 1, 1)
 
     def show_temperature(self, temperature, current_step: MainScreenStep):
@@ -238,3 +242,19 @@ class MainScreenController:
     def print_alerts_complete(self):
         self.__lcd.lcd_clear()
         self.__lcd.lcd_display_string("Press button", 3, 4)
+
+    def print_menu(self, options, option_selected: Enum):
+        LCDStatus.lcd_current_status = LCDStatus.LCDStatus.MENU
+        self.__lcd.lcd_clear()
+        first_line = 2
+        for option in options:
+            if option == option_selected:
+                self.__lcd.lcd_display_string("-> " + str(option.value), first_line, 1)
+            else:
+                self.__lcd.lcd_display_string(option.value, first_line, 4)
+            first_line += 1
+
+    def print_error_message(self, error_message):
+        self.__lcd.lcd_clear()
+        self.__lcd.lcd_display_string(error_message, 3, 2)
+

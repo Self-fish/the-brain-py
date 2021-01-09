@@ -3,4 +3,5 @@ from pytz import timezone
 
 
 def get_current_hour():
-    return datetime.now(timezone('Europe/Madrid')).strftime("%H:%M  %d %b %Y")
+    return "Test hour"
+    #return datetime.now(timezone('Europe/Madrid')).strftime("%H:%M  %d %b %Y")

@@ -35,6 +35,10 @@ class HeatingStatusRepository:
                 print("Necesitamos mas potencia")
                 self.__activate_heating(current_temperature)
 
+            elif self.__previous_temperature < current_temperature:
+                print("Vamos mejorando")
+                self.__previous_temperature = current_temperature
+
         else:
             print("Queremos desactivar")
             self.__deactivate_heating()

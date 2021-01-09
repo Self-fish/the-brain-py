@@ -60,7 +60,7 @@ def display_menu(use_case: DisplayGeneralMenuUseCase):
     while True:
         if JoystickController.is_switch_pressed():
             use_case.display_menu()
-        time.sleep(0.5)
+        time.sleep(0.1)
 
 
 if __name__ == '__main__':

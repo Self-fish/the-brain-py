@@ -252,3 +252,7 @@ class MainScreenController:
                 self.__lcd.lcd_display_string(option.value, first_line, 4)
             first_line += 1
 
+    def print_error_message(self, error_message):
+        self.__lcd.lcd_clear()
+        self.__lcd.lcd_display_string(error_message, 3, 2)
+

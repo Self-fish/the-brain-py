@@ -19,12 +19,10 @@ class DisplayLightMenuUseCase(MenuUseCase):
     def __init__(self, screen_controller: MainScreenController = Provide[MainScreenContainer.main_screen_controller],
                  light_repository: LightStatusRepository = Provide[HandleLightsContainer.light_status_repository]):
         super().__init__(screen_controller)
-        self.__screen_repository = screen_controller
         self.__light_repository = light_repository
         self.__handle_lights_use_case: HandleLightsUseCase = None
 
     def lazy_injection(self, handle_light_use_case: HandleLightsUseCase):
-        print(handle_light_use_case)
         self.__handle_lights_use_case = handle_light_use_case
 
     def build_menu_options(self):
@@ -34,9 +32,8 @@ class DisplayLightMenuUseCase(MenuUseCase):
     def select_option(self):
         update_result = HandleLightMenuRepository.update_light_preferences(self.menu_options[self.selected_option])
         if not update_result:
-            print("Error al actualizar")
+            self.display_error_message("Ups, error!")
         else:
-            print("Actualizado")
             self.__handle_lights_use_case.handle_lights()
         LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN
 

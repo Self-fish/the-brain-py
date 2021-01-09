@@ -47,6 +47,11 @@ class MenuUseCase(abc.ABC):
                 should_wait = False
                 self.select_option()
 
+    def display_error_message(self, error_message):
+        self.__screen_controller.print_error_message(error_message)
+
     def __print_menu(self):
         self.__screen_controller.print_menu(self.menu_options, self.menu_options[self.selected_option])
+
+
 

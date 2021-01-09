@@ -9,25 +9,19 @@ API_URI = "http://192.168.0.25:8080/preferences/updateLightPreferences"
 
 
 def update_light_preferences(light_mode):
-    print(light_mode)
     try:
         serial_number = ReadSerialNumber.get_serial_number()
         light_range = {"starting": "00:00", "finishing": "00:00"}
         light_preferences = {"mode": light_mode, "range": light_range}
         body = {"lightsPreferences": light_preferences, "deviceId": "sf-" + serial_number}
-        print(body)
         preferences = requests.put(API_URI, json=body)
         if preferences.status_code != 200:
-            print("No 200: " + str(preferences.status_code))
             raise NoApiPreferenceException
         else:
-            print("200")
             return True
 
     except NoSerialException:
-        print("NoSerialException")
         raise NoSerialException
 
     except (ConnectionError, ConnectTimeout):
-        print("Other Exception")
         raise NoApiPreferenceException

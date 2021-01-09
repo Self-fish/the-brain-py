@@ -3,6 +3,7 @@ import requests
 from requests.exceptions import ConnectionError, ConnectTimeout
 from Core.data.device import ReadSerialNumber
 from Core.data.device.NoSerialException import NoSerialException
+from HandleLights.data.datasource.NoApiPreferencesException import NoApiPreferenceException
 
 API_URI = "http://192.168.0.25:8080/preferences/updateLightPreferences"
 
@@ -16,16 +17,12 @@ def update_light_preferences(light_mode):
         body = {"lightPreferences": light_preferences, "deviceId": "sf-" + serial_number}
         preferences = requests.put(API_URI, json=body)
         if preferences.status_code != 200:
-            print("No 200")
-            return False
+            raise NoApiPreferenceException
         else:
-            print("200")
             return True
 
     except NoSerialException:
-        print("No Serial Exception")
-        return False
+        raise NoSerialException
 
     except (ConnectionError, ConnectTimeout):
-        print("Other Exception")
-        raise False
+        raise NoApiPreferenceException

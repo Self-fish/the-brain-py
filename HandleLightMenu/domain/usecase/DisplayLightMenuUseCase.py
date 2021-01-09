@@ -27,7 +27,7 @@ class DisplayLightMenuUseCase(MenuUseCase):
 
     def select_option(self):
         #LCDStatus.lcd_next_status = LCDStatus.LCDStatus.MAIN_SCREEN
-        ApiDataSource.update_light_preferences(self.menu_options[self.selected_option].value)
+        ApiDataSource.update_light_preferences(self.menu_options[self.selected_option])
 
     def __light_status_to_display(self):
         if self.__light_repository.current_light_status == RelayStatus.ON:

@@ -15,6 +15,8 @@ class HeatingStatusRepository:
 
     def update_heating_status(self, heating_status, current_temperature):
         if heating_status == RelayStatus.ON:
+            print("Previous Temperature: " + str(self.__previous_temperature))
+            print("Current Temperature: " + str(current_temperature))
             print("Queremos activar")
             if self.__current_heating_status == RelayStatus.OFF:
                 print("Venimos de apagado. Encendemos el primer calentador")

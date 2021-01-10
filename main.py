@@ -14,6 +14,7 @@ from HeaterControl.HeaterControlContainer import HeaterControlContainer
 from HeaterControl.domain.usecase.UseCase import HeaterControlUseCase
 from MainScreen.MainScreenContainer import MainScreenContainer
 from MainScreen.domain.usecase.UseCase import MainScreenUseCase
+from MeasureWaterTemp.MeasureWaterTempContainer import MeasureWaterTempContainer
 from MeasureWaterTemp.domain.usecase.UseCase import MeasureWaterTempUseCase
 from WelcomeScreen.WelcomeScreenContainer import WelcomeContainer
 from HandleLights.HandleLightsContainer import HandleLightsContainer
@@ -74,6 +75,8 @@ if __name__ == '__main__':
     heating_control_container.wire(modules=[sys.modules[__name__]])
     handle_alerts_container = HandleAlertsContainer()
     handle_alerts_container.wire(modules=[sys.modules[__name__]])
+    measure_water_container = MeasureWaterTempContainer()
+    measure_water_container.wire(modules=[sys.modules[__name__]])
 
     welcome_screen_use_case = WelcomeScreenUseCase()
     welcome_screen_use_case.show_screen()

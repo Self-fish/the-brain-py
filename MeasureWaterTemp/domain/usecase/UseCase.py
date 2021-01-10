@@ -2,7 +2,8 @@ from dependency_injector.wiring import Provide, inject
 
 from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
 from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
-from MeasureWaterTemp.data.repository import Repository
+from MeasureWaterTemp.MeasureWaterTempContainer import MeasureWaterTempContainer
+from MeasureWaterTemp.data.repository.MeasureWaterRepository import MeasureWaterRepository
 
 
 class MeasureWaterTempUseCase:
@@ -10,12 +11,16 @@ class MeasureWaterTempUseCase:
     max_error = 10
     error_message = "Measure Error"
 
-    def __init__(self, alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
+    @inject
+    def __init__(self, alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository],
+                 measure_water_repository: MeasureWaterRepository =
+                 Provide[MeasureWaterTempContainer.measure_water_repository]):
         self.__alerts_repository = alerts_repository
+        self.__measure_water_repository = measure_water_repository
         self.__api_errors_count = 0
 
     def track_water_temp(self):
-        request_success = Repository.track_water_temp()
+        request_success = self.__measure_water_repository.track_water_temp()
         self.__handle_possible_api_errors(request_success)
 
     def __handle_possible_api_errors(self, request_success: bool):

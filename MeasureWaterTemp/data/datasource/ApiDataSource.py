@@ -9,6 +9,7 @@ API_URI = "http://192.168.0.25:8081/measures/"
 
 
 def send_water_temperature(water_temp):
+    print("Mandamos la temperatura")
     try:
         serial_number = ReadSerialNumber.get_serial_number()
         body = {"type": "WATER_TEMP", "value": water_temp, "deviceId": "sf-" + serial_number}

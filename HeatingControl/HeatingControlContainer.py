@@ -7,7 +7,7 @@ from HeatingControl.data.repository.HeatingStatusRepository import HeatingStatus
 class HeatingControlContainer(containers.DeclarativeContainer):
     config = providers.Configuration()
     first_heating_controller = providers.Factory(RelayController, 2)
-    second_heating_controller = providers.Factory(RelayController, 50)
+    second_heating_controller = providers.Factory(RelayController, 4)
     heating_status_repository = providers.Singleton(HeatingStatusRepository,
                                                     first_heating_controller,
                                                     second_heating_controller)

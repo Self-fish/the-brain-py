@@ -10,7 +10,6 @@ class HeatingStatusRepository:
     def __init__(self, first_heating_controller: RelayController, second_heating_controller: RelayController):
         self.__first_heating_controller = first_heating_controller
         self.__second_heating_controller = second_heating_controller
-        self.__current_heating_status = RelayStatus.OFF
         self.heating_active: HeatingActive = HeatingActive.NONE
         self.__number_of_tries = 0
         self.__previous_temperature = 0
@@ -20,8 +19,8 @@ class HeatingStatusRepository:
             print("Previous Temperature: " + str(self.__previous_temperature))
             print("Current Temperature: " + str(current_temperature))
             print("Queremos activar")
-            if self.__current_heating_status == RelayStatus.OFF:
-                print("Venimos de apagado. Encendemos el primer calentador")
+            if self.heating_active == HeatingActive.NONE:
+                print("Venimos de apagado.")
                 self.__activate_heating(current_temperature)
 
             elif self.__previous_temperature == current_temperature:
@@ -45,46 +44,56 @@ class HeatingStatusRepository:
 
         else:
             print("Queremos desactivar")
+            print("")
             self.__deactivate_heating()
 
-    def __first_heating_on(self):
-        print("Activamos el heating 1")
-        print("")
-        self.__first_heating_controller.update_relay_status(RelayStatus.ON)
+    def __manage_first_heating(self, relay_status):
+        print("Heating 1: " + str(relay_status))
+        self.__first_heating_controller.update_relay_status(relay_status)
 
-    def __second_heating_on(self):
-        print("Activamos el heating 2")
-        print("")
-        self.__second_heating_controller.update_relay_status(RelayStatus.ON)
-        self.__first_heating_controller.update_relay_status(RelayStatus.OFF)
-
-    def __both_heating_on(self):
-        print("Activamos los dos heatings")
-        print("")
-        self.__second_heating_controller.update_relay_status(RelayStatus.ON)
-        self.__first_heating_controller.update_relay_status(RelayStatus.ON)
+    def __manage_second_heating(self, relay_status):
+        print("Heating2: " + str(relay_status))
+        self.__second_heating_controller.update_relay_status(relay_status)
 
     def __activate_heating(self, current_temperature):
         if self.heating_active == HeatingActive.NONE:
-            self.__first_heating_on()
+            print("Activamos el primer heating")
+            self.__manage_first_heating(RelayStatus.ON)
             self.heating_active = HeatingActive.FIRST_HEATING
+            print("")
         elif self.heating_active == HeatingActive.FIRST_HEATING:
-            self.__second_heating_on()
+            print("Activamos el segundo heating")
+            self.__manage_first_heating(RelayStatus.OFF)
+            self.__manage_second_heating(RelayStatus.ON)
             self.heating_active = HeatingActive.SECOND_HEATING
+            print("")
         elif self.heating_active == HeatingActive.SECOND_HEATING:
-            self.__both_heating_on()
+            print("Activamos los dos")
+            self.__manage_first_heating(RelayStatus.ON)
+            self.__manage_second_heating(RelayStatus.ON)
             self.heating_active = HeatingActive.BOTH
-        else:
-            self.__both_heating_on()
-            self.heating_active = HeatingActive.BOTH
+            print("")
         self.__previous_temperature = current_temperature
         self.__number_of_tries = 0
-        self.__current_heating_status = RelayStatus.ON
 
     def __deactivate_heating(self):
-        self.__second_heating_controller.update_relay_status(RelayStatus.OFF)
-        self.__first_heating_controller.update_relay_status(RelayStatus.OFF)
-        self.__current_heating_status = RelayStatus.OFF
-        self.heating_active = HeatingActive.NONE
-        print("")
+        if self.heating_active == HeatingActive.FIRST_HEATING:
+            print("Apagamos todo")
+            self.__manage_first_heating(RelayStatus.OFF)
+            self.__manage_second_heating(RelayStatus.OFF)
+            self.heating_active = HeatingActive.NONE
+            print("")
+        elif self.heating_active == HeatingActive.SECOND_HEATING:
+            print("Dejamos solo el 1")
+            self.__manage_first_heating(RelayStatus.ON)
+            self.__manage_second_heating(RelayStatus.OFF)
+            self.heating_active = HeatingActive.FIRST_HEATING
+            print("")
+        elif self.heating_active == HeatingActive.BOTH:
+            print("Dejamos solo el 2")
+            self.__manage_first_heating(RelayStatus.OFF)
+            self.__manage_second_heating(RelayStatus.ON)
+            self.heating_active = HeatingActive.SECOND_HEATING
+            print("")
+
 

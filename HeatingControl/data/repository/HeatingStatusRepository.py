@@ -100,5 +100,6 @@ class HeatingStatusRepository:
             self.__manage_second_heating(RelayStatus.ON)
             self.heating_active = HeatingActive.SECOND_HEATING
             print("")
+        self.__number_of_tries = 0
 
 

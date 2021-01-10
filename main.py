@@ -10,8 +10,8 @@ from HandleAlerts.domain.usecase.ShowAlertsAdviseUseCase import ShowAlertsAdvise
 from HandleLightMenu.domain.usecase.DisplayLightMenuUseCase import DisplayLightMenuUseCase
 from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
 from HandleGeneralMenu.domain.usecase.DisplayGeneralMenuUseCase import DisplayGeneralMenuUseCase
-from HeatingControl.HeatingControlContainer import HeatingControlContainer
-from HeatingControl.domain.usecase.UseCase import HeatingControlUseCase
+from HeaterControl.HeaterControlContainer import HeaterControlContainer
+from HeaterControl.domain.usecase.UseCase import HeaterControlUseCase
 from MainScreen.MainScreenContainer import MainScreenContainer
 from MainScreen.domain.usecase.UseCase import MainScreenUseCase
 from MeasureWaterTemp.domain.usecase.UseCase import MeasureWaterTempUseCase
@@ -38,7 +38,7 @@ def measure_water_temp(use_case: MeasureWaterTempUseCase):
         time.sleep(5)
 
 
-def control_heating(use_case: HeatingControlUseCase):
+def control_heating(use_case: HeaterControlUseCase):
     while True:
         use_case.control_heating()
         time.sleep(10)
@@ -70,7 +70,7 @@ if __name__ == '__main__':
     handle_lights_container.wire(modules=[sys.modules[__name__]])
     main_screen_container = MainScreenContainer()
     main_screen_container.wire(modules=[sys.modules[__name__]])
-    heating_control_container = HeatingControlContainer()
+    heating_control_container = HeaterControlContainer()
     heating_control_container.wire(modules=[sys.modules[__name__]])
     handle_alerts_container = HandleAlertsContainer()
     handle_alerts_container.wire(modules=[sys.modules[__name__]])
@@ -90,7 +90,7 @@ if __name__ == '__main__':
     handle_main_screen_thread = threading.Thread(target=handle_main_screen, args=(main_screen_use_case,))
     handle_main_screen_thread.start()
 
-    heating_control_use_case = HeatingControlUseCase()
+    heating_control_use_case = HeaterControlUseCase()
     handle_heating_control_thread = threading.Thread(target=control_heating, args=(heating_control_use_case,))
     handle_heating_control_thread.start()
 

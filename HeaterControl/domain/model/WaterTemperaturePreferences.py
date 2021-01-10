@@ -1,4 +1,4 @@
-from HeatingControl.domain.model.WaterTemperaturePreferencesSource import WaterTemperaturePreferencesSource
+from HeaterControl.domain.model.WaterTemperaturePreferencesSource import WaterTemperaturePreferencesSource
 
 
 class WaterTemperaturePreferences:

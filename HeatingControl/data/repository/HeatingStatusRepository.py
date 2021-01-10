@@ -50,6 +50,7 @@ class HeatingStatusRepository:
         else:
             print("Queremos desactivar")
             print("")
+            self.__previous_temperature = current_temperature
             self.__deactivate_heating()
 
     def __manage_first_heating(self, relay_status):

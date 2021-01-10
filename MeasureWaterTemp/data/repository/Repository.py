@@ -7,7 +7,7 @@ from MeasureWaterTemp.data.datasource.NoMeasuresApiException import NoMeasuresAp
 def track_water_temp():
     LocalDataSource.water_temperature = DS18B20Controller.read_temperature()
     try:
-        ApiDataSource.send_water_temperature(LocalDataSource.water_temperature)
+        #ApiDataSource.send_water_temperature(LocalDataSource.water_temperature)
         return True
     except (NoMeasuresApiException, NoSerialException):
         return False

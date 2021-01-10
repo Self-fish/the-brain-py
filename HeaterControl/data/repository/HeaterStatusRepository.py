@@ -10,7 +10,6 @@ class HeaterStatusRepository:
     def __init__(self, first_heater_controller: RelayController, second_heater_controller: RelayController):
         self.__first_heater_controller = first_heater_controller
         self.__second_heater_controller = second_heater_controller
-        self.__heaters = [first_heater_controller, second_heater_controller]
         self.__heater_active: ActiveHeater = ActiveHeater.NONE
         self.__number_of_tries = 0
         self.__previous_temperature = 0

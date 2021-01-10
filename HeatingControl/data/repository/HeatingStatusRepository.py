@@ -51,6 +51,7 @@ class HeatingStatusRepository:
         print("Activamos el heating 1")
         print("")
         self.__first_heating_controller.update_relay_status(RelayStatus.ON)
+        self.__second_heating_controller.update_relay_status(RelayStatus.ON)
 
     def __second_heating_on(self):
         print("Activamos el heating 2")

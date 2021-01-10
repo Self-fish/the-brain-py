@@ -13,6 +13,11 @@ class HeatingStatusRepository:
         self.heating_active: HeatingActive = HeatingActive.NONE
         self.__number_of_tries = 0
         self.__previous_temperature = 0
+        self.__turn_off_heating()
+
+    def __turn_off_heating(self):
+        self.__manage_first_heating(RelayStatus.OFF)
+        self.__manage_second_heating(RelayStatus.OFF)
 
     def update_heating_status(self, heating_status, current_temperature):
         if heating_status == RelayStatus.ON and current_temperature is not 0:

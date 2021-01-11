@@ -36,13 +36,13 @@ def handle_main_screen(use_case: MainScreenUseCase):
 def measure_water_temp(use_case: MeasureWaterTempUseCase):
     while True:
         use_case.track_water_temp()
-        time.sleep(5)
+        time.sleep(60)
 
 
 def control_heating(use_case: HeaterControlUseCase):
     while True:
         use_case.control_heating()
-        time.sleep(10)
+        time.sleep(60)
 
 
 def get_alerts(use_case: GetAlertsUseCase):

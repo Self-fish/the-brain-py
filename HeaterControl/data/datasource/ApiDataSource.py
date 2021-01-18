@@ -5,7 +5,7 @@ from Core.data.device.NoSerialException import NoSerialException
 from HandleLights.data.datasource.NoApiPreferencesException import NoApiPreferenceException
 from requests.exceptions import ConnectionError, ConnectTimeout
 
-API_URI = "http://192.168.0.25:8080/preferences?deviceId=sf-"
+API_URI = "http://192.168.0.25:8083/preferences?deviceId=sf-"
 
 
 def get_water_preferences():

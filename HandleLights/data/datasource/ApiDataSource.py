@@ -8,7 +8,7 @@ from HandleLights.data.datamodel.LightPreferencesDataModel import LightPreferenc
 from HandleLights.data.datasource.NoApiPreferencesException import NoApiPreferenceException
 from HandleLights.domain.model.LightMode import LightMode
 
-API_URI = "http://192.168.0.25:8080/preferences?deviceId=sf-"
+API_URI = "http://192.168.0.25:8083/preferences?deviceId=sf-"
 
 
 MANUAL_OFF = "MANUAL_OFF"

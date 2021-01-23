@@ -29,7 +29,7 @@ class HeatingControlUseCase:
         LogsApiDataSource.log_info("HeatingControl - UseCase: comparing if water temperature fits requirements")
         desired_water_temperature: WaterTemperaturePreferences = HeatingTemperatureRepository.get_heating_temperature()
         LogsApiDataSource.log_info("HeatingControl - UseCase: "
-                                   "the desired temperature is " + str(desired_water_temperature))
+                                   "the desired temperature is " + str(desired_water_temperature.temperature))
         current_water_temperature = LocalDataSource.water_temperature
         LogsApiDataSource.log_info("HeatingControl - UseCase: "
                                    "the current temperature is " + str(current_water_temperature))

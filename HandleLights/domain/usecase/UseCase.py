@@ -60,5 +60,5 @@ class HandleLightsUseCase:
         if self.__api_errors_count == self.max_errors:
             self.__alerts_repository.create_local_alert(self.error_message)
             LogsApiDataSource.log_error("HandleLights - UseCase: api error number: " + str(self.__api_errors_count) +
-                                        "creating local alert")
+                                        ". Creating local alert")
             self.__api_errors_count = 0

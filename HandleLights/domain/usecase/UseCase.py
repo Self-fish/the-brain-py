@@ -25,7 +25,7 @@ def should_turn_on_lights(current_time, light_preferences: LightPreferences):
 
 class HandleLightsUseCase:
 
-    max_errors = 10
+    max_errors = 3
     error_message = "Light Preference Error"
 
     @inject
@@ -49,7 +49,7 @@ class HandleLightsUseCase:
         self.__handle_possible_api_errors(preferences)
 
     def __handle_possible_api_errors(self, preferences: LightPreferences):
-        if preferences.source != LightPreferencesSource.API and self.__api_errors_count < 3:
+        if preferences.source != LightPreferencesSource.API and self.__api_errors_count < self.max_errors:
             self.__api_errors_count += 1
             LogsApiDataSource.log_warning("HandleLights - UseCase: api error number: " + str(self.__api_errors_count))
         else:

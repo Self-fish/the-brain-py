@@ -6,9 +6,11 @@ LOGS_URL = "http://192.168.0.25:8084/logs/"
 
 
 def __post_log(log_level: LogLevel, message):
-    body = {"severity": log_level.name, "message": message}
-    print(body)
-    requests.post(LOGS_URL, json=body)
+    try:
+        body = {"severity": log_level.name, "message": message}
+        requests.post(LOGS_URL, json=body)
+    except Exception:
+        pass
 
 
 def log_info(message):

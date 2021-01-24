@@ -5,7 +5,7 @@ from Core.data.device import ReadSerialNumber
 from Core.data.device.NoSerialException import NoSerialException
 from MeasureWaterTemp.data.datasource.NoMeasuresApiException import NoMeasuresApiException
 
-API_URI = "http://192.168.0.25:8081/measures/"
+API_URI = "http://192.168.0.15:8081/measures/"
 
 
 def send_water_temperature(water_temp):

@@ -6,7 +6,7 @@ from HandleAlerts.data.datasource.NoApiAlertsException import NoApiAlertsExcepti
 from HandleAlerts.domain.model.Alert import Alert
 from HandleAlerts.domain.model.StartingTime import StartingTime
 
-ALERTS_BASE_URL = "http://192.168.0.25:8082/alerts/"
+ALERTS_BASE_URL = "http://192.168.0.15:8082/alerts/"
 NEXT_ALERT_PATH = "next"
 EXECUTE_ALERT_PATH = "/execute"
 

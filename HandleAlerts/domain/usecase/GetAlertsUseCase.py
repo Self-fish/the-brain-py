@@ -6,7 +6,7 @@ from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
 
 class GetAlertsUseCase:
 
-    max_errors = 10
+    max_errors = 3
     error_message = "Remote Alerts Error"
 
     @inject
@@ -24,7 +24,7 @@ class GetAlertsUseCase:
             self.__handle_possible_api_errors(False)
 
     def __handle_possible_api_errors(self, request_success: bool):
-        if not request_success and self.__api_errors_count < 3:
+        if not request_success and self.__api_errors_count < self.max_errors:
             self.__api_errors_count += 1
         else:
             if self.__api_errors_count > 0:

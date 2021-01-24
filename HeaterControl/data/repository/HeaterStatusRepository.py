@@ -1,5 +1,6 @@
 from Core.data.driver.RelayController import RelayController
 from Core.data.driver.RelayStatus import RelayStatus
+from Core.data.logs import LogsApiDataSource
 from HeaterControl.domain.model.ActiveHeater import ActiveHeater
 
 
@@ -49,14 +50,26 @@ class HeaterStatusRepository:
         if self.__heater_active == ActiveHeater.NONE:
             self.__manage_first_heater(RelayStatus.ON)
             self.__heater_active = ActiveHeater.FIRST_HEATER
+            LogsApiDataSource.log_info("HeaterControl - HeaterStatusRepository: "
+                                       "Heater 1 set to ON")
+            LogsApiDataSource.log_info("HeaterControl - HeaterStatusRepository: "
+                                       "Heater 2 set to OFF")
         elif self.__heater_active == ActiveHeater.FIRST_HEATER:
             self.__manage_first_heater(RelayStatus.OFF)
             self.__manage_second_heater(RelayStatus.ON)
             self.__heater_active = ActiveHeater.SECOND_HEATER
+            LogsApiDataSource.log_info("HeaterControl - HeaterStatusRepository: "
+                                       "Heater 1 set to OFF")
+            LogsApiDataSource.log_info("HeaterControl - HeaterStatusRepository: "
+                                       "Heater 2 set to ON")
         elif self.__heater_active == ActiveHeater.SECOND_HEATER:
             self.__manage_first_heater(RelayStatus.ON)
             self.__manage_second_heater(RelayStatus.ON)
             self.__heater_active = ActiveHeater.BOTH
+            LogsApiDataSource.log_info("HeaterControl - HeaterStatusRepository: "
+                                       "Heater 1 set to ON")
+            LogsApiDataSource.log_info("HeaterControl - HeaterStatusRepository: "
+                                       "Heater 2 set to ON")
         self.__previous_temperature = current_temperature
         self.__number_of_tries = 0
 
@@ -65,14 +78,26 @@ class HeaterStatusRepository:
             self.__manage_first_heater(RelayStatus.OFF)
             self.__manage_second_heater(RelayStatus.OFF)
             self.__heater_active = ActiveHeater.NONE
+            LogsApiDataSource.log_info("HeaterControl - HeaterStatusRepository: "
+                                       "Heater 1 set to OFF")
+            LogsApiDataSource.log_info("HeaterControl - HeaterStatusRepository: "
+                                       "Heater 2 set to OFF")
         elif self.__heater_active == ActiveHeater.SECOND_HEATER:
             self.__manage_first_heater(RelayStatus.ON)
             self.__manage_second_heater(RelayStatus.OFF)
             self.__heater_active = ActiveHeater.FIRST_HEATER
+            LogsApiDataSource.log_info("HeaterControl - HeaterStatusRepository: "
+                                       "Heater 1 set to ON")
+            LogsApiDataSource.log_info("HeaterControl - HeaterStatusRepository: "
+                                       "Heater 2 set to OFF")
         elif self.__heater_active == ActiveHeater.BOTH:
             self.__manage_first_heater(RelayStatus.OFF)
             self.__manage_second_heater(RelayStatus.ON)
             self.__heater_active = ActiveHeater.SECOND_HEATER
+            LogsApiDataSource.log_info("HeaterControl - HeaterStatusRepository: "
+                                       "Heater 1 set to OFF")
+            LogsApiDataSource.log_info("HeaterControl - HeaterStatusRepository: "
+                                       "Heater 2 set to ON")
         self.__number_of_tries = 0
 
 

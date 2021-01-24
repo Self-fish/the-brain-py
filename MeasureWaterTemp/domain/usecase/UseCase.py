@@ -8,7 +8,7 @@ from MeasureWaterTemp.data.repository.MeasureWaterRepository import MeasureWater
 
 class MeasureWaterTempUseCase:
 
-    max_error = 10
+    max_error = 3
     error_message = "Measure Error"
 
     @inject
@@ -24,7 +24,7 @@ class MeasureWaterTempUseCase:
         self.__handle_possible_api_errors(request_success)
 
     def __handle_possible_api_errors(self, request_success: bool):
-        if not request_success and self.__api_errors_count < 3:
+        if not request_success and self.__api_errors_count < self.max_error:
             self.__api_errors_count += 1
         else:
             if self.__api_errors_count > 0:

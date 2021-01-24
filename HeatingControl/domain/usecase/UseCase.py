@@ -14,7 +14,7 @@ from MeasureWaterTemp.data.datasource import LocalDataSource
 
 class HeatingControlUseCase:
 
-    max_errors = 10
+    max_errors = 3
     error_message = "Temp Preference Error"
 
     @inject

@@ -110,38 +110,38 @@ class lcd:
     def __init__(self):
         self.lcd_device = i2c_device(ADDRESS)
 
-        self.lcd_write(0x03)
-        self.lcd_write(0x03)
-        self.lcd_write(0x03)
-        self.lcd_write(0x02)
+        self.__lcd_write(0x03)
+        self.__lcd_write(0x03)
+        self.__lcd_write(0x03)
+        self.__lcd_write(0x02)
 
-        self.lcd_write(LCD_FUNCTIONSET | LCD_2LINE | LCD_5x8DOTS | LCD_4BITMODE)
-        self.lcd_write(LCD_DISPLAYCONTROL | LCD_DISPLAYON)
-        self.lcd_write(LCD_CLEARDISPLAY)
-        self.lcd_write(LCD_ENTRYMODESET | LCD_ENTRYLEFT)
+        self.__lcd_write(LCD_FUNCTIONSET | LCD_2LINE | LCD_5x8DOTS | LCD_4BITMODE)
+        self.__lcd_write(LCD_DISPLAYCONTROL | LCD_DISPLAYON)
+        self.__lcd_write(LCD_CLEARDISPLAY)
+        self.__lcd_write(LCD_ENTRYMODESET | LCD_ENTRYLEFT)
         sleep(0.2)
 
     # clocks EN to latch command
-    def lcd_strobe(self, data):
+    def __lcd_strobe(self, data):
         self.lcd_device.write_cmd(data | En | LCD_BACKLIGHT)
         sleep(.0005)
         self.lcd_device.write_cmd(((data & ~En) | LCD_BACKLIGHT))
         sleep(.0001)
 
-    def lcd_write_four_bits(self, data):
+    def __lcd_write_four_bits(self, data):
         self.lcd_device.write_cmd(data | LCD_BACKLIGHT)
-        self.lcd_strobe(data)
+        self.__lcd_strobe(data)
 
     # write a command to lcd
-    def lcd_write(self, cmd, mode=0):
-        self.lcd_write_four_bits(mode | (cmd & 0xF0))
-        self.lcd_write_four_bits(mode | ((cmd << 4) & 0xF0))
+    def __lcd_write(self, cmd, mode=0):
+        self.__lcd_write_four_bits(mode | (cmd & 0xF0))
+        self.__lcd_write_four_bits(mode | ((cmd << 4) & 0xF0))
 
     # write a character to lcd (or character rom) 0x09: backlight | RS=DR<
     # works!
-    def lcd_write_char(self, charvalue, mode=1):
-        self.lcd_write_four_bits(mode | (charvalue & 0xF0))
-        self.lcd_write_four_bits(mode | ((charvalue << 4) & 0xF0))
+    def __lcd_write_char(self, charvalue, mode=1):
+        self.__lcd_write_four_bits(mode | (charvalue & 0xF0))
+        self.__lcd_write_four_bits(mode | ((charvalue << 4) & 0xF0))
 
     def lcd_write_char_with_position(self, charvalue, line, column):
         switcher = {
@@ -151,29 +151,32 @@ class lcd:
             4: 0x54
         }
         position = 0x80 + switcher.get(line) + column
-        self.lcd_write(position)
-        self.lcd_write_char(charvalue)
+        self.__lcd_write(position)
+        self.__lcd_write_char(charvalue)
 
     # put string function with optional char positioning
     def lcd_display_string(self, string, line=1, pos=0):
-        if line == 1:
-            pos_new = pos
-        elif line == 2:
-            pos_new = 0x40 + pos
-        elif line == 3:
-            pos_new = 0x14 + pos
-        elif line == 4:
-            pos_new = 0x54 + pos
+        try:
+            if line == 1:
+                pos_new = pos
+            elif line == 2:
+                pos_new = 0x40 + pos
+            elif line == 3:
+                pos_new = 0x14 + pos
+            elif line == 4:
+                pos_new = 0x54 + pos
 
-        self.lcd_write(0x80 + pos_new)
+            self.__lcd_write(0x80 + pos_new)
 
-        for char in string:
-            self.lcd_write(ord(char), Rs)
+            for char in string:
+                self.__lcd_write(ord(char), Rs)
+        except Exception:
+            pass
 
     # clear lcd and set to home
     def lcd_clear(self):
-        self.lcd_write(LCD_CLEARDISPLAY)
-        self.lcd_write(LCD_RETURNHOME)
+        self.__lcd_write(LCD_CLEARDISPLAY)
+        self.__lcd_write(LCD_RETURNHOME)
 
     # define backlight on/off (lcd.backlight(1); off= lcd.backlight(0)
     def backlight(self, state):  # for state, 1 = on, 0 = off
@@ -184,7 +187,7 @@ class lcd:
 
     # add custom characters (0 - 7)
     def lcd_load_custom_chars(self, fontdata):
-        self.lcd_write(0x40)
+        self.__lcd_write(0x40)
         for char in fontdata:
             for line in char:
-                self.lcd_write_char(line)
+                self.__lcd_write_char(line)

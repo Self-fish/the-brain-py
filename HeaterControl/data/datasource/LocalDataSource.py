@@ -1,3 +1,3 @@
 
 
-local_heater_temperature = 26
+local_heater_temperature = 24

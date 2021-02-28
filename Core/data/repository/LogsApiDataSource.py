@@ -1,6 +1,6 @@
 import requests
 
-from Core.data.logs.LogLevel import LogLevel
+from Core.data.repository.LogLevel import LogLevel
 
 LOGS_URL = "http://192.168.0.15:8084/logs/"
 

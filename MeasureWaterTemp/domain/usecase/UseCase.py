@@ -1,5 +1,6 @@
 from dependency_injector.wiring import Provide, inject
 
+from Core.data.repository import NotificationsApiDataSource
 from MeasureWaterTemp.MeasureWaterTempContainer import MeasureWaterTempContainer
 from MeasureWaterTemp.data.repository.MeasureWaterRepository import MeasureWaterRepository
 
@@ -27,5 +28,6 @@ class MeasureWaterTempUseCase:
                 self.__api_errors_count -= 1
 
         if self.__api_errors_count == self.max_error:
-            # TODO: Create Remote notification
+            NotificationsApiDataSource.create_notification("Something seems to be wrong while sending the current "
+                                                           "water temperature.")
             self.__api_errors_count = 0

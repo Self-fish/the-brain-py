@@ -1,7 +1,7 @@
 from dependency_injector.wiring import inject, Provide
 
 from Core.data.driver.RelayStatus import RelayStatus
-from Core.data.logs import LogsApiDataSource
+from Core.data.repository import LogsApiDataSource, NotificationsApiDataSource
 from HeaterControl.HeaterControlContainer import HeaterControlContainer
 from HeaterControl.data.repository import WaterTemperatureRepository
 from HeaterControl.data.repository.HeaterStatusRepository import HeaterStatusRepository
@@ -47,6 +47,7 @@ class HeaterControlUseCase:
 
         if self.__api_errors_count == self.max_errors:
             LogsApiDataSource.log_error("HeaterControl - UseCase: api error number: " + str(self.__api_errors_count) +
-                                        ". Creating local alert")
-            # TODO: Create remote notification
+                                        ". Creating remote notification")
+            NotificationsApiDataSource.create_notification("Something seems to be wrong with the remote preferences."
+                                                           "Impossible to get the desired water temperature")
             self.__api_errors_count = 0

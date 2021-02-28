@@ -2,7 +2,7 @@ import sys
 import threading
 import time
 
-from Core.data.repository import Notifications
+from Core.data.repository import NotificationsApiDataSource
 from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
 from HeaterControl.HeaterControlContainer import HeaterControlContainer
 from HeaterControl.domain.usecase.UseCase import HeaterControlUseCase

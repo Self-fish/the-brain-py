@@ -1,6 +1,6 @@
 from Core.data.driver.RelayController import RelayController
 from Core.data.driver.RelayStatus import RelayStatus
-from Core.data.logs import LogsApiDataSource
+from Core.data.repository import LogsApiDataSource
 from HeaterControl.domain.model.ActiveHeater import ActiveHeater
 
 

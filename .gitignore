@@ -6,6 +6,8 @@
 # virtualenv
 .venv
 venv/
+.venv_3.9
+venv_3.9/
 ENV/
 
 # Installer logs

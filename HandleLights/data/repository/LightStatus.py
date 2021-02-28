@@ -1,5 +1,5 @@
 from Core.data.driver.RelayController import RelayController
-from Core.data.logs import LogsApiDataSource
+from Core.data.repository import LogsApiDataSource
 
 
 class LightStatusRepository:

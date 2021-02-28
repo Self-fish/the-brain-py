@@ -1,5 +1,5 @@
 from Core.data.device.NoSerialException import NoSerialException
-from Core.data.logs import LogsApiDataSource
+from Core.data.repository import LogsApiDataSource
 from HandleLights.data.datasource import LocalDataSource, ApiDataSource
 from HandleLights.data.datasource.NoApiPreferencesException import NoApiPreferenceException
 from HandleLights.domain.model.LightPreferences import LightPreferences

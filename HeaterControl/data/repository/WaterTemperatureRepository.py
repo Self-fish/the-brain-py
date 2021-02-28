@@ -1,5 +1,5 @@
 from Core.data.device.NoSerialException import NoSerialException
-from Core.data.logs import LogsApiDataSource
+from Core.data.repository import LogsApiDataSource
 from HandleLights.data.datasource.NoApiPreferencesException import NoApiPreferenceException
 from HeaterControl.data.datasource import LocalDataSource, ApiDataSource
 from HeaterControl.domain.model.WaterTemperaturePreferences import WaterTemperaturePreferences

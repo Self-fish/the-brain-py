@@ -1,8 +1,6 @@
 from dependency_injector.wiring import inject, Provide
 
-from Core.data.logs import LogsApiDataSource
-from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
-from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
+from Core.data.repository import NotificationsApiDataSource, LogsApiDataSource
 from HandleLights.HandleLightsContainer import HandleLightsContainer
 from HandleLights.data.repository import Preferences
 from HandleLights.data.repository.LightStatus import LightStatusRepository
@@ -30,10 +28,8 @@ class HandleLightsUseCase:
 
     @inject
     def __init__(self,
-                 light_repository: LightStatusRepository = Provide[HandleLightsContainer.light_status_repository],
-                 alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
+                 light_repository: LightStatusRepository = Provide[HandleLightsContainer.light_status_repository]):
         self.__light_repository = light_repository
-        self.__alerts_repository = alerts_repository
         self.__api_errors_count = 0
 
     def handle_lights(self):
@@ -58,7 +54,8 @@ class HandleLightsUseCase:
                 LogsApiDataSource.log_info("HandleLights - UseCase: api error number: " + str(self.__api_errors_count))
 
         if self.__api_errors_count == self.max_errors:
-            self.__alerts_repository.create_local_alert(self.error_message)
+            NotificationsApiDataSource.create_notification("Something seems to be wrong with the remote preferences."
+                                                           "Impossible to get the lights range of hours")
             LogsApiDataSource.log_error("HandleLights - UseCase: api error number: " + str(self.__api_errors_count) +
-                                        ". Creating local alert")
+                                        ". Creating remote notification")
             self.__api_errors_count = 0

@@ -70,7 +70,6 @@ if __name__ == '__main__':
     handle_heating_control_thread = threading.Thread(target=control_heating, args=(heating_control_use_case,))
     handle_heating_control_thread.start()
 
-    Notifications.create_notification("this is a test notification")
 
 
 

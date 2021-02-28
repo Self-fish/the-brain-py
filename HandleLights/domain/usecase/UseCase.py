@@ -1,6 +1,7 @@
 from dependency_injector.wiring import inject, Provide
 
 from Core.data.logs import LogsApiDataSource
+from Core.data.repository import Notifications
 from HandleLights.HandleLightsContainer import HandleLightsContainer
 from HandleLights.data.repository import Preferences
 from HandleLights.data.repository.LightStatus import LightStatusRepository
@@ -33,6 +34,7 @@ class HandleLightsUseCase:
         self.__api_errors_count = 0
 
     def handle_lights(self):
+        Notifications.create_notification("this is a test notification")
         current_time = datetime.now(timezone('Europe/Madrid')).strftime("%H:%M")
         LogsApiDataSource.log_info("HandleLights - UseCase checking if lights should be on/off at " + current_time)
         preferences = Preferences.get_light_preferences()

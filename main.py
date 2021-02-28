@@ -2,6 +2,7 @@ import sys
 import threading
 import time
 
+from Core.data.repository import Notifications
 from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
 from HeaterControl.HeaterControlContainer import HeaterControlContainer
 from HeaterControl.domain.usecase.UseCase import HeaterControlUseCase
@@ -68,6 +69,8 @@ if __name__ == '__main__':
     heating_control_use_case = HeaterControlUseCase()
     handle_heating_control_thread = threading.Thread(target=control_heating, args=(heating_control_use_case,))
     handle_heating_control_thread.start()
+
+    Notifications.create_notification("this is a test notification")
 
 
 

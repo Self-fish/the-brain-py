@@ -2,9 +2,6 @@ import sys
 import threading
 import time
 
-from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
-from HandleAlerts.domain.usecase.GetAlertsUseCase import GetAlertsUseCase
-from HandleAlerts.domain.usecase.ShowAlertsAdviseUseCase import ShowAlertsAdviseUseCase
 from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
 from HeaterControl.HeaterControlContainer import HeaterControlContainer
 from HeaterControl.domain.usecase.UseCase import HeaterControlUseCase
@@ -41,18 +38,6 @@ def control_heating(use_case: HeaterControlUseCase):
         time.sleep(60)
 
 
-def get_alerts(use_case: GetAlertsUseCase):
-    while True:
-        use_case.get_alerts()
-        time.sleep(60)
-
-
-def show_alert_advice(use_case: ShowAlertsAdviseUseCase):
-    while True:
-        use_case.show_alert_advice()
-        time.sleep(60)
-
-
 if __name__ == '__main__':
     welcome_container = WelcomeContainer()
     welcome_container.wire(modules=[sys.modules[__name__]])
@@ -62,8 +47,6 @@ if __name__ == '__main__':
     main_screen_container.wire(modules=[sys.modules[__name__]])
     heating_control_container = HeaterControlContainer()
     heating_control_container.wire(modules=[sys.modules[__name__]])
-    handle_alerts_container = HandleAlertsContainer()
-    handle_alerts_container.wire(modules=[sys.modules[__name__]])
     measure_water_container = MeasureWaterTempContainer()
     measure_water_container.wire(modules=[sys.modules[__name__]])
 
@@ -85,14 +68,6 @@ if __name__ == '__main__':
     heating_control_use_case = HeaterControlUseCase()
     handle_heating_control_thread = threading.Thread(target=control_heating, args=(heating_control_use_case,))
     handle_heating_control_thread.start()
-
-    get_alerts_use_case = GetAlertsUseCase()
-    get_alerts_thread = threading.Thread(target=get_alerts, args=(get_alerts_use_case,))
-    get_alerts_thread.start()
-
-    show_alert_advice_use_case = ShowAlertsAdviseUseCase()
-    show_alerts_advice_thread = threading.Thread(target=show_alert_advice, args=(show_alert_advice_use_case,))
-    show_alerts_advice_thread.start()
 
 
 

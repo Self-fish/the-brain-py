@@ -1,4 +1,0 @@
-
-
-class NoApiAlertsException(Exception):
-    pass

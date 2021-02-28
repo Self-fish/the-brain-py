@@ -2,8 +2,6 @@ from dependency_injector.wiring import inject, Provide
 
 from Core.data.driver.RelayStatus import RelayStatus
 from Core.data.logs import LogsApiDataSource
-from HandleAlerts.HandleAlertsContainer import HandleAlertsContainer
-from HandleAlerts.data.repository.AlertsRepository import AlertsRepository
 from HeaterControl.HeaterControlContainer import HeaterControlContainer
 from HeaterControl.data.repository import WaterTemperatureRepository
 from HeaterControl.data.repository.HeaterStatusRepository import HeaterStatusRepository
@@ -19,10 +17,8 @@ class HeaterControlUseCase:
 
     @inject
     def __init__(self, heater_status_repository:
-                 HeaterStatusRepository = Provide[HeaterControlContainer.heater_status_repository],
-                 alerts_repository: AlertsRepository = Provide[HandleAlertsContainer.alerts_repository]):
+                 HeaterStatusRepository = Provide[HeaterControlContainer.heater_status_repository]):
         self.__heater_status_repository = heater_status_repository
-        self.__alerts_repository = alerts_repository
         self.__api_errors_count = 0
 
     def control_heating(self):
@@ -52,5 +48,5 @@ class HeaterControlUseCase:
         if self.__api_errors_count == self.max_errors:
             LogsApiDataSource.log_error("HeaterControl - UseCase: api error number: " + str(self.__api_errors_count) +
                                         ". Creating local alert")
-            self.__alerts_repository.create_local_alert(self.error_message)
+            # TODO: Create remote notification
             self.__api_errors_count = 0

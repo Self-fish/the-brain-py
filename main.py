@@ -2,6 +2,7 @@ import sys
 import threading
 import time
 
+from HandleActions.domain.usecase.HandleActionsUseCase import HandleActionsUseCase
 from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
 from HeaterControl.HeaterControlContainer import HeaterControlContainer
 from HeaterControl.domain.usecase.UseCase import HeaterControlUseCase
@@ -38,6 +39,10 @@ def control_heating(use_case: HeaterControlUseCase):
         time.sleep(60)
 
 
+def read_actions(use_case: HandleActionsUseCase):
+    use_case.read_messages()
+
+
 if __name__ == '__main__':
     welcome_container = WelcomeContainer()
     welcome_container.wire(modules=[sys.modules[__name__]])
@@ -68,6 +73,10 @@ if __name__ == '__main__':
     heating_control_use_case = HeaterControlUseCase()
     handle_heating_control_thread = threading.Thread(target=control_heating, args=(heating_control_use_case,))
     handle_heating_control_thread.start()
+
+    handle_actions_use_case = HandleActionsUseCase()
+    handle_actions_thread = threading.Thread(target=read_actions, args=(handle_actions_use_case,))
+    handle_actions_thread.start()
 
 
 

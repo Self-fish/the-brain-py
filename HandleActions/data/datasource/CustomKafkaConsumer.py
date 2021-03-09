@@ -13,7 +13,7 @@ class CustomKafkaConsumer:
         self.__on_message_receive.append(listener)
 
     def read(self):
-        consumer = KafkaConsumer(self.__topic_name, auto_offset_reset='earliest',
+        consumer = KafkaConsumer(self.__topic_name, auto_offset_reset='none',
                                  bootstrap_servers=self.__bootstrap_servers, api_version=(0, 10))
         for msg in consumer:
             self.__fire_event(msg.value)

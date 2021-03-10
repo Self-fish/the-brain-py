@@ -33,6 +33,6 @@ def calculate_distance():
     finally:
         GPIO.cleanup()
 
-    final_distance = distance_aux / NUMBER_OF_MEASUREMENTS
+    final_distance = float("{:.2f}".format(distance_aux / NUMBER_OF_MEASUREMENTS))
     return final_distance
 

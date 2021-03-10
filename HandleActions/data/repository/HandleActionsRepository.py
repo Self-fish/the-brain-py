@@ -12,7 +12,7 @@ class HandleActionsRepository:
 
     def __process_action(self, message):
         action_json = json.loads(message.decode("utf-8"))
-        action = Action(action_json.json()['action'], message.decode("utf-8").json()['step'])
+        action = Action(action_json['action'], message.decode("utf-8").json()['step'])
         self.__fire_event(action)
 
     def add_listener(self, listener):

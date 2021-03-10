@@ -27,9 +27,12 @@ def calculate_distance():
             distance_aux = distance_aux + distance
             i = i + 1
             time.sleep(0.2)
-            final_distance = distance_aux / NUMBER_OF_MEASUREMENTS
-            return final_distance
+
+
 
     finally:
         GPIO.cleanup()
+
+    final_distance = distance_aux / NUMBER_OF_MEASUREMENTS
+    return final_distance
 

@@ -29,7 +29,3 @@ def calculate_distance():
 
     final_distance = float("{:.2f}".format(distance_aux / NUMBER_OF_MEASUREMENTS))
     return final_distance
-
-
-def cleanup_gpio():
-    GPIO.cleanup()

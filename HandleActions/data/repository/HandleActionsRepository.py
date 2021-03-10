@@ -12,8 +12,9 @@ class HandleActionsRepository:
 
     def __process_action(self, message):
         string_message = message.decode("utf-8")
-        #action_json = json.load(message.decode("utf-8"))
+        action_json = json.load(message)
         print(string_message)
+        print(action_json)
         #action = Action(action_json.json()['action'], message.decode("utf-8").json()['step'])
         #self.__fire_event(action)
 

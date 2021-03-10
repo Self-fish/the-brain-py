@@ -11,8 +11,9 @@ class HandleActionsRepository:
         self.__listeners = []
 
     def __process_action(self, message):
-        action_json = json.load(message.decode("utf-8"))
-        print(action_json)
+        string_message = json.load(message.decode("utf-8"))
+        #action_json = json.load(message.decode("utf-8"))
+        print(string_message)
         #action = Action(action_json.json()['action'], message.decode("utf-8").json()['step'])
         #self.__fire_event(action)
 

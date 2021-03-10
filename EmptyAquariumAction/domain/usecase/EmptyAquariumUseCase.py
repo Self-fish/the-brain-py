@@ -1,8 +1,10 @@
 from Core.domain.usecases.CoreActionUseCase import CoreActionUseCase
-from HandleActions.domain.model.Action import Action
+from EmptyAquariumAction.data.controller import MCP3008Controller
 
 
 class EmptyAquariumUseCase(CoreActionUseCase):
 
     def execute_action(self):
-        print("Vaciamos el aquario!")
+        while True:
+            distance = MCP3008Controller.calculate_distance()
+            print(distance)

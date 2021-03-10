@@ -2,6 +2,7 @@ import sys
 import threading
 import time
 
+from HandleActions.HandleActionsContainer import HandleActionsContainer
 from HandleActions.domain.usecase.HandleActionsUseCase import HandleActionsUseCase
 from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
 from HeaterControl.HeaterControlContainer import HeaterControlContainer
@@ -54,6 +55,8 @@ if __name__ == '__main__':
     heating_control_container.wire(modules=[sys.modules[__name__]])
     measure_water_container = MeasureWaterTempContainer()
     measure_water_container.wire(modules=[sys.modules[__name__]])
+    handle_actions_container = HandleActionsContainer()
+    handle_actions_container.wire(modules=[sys.modules[__name__]])
 
     welcome_screen_use_case = WelcomeScreenUseCase()
     welcome_screen_use_case.show_screen()

@@ -19,5 +19,5 @@ class HandleActionsUseCase:
 
     def __process_action(self, action):
         self.__use_case = ActionsUseCaseFactory.build_use_case(action)
-        self.__use_case.execute_action(action)
+        self.__use_case.execute_action()
 

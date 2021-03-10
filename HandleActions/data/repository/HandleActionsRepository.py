@@ -1,5 +1,6 @@
 from HandleActions.data.datasource.CustomKafkaConsumer import CustomKafkaConsumer
 from HandleActions.domain.model.Action import Action
+import json
 
 
 class HandleActionsRepository:
@@ -10,7 +11,8 @@ class HandleActionsRepository:
         self.__listeners = []
 
     def __process_action(self, message):
-        action = Action(message.decode("utf-8").json()['action'], message.decode("utf-8").json()['step'])
+        action_json = json.load(message.decode("utf-8"))
+        action = Action(action_json.json()['action'], message.decode("utf-8").json()['step'])
         self.__fire_event(action)
 
     def add_listener(self, listener):

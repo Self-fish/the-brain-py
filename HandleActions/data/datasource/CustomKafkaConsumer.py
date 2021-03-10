@@ -1,10 +1,12 @@
 from kafka import KafkaConsumer
 
+from Core.data.device import ReadSerialNumber
+
 
 class CustomKafkaConsumer:
 
     __bootstrap_servers = ['192.168.0.15:9092']
-    __topic_name = 'aquarium_actions'
+    __topic_name = 'aquarium_actions_' + ReadSerialNumber.get_serial_number()
 
     def __init__(self):
         self.__on_message_receive = []

@@ -19,7 +19,7 @@ class EmptyAquariumUseCase(CoreActionUseCase):
         # 3. Empezar a vaciar hasta el valor que toque
         # 4. Parar el calentador del cubo de llenado
 
-        self.__filter_repository.change_status(RelayStatus.OFF)
+        self.__filter_repository.switch_filter_off()
 
 
 

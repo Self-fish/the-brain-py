@@ -5,7 +5,7 @@ import time
 def __read_device_temperature(device):
     temperature = 0
     base_dir = '/sys/bus/w1/devices/'
-    devices_folder = glob.glob(base_dir + '28*')
+    devices_folder = glob.glob(base_dir + '28-00000b10eb34')
     f = open(devices_folder[device] + '/w1_slave', 'r')
     lines = f.readlines()
     f.close()
@@ -20,5 +20,5 @@ def __read_device_temperature(device):
 
 
 def read_temperature():
-    return round((__read_device_temperature(0) + __read_device_temperature(1)) / 2, 1)
+    return round(__read_device_temperature(0) / 2, 1)
 

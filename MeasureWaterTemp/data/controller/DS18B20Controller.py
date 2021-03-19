@@ -20,5 +20,5 @@ def __read_device_temperature(device):
 
 
 def read_temperature():
-    return round(__read_device_temperature(0) / 2, 1)
+    return round(__read_device_temperature(0), 1)
 

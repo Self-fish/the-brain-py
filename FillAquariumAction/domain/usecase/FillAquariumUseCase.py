@@ -45,6 +45,6 @@ class FillAquariumUseCase(CoreActionUseCase):
         water_temperature = 0
         while water_temperature < 25:
             water_temperature = self.__water_temperature_controller.read_device_temperature()
-            print("Water temperature: " + water_temperature)
+            print("Water temperature: " + str(water_temperature))
             time.sleep(10)
         self.__fill_water_heater_repository.switch_heater_off()

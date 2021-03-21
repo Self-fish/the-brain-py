@@ -30,7 +30,7 @@ class EmptyAquariumUseCase(CoreActionUseCase):
         self.__fill_water_heater_repository.switch_heater_on()
         self.__filter_repository.switch_filter_off()
         original_distance = MCP3008Controller.calculate_distance()
-        print("Original distance: " + original_distance)
+        print("Original distance: " + str(original_distance))
         distance = 99
         self.__empty_pump_repository.switch_pump_on()
 

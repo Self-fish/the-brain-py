@@ -29,7 +29,7 @@ class FillAquariumUseCase(CoreActionUseCase):
 
     def execute_action(self):
         self.__fill_pump_repository.switch_pump_off()
-        self.__heat_water()
+        #self.__heat_water()
         original_distance = MCP3008Controller.calculate_distance()
         print("Original didtance: " + str(original_distance))
         distance = 99

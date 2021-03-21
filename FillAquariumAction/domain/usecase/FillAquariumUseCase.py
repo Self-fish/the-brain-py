@@ -43,7 +43,7 @@ class FillAquariumUseCase(CoreActionUseCase):
     def __heat_water(self):
         self.__fill_water_heater_repository.switch_heater_on()
         water_temperature = 0
-        while water_temperature < 25:
+        while water_temperature > 25:
             water_temperature = self.__water_temperature_controller.read_device_temperature()
             print("Water temperature: " + str(water_temperature))
             time.sleep(10)

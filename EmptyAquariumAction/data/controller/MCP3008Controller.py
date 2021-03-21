@@ -8,7 +8,7 @@ def calculate_distance():
     PIN_ECHO = 37
     GPIO.setup(PIN_TRIGGER, GPIO.OUT)
     GPIO.setup(PIN_ECHO, GPIO.IN)
-    NUMBER_OF_MEASUREMENTS = 20
+    NUMBER_OF_MEASUREMENTS = 10
 
     GPIO.output(PIN_TRIGGER, GPIO.LOW)
     i = 0
@@ -25,7 +25,7 @@ def calculate_distance():
         distance = round(pulse_duration * 17150, 2)
         distance_aux = distance_aux + distance
         i = i + 1
-        time.sleep(0.2)
+        time.sleep(0.5)
 
     final_distance = float("{:.3f}".format(distance_aux / NUMBER_OF_MEASUREMENTS))
     return final_distance

@@ -23,6 +23,6 @@ class HandleActionsUseCase:
         self.__repository.listen_actions()
 
     def __process_action(self, action):
-        self.__use_case = ActionsUseCaseFactory.build_use_case(action)
+        self.__use_case = ActionsUseCaseFactory.build_use_case(action, self.__general_heater_use_case)
         self.__use_case.execute_action()
 

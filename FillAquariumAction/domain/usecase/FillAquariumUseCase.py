@@ -49,7 +49,7 @@ class FillAquariumUseCase(CoreActionUseCase):
         self.__fill_pump_repository.switch_pump_off()
         if distance < 6:
             self.__filter_repository.switch_filter_on()
-            self.__general_heater_use_case.unblock_heaters
+            self.__general_heater_use_case.unblock_heaters()
 
     def __heat_water(self):
         self.__fill_water_heater_repository.switch_heater_on()

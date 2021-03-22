@@ -33,7 +33,7 @@ class EmptyAquariumUseCase(CoreActionUseCase):
         # 2. Parar el Filtro
         # 3. Empezar a vaciar hasta el valor que toque
         # 4. Parar el calentador del cubo de llenado
-        self.__general_heater_use_case.switch_off_heater_and_block
+        self.__general_heater_use_case.switch_off_heater_and_block()
         self.__fill_water_heater_repository.switch_heater_on()
         self.__filter_repository.switch_filter_off()
         original_distance = MCP3008Controller.calculate_distance()

@@ -22,6 +22,7 @@ class HeaterStatusRepository:
         self.__manage_second_heater(RelayStatus.OFF)
 
     def turn_off_heater_and_block(self):
+        print("Apagamos calentadores y bloqueamos")
         self.__heaters_blocked = True
         self.__manage_first_heater(RelayStatus.OFF)
         self.__manage_second_heater(RelayStatus.OFF)
@@ -30,6 +31,7 @@ class HeaterStatusRepository:
         self.__heaters_blocked = False
 
     def update_heater_status(self, heater_status, current_temperature):
+        print("Tratamos de encender calentadores")
         if not self.__heaters_blocked:
             if heater_status == RelayStatus.ON and current_temperature is not 0:
                 if self.__heater_active == ActiveHeater.NONE:
@@ -58,6 +60,7 @@ class HeaterStatusRepository:
         self.__second_heater_controller.update_relay_status(relay_status)
 
     def __activate_heaters(self, current_temperature):
+        print("activamos calentadores")
         if self.__heater_active == ActiveHeater.NONE:
             self.__manage_first_heater(RelayStatus.ON)
             self.__heater_active = ActiveHeater.FIRST_HEATER
@@ -73,6 +76,7 @@ class HeaterStatusRepository:
         self.__number_of_tries = 0
 
     def __deactivate_heaters(self):
+        print("desactivamos calentadores")
         if self.__heater_active == ActiveHeater.FIRST_HEATER:
             self.__manage_first_heater(RelayStatus.OFF)
             self.__manage_second_heater(RelayStatus.OFF)

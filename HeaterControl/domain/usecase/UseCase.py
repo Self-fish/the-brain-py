@@ -30,9 +30,9 @@ class HeaterControlUseCase:
         LogsApiDataSource.log_info("HeaterControl - UseCase: "
                                    "the current temperature is " + str(current_water_temperature))
         if current_water_temperature < (desired_water_temperature.temperature + 0.1):
-            self.__heater_status_repository.update_heating_status(RelayStatus.ON, current_water_temperature)
+            self.__heater_status_repository.update_heater_status(RelayStatus.ON, current_water_temperature)
         else:
-            self.__heater_status_repository.update_heating_status(RelayStatus.OFF, current_water_temperature)
+            self.__heater_status_repository.update_heater_status(RelayStatus.OFF, current_water_temperature)
         self.__handle_possible_api_errors(desired_water_temperature)
 
     def __handle_possible_api_errors(self, preferences: WaterTemperaturePreferences):

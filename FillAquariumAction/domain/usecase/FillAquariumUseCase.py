@@ -11,6 +11,7 @@ from FillAquariumAction.FillAquariumActionContainer import FillAquariumActionCon
 from FillAquariumAction.data.repository.FillPumpRepository import FillPumpRepository
 from HeaterControl.HeaterControlContainer import HeaterControlContainer
 from HeaterControl.data.repository.HeaterStatusRepository import HeaterStatusRepository
+from HeaterControl.domain.usecase import UseCase
 
 
 class FillAquariumUseCase(CoreActionUseCase):
@@ -23,14 +24,15 @@ class FillAquariumUseCase(CoreActionUseCase):
                  fill_pump_repository: FillPumpRepository =
                  Provide[FillAquariumActionContainer.fill_pump_repository],
                  filter_repository: FilterRepository =
-                 Provide[EmptyAquariumActionContainer.filter_repository],
-                 general_heater_repository: HeaterStatusRepository =
-                 Provide[HeaterControlContainer.heater_status_repository]):
+                 Provide[EmptyAquariumActionContainer.filter_repository]):
         self.__water_temperature_controller: DS18B20Controller = water_temperature_controller
         self.__fill_water_heater_repository = fill_water_heater_repository
         self.__fill_pump_repository = fill_pump_repository
         self.__filter_repository = filter_repository
-        self.__general_heater_repository = general_heater_repository
+        self.__general_heater_use_case: UseCase = None
+
+    def lazy_injection(self, general_heater_use_case: UseCase):
+        self.__general_heater_use_case = general_heater_use_case
 
     def execute_action(self):
         self.__fill_pump_repository.switch_pump_off()
@@ -47,7 +49,7 @@ class FillAquariumUseCase(CoreActionUseCase):
         self.__fill_pump_repository.switch_pump_off()
         if distance < 6:
             self.__filter_repository.switch_filter_on()
-            self.__general_heater_repository.unblock_heaters()
+            self.__general_heater_use_case.unblock_heaters
 
     def __heat_water(self):
         self.__fill_water_heater_repository.switch_heater_on()

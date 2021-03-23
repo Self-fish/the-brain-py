@@ -6,6 +6,7 @@ from FillAquariumAction.FillAquariumActionContainer import FillAquariumActionCon
 from FillAquariumAction.domain.usecase.FillAquariumUseCase import FillAquariumUseCase
 from HandleActions.domain.model.Action import Action
 from HeaterControl.domain.usecase import UseCase
+from TurnOffLight.domain.usecase.TurnOffLightUseCase import TurnOffLightUseCase
 
 empty_aquarium_container = EmptyAquariumActionContainer()
 empty_aquarium_container.wire(modules=[sys.modules[__name__]])
@@ -20,4 +21,6 @@ def build_use_case(action: Action, general_heater_use_case: UseCase):
         return empty_aquarium_use_case
     elif action.step == "FILL_AQUARIUM":
         return FillAquariumUseCase()
+    elif action.step == "TURN_OFF_LIGHT":
+        return TurnOffLightUseCase()
 

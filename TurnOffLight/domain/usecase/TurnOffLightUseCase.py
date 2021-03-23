@@ -14,4 +14,5 @@ class TurnOffLightUseCase(CoreActionUseCase):
         self.__light_status_repository = light_status_repository
 
     def execute_action(self):
+        print("Apagamos las luces")
         self.__light_status_repository.update_light_status(RelayStatus.OFF)

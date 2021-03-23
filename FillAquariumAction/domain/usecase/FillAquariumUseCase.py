@@ -9,12 +9,14 @@ from EmptyAquariumAction.data.repository.FillWaterHeaterRepository import FillWa
 from EmptyAquariumAction.data.repository.FilterRepository import FilterRepository
 from FillAquariumAction.FillAquariumActionContainer import FillAquariumActionContainer
 from FillAquariumAction.data.repository.FillPumpRepository import FillPumpRepository
-from HeaterControl.HeaterControlContainer import HeaterControlContainer
-from HeaterControl.data.repository.HeaterStatusRepository import HeaterStatusRepository
 from HeaterControl.domain.usecase import UseCase
 
 
 class FillAquariumUseCase(CoreActionUseCase):
+
+    DESIRED_NEW_WATER_TEMPERATURE = 25
+    CONTAINER_MAX_CAPACITY = 4
+    AQUARIUM_MAX_CAPACITY = 6
 
     @inject
     def __init__(self, water_temperature_controller: DS18B20Controller = Provide[FillAquariumActionContainer.
@@ -35,27 +37,40 @@ class FillAquariumUseCase(CoreActionUseCase):
         self.__general_heater_use_case = general_heater_use_case
 
     def execute_action(self):
-        self.__fill_pump_repository.switch_pump_off()
+        self.__prepare_aquarium()
         #self.__heat_water()
-        original_distance = MCP3008Controller.calculate_distance()
-        print("Original didtance: " + str(original_distance))
-        distance = 99
-        self.__fill_pump_repository.switch_pump_on()
-        while distance > original_distance - 4:
-            distance = MCP3008Controller.calculate_distance()
-            print(distance)
-            if distance < 6:
-                break
+        current_distance = self.__empty_aquarium()
+        if self.__is_aquarium_totally_filled(current_distance):
+            self.__finish_fill_action()
+
+    def __prepare_aquarium(self):
         self.__fill_pump_repository.switch_pump_off()
-        if distance < 6:
-            self.__filter_repository.switch_filter_on()
-            self.__general_heater_use_case.unblock_heaters()
 
     def __heat_water(self):
         self.__fill_water_heater_repository.switch_heater_on()
         water_temperature = 0
-        while water_temperature < 25:
+        while water_temperature < self.DESIRED_NEW_WATER_TEMPERATURE:
             water_temperature = self.__water_temperature_controller.read_device_temperature()
-            print("Water temperature: " + str(self.__water_temperature_controller.read_device_temperature()))
-            time.sleep(10)
+            time.sleep(5)
         self.__fill_water_heater_repository.switch_heater_off()
+
+    def __empty_aquarium(self):
+        original_distance = MCP3008Controller.calculate_distance()
+        current_distance = 99
+        self.__fill_pump_repository.switch_pump_on()
+        while current_distance > original_distance - self.CONTAINER_MAX_CAPACITY:
+            current_distance = MCP3008Controller.calculate_distance()
+            if self.__is_aquarium_totally_filled(current_distance):
+                break
+        self.__fill_pump_repository.switch_pump_off()
+        return current_distance
+
+    def __is_aquarium_totally_filled(self, current_distance):
+        if current_distance < self.AQUARIUM_MAX_CAPACITY:
+            return True
+        else:
+            return False
+
+    def __finish_fill_action(self):
+        self.__filter_repository.switch_filter_on()
+        self.__general_heater_use_case.unblock_heaters()

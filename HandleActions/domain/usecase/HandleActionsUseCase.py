@@ -4,6 +4,7 @@ from Core.domain.usecases.CoreActionUseCase import CoreActionUseCase
 from HandleActions.HandleActionsContainer import HandleActionsContainer
 from HandleActions.data.repository.HandleActionsRepository import HandleActionsRepository
 from HandleActions.domain.usecase import ActionsUseCaseFactory
+from HandleLights.HandleLightsContainer import HandleLightsContainer
 from HeaterControl.domain.usecase import UseCase
 
 
@@ -15,9 +16,11 @@ class HandleActionsUseCase:
         self.__repository.add_listener(self.__process_action)
         self.__general_heater_use_case = None
         self.__use_case: CoreActionUseCase = None
+        self.__handle_light_container = None
 
-    def lazy_injection(self, general_heater_use_case: UseCase):
+    def lazy_injection(self, general_heater_use_case: UseCase, handle_light_container: HandleLightsContainer):
         self.__general_heater_use_case = general_heater_use_case
+        self.__handle_light_container = handle_light_container
 
     def read_messages(self):
         self.__repository.listen_actions()

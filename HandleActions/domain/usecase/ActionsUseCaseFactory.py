@@ -13,8 +13,8 @@ empty_aquarium_container = EmptyAquariumActionContainer()
 empty_aquarium_container.wire(modules=[sys.modules[__name__]])
 fill_aquarium_container = FillAquariumActionContainer()
 fill_aquarium_container.wire(modules=[sys.modules[__name__]])
-handle_light_container = HandleLightsContainer()
-handle_light_container.wire(modules=[sys.modules[__name__]])
+#handle_light_container = HandleLightsContainer()
+#handle_light_container.wire(modules=[sys.modules[__name__]])
 
 
 def build_use_case(action: Action, general_heater_use_case: UseCase):

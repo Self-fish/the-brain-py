@@ -9,6 +9,7 @@ class LightStatusRepository:
         self.current_light_status = self.__light_controller.get_current_relay_status()
 
     def update_light_status(self, light_status):
+        print("Update light repository")
         if light_status != self.current_light_status:
             self.__light_controller.update_relay_status(light_status)
             self.current_light_status = light_status

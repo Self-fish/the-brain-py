@@ -46,3 +46,4 @@ class EmptyAquariumUseCase(CoreActionUseCase):
         while distance < (original_distance + self.CONTAINER_MAX_CAPACITY):
             distance = MCP3008Controller.calculate_distance()
             print(distance)
+        self.__empty_pump_repository.switch_pump_off()

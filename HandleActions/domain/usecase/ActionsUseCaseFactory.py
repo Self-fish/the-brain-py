@@ -19,5 +19,7 @@ def build_use_case(action: Action, general_heater_use_case: UseCase):
         empty_aquarium_use_case.lazy_injection(general_heater_use_case)
         return empty_aquarium_use_case
     elif action.step == "FILL_AQUARIUM":
-        return FillAquariumUseCase()
+        fill_aquarium_use_case = FillAquariumUseCase()
+        fill_aquarium_use_case.lazy_injection(general_heater_use_case)
+        return fill_aquarium_use_case
 

@@ -40,6 +40,7 @@ class FillAquariumUseCase(CoreActionUseCase):
         self.__prepare_aquarium()
         #self.__heat_water()
         current_distance = self.__empty_aquarium()
+        print("Final distance: " + str(current_distance))
         if self.__is_aquarium_totally_filled(current_distance):
             self.__finish_fill_action()
 
@@ -56,11 +57,14 @@ class FillAquariumUseCase(CoreActionUseCase):
 
     def __empty_aquarium(self):
         original_distance = MCP3008Controller.calculate_distance()
+        print("Original distance: " + str(original_distance))
         current_distance = 99
         self.__fill_pump_repository.switch_pump_on()
         while current_distance > original_distance - self.CONTAINER_MAX_CAPACITY:
             current_distance = MCP3008Controller.calculate_distance()
+            print("Distance now: " + str(current_distance))
             if self.__is_aquarium_totally_filled(current_distance):
+                print("Aquarium totally filled")
                 break
         self.__fill_pump_repository.switch_pump_off()
         return current_distance
@@ -72,5 +76,6 @@ class FillAquariumUseCase(CoreActionUseCase):
             return False
 
     def __finish_fill_action(self):
+        print("Finish fill action")
         self.__filter_repository.switch_filter_on()
         self.__general_heater_use_case.unblock_heaters()

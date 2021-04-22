@@ -15,11 +15,15 @@ class MeasureWaterRepository:
         self.__water_temperature_controller: DS18B20Controller = water_temperature_controller
 
     def track_water_temp(self):
+        print("Repository: reading the temperature")
         current_time = time.time() * 1000
         LocalDataSource.water_temperature = self.__water_temperature_controller.read_device_temperature()
+        print("Repository: temperature read")
         if current_time > self.__last_measure_sent + self.ONE_MINUTE:
             try:
+                print("Sending to the API")
                 ApiDataSource.send_water_temperature(LocalDataSource.water_temperature)
+                print("Sento to the API")
                 self.__last_measure_sent = current_time
             except (NoMeasuresApiException, NoSerialException):
                 return False

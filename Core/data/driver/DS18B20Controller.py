@@ -13,6 +13,7 @@ class DS18B20Controller:
         devices_folder = glob.glob(base_dir + self.__device_id)
         f = open(devices_folder[0] + '/w1_slave', 'r')
         lines = f.readlines()
+        print(lines)
         f.close()
         while lines[0].strip()[-3:] != 'YES':
             time.sleep(0.2)

@@ -1,0 +1,3 @@
+
+class NoWaterTemperatureException(Exception):
+    pass

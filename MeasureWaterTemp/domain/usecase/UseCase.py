@@ -17,7 +17,6 @@ class MeasureWaterTempUseCase:
         self.__api_errors_count = 0
 
     def track_water_temp(self):
-        print("UseCase: track water temperature")
         request_success = self.__measure_water_repository.track_water_temp()
         self.__handle_possible_api_errors(request_success)
 

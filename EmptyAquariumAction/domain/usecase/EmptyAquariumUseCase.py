@@ -6,7 +6,9 @@ from EmptyAquariumAction.data.controller import MCP3008Controller
 from EmptyAquariumAction.data.repository.EmptyPumpRepository import EmptyPumpRepository
 from EmptyAquariumAction.data.repository.FillWaterHeaterRepository import FillWaterHeaterRepository
 from EmptyAquariumAction.data.repository.FilterRepository import FilterRepository
+from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
 from HeaterControl.domain.usecase import UseCase
+
 
 
 class EmptyAquariumUseCase(CoreActionUseCase):
@@ -23,9 +25,11 @@ class EmptyAquariumUseCase(CoreActionUseCase):
         self.__empty_pump_repository = empty_pump_repository
         self.__fill_water_heater_repository = fill_water_heater_repository
         self.__general_heater_use_case: UseCase = None
+        self.__light_use_case: HandleLightsUseCase = None
 
-    def lazy_injection(self, general_heater_use_case: UseCase):
+    def lazy_injection(self, general_heater_use_case: UseCase, light_use_case: HandleLightsUseCase):
         self.__general_heater_use_case = general_heater_use_case
+        self.__light_use_case = light_use_case
 
     def execute_action(self):
         self.__prepare_aquarium()
@@ -36,6 +40,7 @@ class EmptyAquariumUseCase(CoreActionUseCase):
         self.__general_heater_use_case.switch_off_heater_and_block()
         # self.__fill_water_heater_repository.switch_heater_on()
         self.__filter_repository.switch_filter_off()
+        self.__light_use_case.turn_off_light()
 
     def __empty_aquarium(self):
         original_distance = MCP3008Controller.calculate_distance()

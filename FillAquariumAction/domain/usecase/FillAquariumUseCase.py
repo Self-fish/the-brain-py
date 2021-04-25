@@ -9,6 +9,7 @@ from EmptyAquariumAction.data.repository.FillWaterHeaterRepository import FillWa
 from EmptyAquariumAction.data.repository.FilterRepository import FilterRepository
 from FillAquariumAction.FillAquariumActionContainer import FillAquariumActionContainer
 from FillAquariumAction.data.repository.FillPumpRepository import FillPumpRepository
+from HandleLights.domain.usecase.UseCase import HandleLightsUseCase
 from HeaterControl.domain.usecase import UseCase
 
 
@@ -32,9 +33,11 @@ class FillAquariumUseCase(CoreActionUseCase):
         self.__fill_pump_repository = fill_pump_repository
         self.__filter_repository = filter_repository
         self.__general_heater_use_case: UseCase = None
+        self.__light_use_case: HandleLightsUseCase = None
 
-    def lazy_injection(self, general_heater_use_case: UseCase):
+    def lazy_injection(self, general_heater_use_case: UseCase, light_use_case: HandleLightsUseCase):
         self.__general_heater_use_case = general_heater_use_case
+        self.__light_use_case = light_use_case
 
     def execute_action(self):
         self.__prepare_aquarium()
@@ -79,3 +82,4 @@ class FillAquariumUseCase(CoreActionUseCase):
         print("Finish fill action")
         self.__filter_repository.switch_filter_on()
         self.__general_heater_use_case.unblock_heaters()
+        self.__light_use_case.handle_lights()

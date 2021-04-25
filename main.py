@@ -78,7 +78,7 @@ if __name__ == '__main__':
     handle_heating_control_thread.start()
 
     handle_actions_use_case = HandleActionsUseCase()
-    handle_actions_use_case.lazy_injection(heating_control_use_case)
+    handle_actions_use_case.lazy_injection(heating_control_use_case, handle_light_use_case)
     handle_actions_thread = threading.Thread(target=read_actions, args=(handle_actions_use_case,))
     handle_actions_thread.start()
 

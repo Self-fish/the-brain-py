@@ -1,4 +1,5 @@
 from Core.data.driver.RelayController import RelayController
+from Core.data.driver.RelayStatus import RelayStatus
 from Core.data.repository import LogsApiDataSource
 
 
@@ -17,3 +18,4 @@ class LightStatusRepository:
         else:
             LogsApiDataSource.log_info("HandleLights  - LightStatusRepository: keeping the current status: " +
                                        light_status.name)
+

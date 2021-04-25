@@ -21,13 +21,11 @@ class MeasureWaterRepository:
         if current_time > self.__last_measure_sent + self.ONE_MINUTE:
             try:
                 LocalDataSource.water_temperature = self.__water_temperature_controller.read_device_temperature()
-                print("Repository: temperature read")
                 ApiDataSource.send_water_temperature(LocalDataSource.water_temperature)
                 self.__last_measure_sent = current_time
             except (NoMeasuresApiException, NoSerialException):
                 return False
             except NoWaterTemperatureException:
-                print("Exception reading the temperature")
                 return False
         return True
 

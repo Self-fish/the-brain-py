@@ -40,7 +40,7 @@ class EmptyAquariumUseCase(CoreActionUseCase):
         self.__general_heater_use_case.switch_off_heater_and_block()
         # self.__fill_water_heater_repository.switch_heater_on()
         self.__filter_repository.switch_filter_off()
-        self.__light_use_case.turn_off_light()
+        self.__light_use_case.turn_on_light()
 
     def __empty_aquarium(self):
         original_distance = MCP3008Controller.calculate_distance()

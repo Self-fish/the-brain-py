@@ -44,6 +44,11 @@ class HandleLightsUseCase:
             self.__light_repository.update_light_status(RelayStatus.OFF)
         self.__handle_possible_api_errors(preferences)
 
+    def turn_on_light(self):
+        LogsApiDataSource.log_info("HandleLights  - UseCase: lights must be on")
+        self.__light_repository.update_light_status(RelayStatus.ON)
+
+
     def __handle_possible_api_errors(self, preferences: LightPreferences):
         if preferences.source != LightPreferencesSource.API and self.__api_errors_count < self.max_errors:
             self.__api_errors_count += 1
